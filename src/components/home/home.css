@@ -1,0 +1,41 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel {
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 900px;
+}
+
+.carousel-inner {
+  white-space: nowrap;
+  white-space: nowrap;
+  transition: ease 1s;
+}
+
+.carousel-item {
+  display: inline-block;
+  width: 100%;
+}
+.carousel-control {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  display: inline-block;
+  position: absolute;
+  height: 50px;
+  width: 70px;
+  top: calc(50% - 25px);
+  color: #f3f3f3;
+  cursor: pointer;
+}
+.left {
+  left: 0;
+}
+.right {
+  right: 0;
+}
