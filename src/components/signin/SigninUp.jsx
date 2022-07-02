@@ -7,7 +7,7 @@ import "./css/Sign.css";
 
 function SigninUp() {
   const [showUser, setUser] = useState({ name: "", email: "", Branch: "", Year: "", password: "", cpassword: "", });
-  const [show, set] = useState();
+  const [show, set] = useState("");
 
   const authCtx = useContext(AuthContext);
 
@@ -18,16 +18,17 @@ function SigninUp() {
     if (name !== "" && email !== "" && Branch !== "" && Year !== "" && password !== "" && cpassword !== "") {
 
       if (password === cpassword) {
-        // authCtx.login("dede", 1000)
-        // redirect('/')
-        console.log("Done");
-        e.target.style.border = "2px solid  transparent";
-      } else {
-        e.target.style.border = "2px solid  #FF0000";
-        e.target.style.outline = "none";
+        set("");
 
+        authCtx.login("dede", 1000)
+        redirect('/')
+        console.log("Done");
+
+      } else {
+        set("Passwords Does Not Match");
       }
     } else {
+      set("Please fill all the fields");
       console.log("Error")
     }
 
@@ -105,7 +106,8 @@ function SigninUp() {
           onChange={PostData}
           className='w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded' type="password" name="cpassword" id="password" placeholder='Confirm Password' />
         <br />
-        <p className="alertText">Passwords Does Not Match</p>
+
+        {show ? <p className="alertText">{show}</p> : ""}
         <br />
         <button className='w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold' onClick={signup}>Sign Up</button>
       </div>
