@@ -65,12 +65,18 @@ function AdminEvents() {
   const [events, setEvents] = useState(eventCard);
   const [eve, setEve] = useState({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
   const [showModal, setShowModal] = useState({ show: false, index: null });
+
+
   //  add events
   const handleClick = (e) => {
     e.preventDefault();
-    setEvents(events.concat(eve));
-    setEve({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
 
+    const { name, date, venue, status, mode, team, img1, img2, img3, description, sheetId } = setEve;
+    if (name !== "" && date !== "" && venue !== "" && status !== "" && mode !== "" && team !== "" && img1 !== "" && img2 !== "" && img3 !== "" && description !== "" && sheetId !== "") {
+      setEvents(events.concat(eve));
+      setEve({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
+
+    }
   };
   const onChange = (e) => {
     setEve({ ...eve, [e.target.name]: e.target.value });
