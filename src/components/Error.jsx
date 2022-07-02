@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import "./CSS/Error.css";
 
 export default function Error() {
     return (
-        <div>Error</div>
+        <div className="ErrorMdiv">Error</div>
     )
 }
