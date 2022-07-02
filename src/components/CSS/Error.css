@@ -1,0 +1,8 @@
+.ErrorMdiv {
+  color: #ff0000;
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  background-color: #fff;
+  border-radius: 10px;
+}
