@@ -15,9 +15,9 @@ function SigninMain() {
 
     if (password !== "" && email !== "" && email.indexOf('@') > -1) {
       authCtx.login("dede", 1000)
-      redirect('/')
+      redirect('/');
     } else {
-      setError("Error")
+      console.log("Error")
     }
 
   }
@@ -73,7 +73,6 @@ function SigninMain() {
         <h2 className='text-white leading-10'><Link to='/signin' >forgot password?</Link><Link style={{ color: "blue" }} to='/signup' > SignUp</Link></h2><br />
         <button className='w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold' onClick={login}>Log in</button>
       </div>
-      {showError === "" ? "" : <Error msg={showError} />}
     </div>
   )
 }
