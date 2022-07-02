@@ -15,13 +15,13 @@ function SigninMain() {
   const login = () => {
     const { email, password } = showUser;
 
-    // if (password !== "" && email !== "" && email.indexOf('@') > -1) {
-    //   authCtx.login("dede", 1000)
-    //   redirect('/')
-    // } else {
-    //   setError("Error")
-    // console.log("error")
-    // }
+    if (password !== "" && email !== "" && email.indexOf('@') > -1) {
+      authCtx.login("dede", 1000)
+      redirect('/')
+    } else {
+      setError("Error")
+      console.log("error")
+    }
 
   }
 
@@ -30,9 +30,12 @@ function SigninMain() {
     const value = e.target.value;
 
     if (name === "email") {
-      if (value.indexOf('@') > -1) {
-        e.target.style.border = "2px solid  #FF0000"
+      if (value.indexOf('@') === -1) {
+        e.target.style.border = "2px solid  #FF0000";
+        e.target.style.outline = "none";
         console.log(e.target);
+      } else {
+        e.target.style.border = "2px solid  transparent";
       }
     }
 
@@ -51,6 +54,7 @@ function SigninMain() {
           id="email"
           placeholder='Enter email address'
           onChange={PostData}
+          style={{ border: "2px solid  transparent" }}
         />
         <br />
         <input
@@ -60,6 +64,7 @@ function SigninMain() {
           id="password"
           placeholder='Password'
           onChange={PostData}
+          style={{ border: "2px solid  transparent" }}
         />
         <h2 className='text-white leading-10'><Link to='/signin' >forgot password?</Link><Link style={{ color: "blue" }} to='/signup' > SignUp</Link></h2><br />
         <button className='w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold' onClick={login}>Log in</button>
