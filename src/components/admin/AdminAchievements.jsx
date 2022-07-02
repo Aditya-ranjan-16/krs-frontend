@@ -32,13 +32,19 @@ function AdminAchievements() {
   const [achievements, setAchievements] = useState(achievementsCard)
   const [ach, setAch] = useState({ teamName: "", img1: "", img2: "", position: "", year: "", teamName: "", eventName1: "", eventName2: "", eventPlace: "" })
   const [showModal, setShowModal] = useState({ show: false, index: null });
+  const [show, set] = useState("");
+
   //  add events
   const handleClick = (e) => {
     e.preventDefault();
-    const { teamName, img1, img2, position, password, year, eventName1, eventName2, eventPlace } = setAch;
+    const { teamName, img1, img2, position, password, year, eventName1, eventName2, eventPlace } = ach;
     if (teamName !== "" && img1 !== "" && img2 !== "" && position !== "" && password !== "" && year !== "" && eventName1 !== "" && eventName2 !== "" && eventPlace !== "") {
       setAchievements(achievements.concat(ach))
+      set("");
       setAch({ teamName: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: "" })
+    } else {
+      set("Please fill all the fields");
+
     }
   }
 
@@ -112,6 +118,8 @@ function AdminAchievements() {
             <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter Events Place' type="text" name='eventPlace' value={ach.eventPlace} onChange={onChange} />
           </div>
         </div>
+        <br />
+        {show ? <p className="alertText">{show}</p> : ""}
         <button type="submit" onClick={handleClick} className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white">Add achievement</button>
       </div>
 
