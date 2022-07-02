@@ -15,7 +15,7 @@ function SigninUp() {
 
   const signup = () => {
     const { name, email, Branch, Year, password, cpassword } = showUser;
-    if (name !== "" && email !== "" && Branch !== "" && Year !== "" && password !== "" && cpassword !== "") {
+    if (name !== "" && email !== "" && Branch !== "" && Year !== "" && password !== "" && cpassword !== "" && email.indexOf('@') > -1 && email.indexOf('.') !== -1) {
 
       if (password === cpassword) {
         set("");
