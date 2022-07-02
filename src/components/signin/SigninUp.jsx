@@ -11,7 +11,10 @@ function SigninUp() {
 
   const redirect = useNavigate();
   const signup = () => {
+    const { name, email, Branch, Year, password, cpassword } = showUser;
+    if (name !== "" && email !== "" && Branch !== "" && Year !== "" && password !== "" && cpassword !== "") {
 
+    }
     // authCtx.login("dede", 1000)
     // redirect('/')
   }
@@ -20,24 +23,19 @@ function SigninUp() {
     const name = e.target.name;
     const value = e.target.value;
 
-    // if (name === "email") {
-    //   if (value.indexOf('@') === -1 || value.indexOf('.') === -1) {
-    //     e.target.style.border = "2px solid  #FF0000";
-    //     e.target.style.outline = "none";
-    //   } else {
-    //     e.target.style.border = "2px solid  transparent";
-    //   }
-    // }
-    // if (name === "password") {
-    //   if (value === "") {
-    //     e.target.style.border = "2px solid  #FF0000";
-    //     e.target.style.outline = "none";
-    //   } else {
-    //     e.target.style.border = "2px solid  transparent";
-    //   }
-    // }
-
-    console.log(name + "\t" + value);
+    if (name === "email") {
+      if (value.indexOf('@') === -1 || value.indexOf('.') === -1) {
+        e.target.style.border = "2px solid  #FF0000";
+        e.target.style.outline = "none";
+      } else {
+        e.target.style.border = "2px solid  transparent";
+      }
+    } else if (value === "") {
+      e.target.style.border = "2px solid  #FF0000";
+      e.target.style.outline = "none";
+    } else {
+      e.target.style.border = "2px solid  transparent";
+    }
 
     setUser({ ...showUser, [name]: value });
   }
