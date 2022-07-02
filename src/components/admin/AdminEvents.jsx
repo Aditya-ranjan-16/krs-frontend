@@ -63,14 +63,14 @@ const eventCard = [
 
 function AdminEvents() {
   const [events, setEvents] = useState(eventCard);
-  const [eve, setEve] = useState({name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: ""});
-  const [showModal, setShowModal] = useState({show:false,index:null});
+  const [eve, setEve] = useState({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
+  const [showModal, setShowModal] = useState({ show: false, index: null });
   //  add events
   const handleClick = (e) => {
     e.preventDefault();
     setEvents(events.concat(eve));
-    setEve({name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: ""});
-  
+    setEve({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
+
   };
   const onChange = (e) => {
     setEve({ ...eve, [e.target.name]: e.target.value });
@@ -87,22 +87,22 @@ function AdminEvents() {
   };
   //editing events
   const updateCard = (i) => {
-    setEve({name: eventCard[i].name, date: eventCard[i].date, venue: eventCard[i].venue, status: eventCard[i].status, mode: eventCard[i].mode, team: eventCard[i].team, img1: eventCard[i].img1, img2: eventCard[i].img2, img3: eventCard[i].img3, description: eventCard[i].description, sheetId: eventCard[i].sheetId});
-    setShowModal({show:true,index:i})
+    setEve({ name: eventCard[i].name, date: eventCard[i].date, venue: eventCard[i].venue, status: eventCard[i].status, mode: eventCard[i].mode, team: eventCard[i].team, img1: eventCard[i].img1, img2: eventCard[i].img2, img3: eventCard[i].img3, description: eventCard[i].description, sheetId: eventCard[i].sheetId });
+    setShowModal({ show: true, index: i })
   }
-  const editEvents=()=>{
-   eventCard[showModal.index]={name:eve.name,date:eve.date,venue:eve.venue,status:eve.status,mode:eve.mode,team:eve.team,img1:eve.img1,img2:eve.img2,img3:eve.img3,description:eve.description,}
-   setEvents(eventCard)
-   setEve({name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: ""});
-   setShowModal({show:false,index:null})
+  const editEvents = () => {
+    eventCard[showModal.index] = { name: eve.name, date: eve.date, venue: eve.venue, status: eve.status, mode: eve.mode, team: eve.team, img1: eve.img1, img2: eve.img2, img3: eve.img3, description: eve.description, }
+    setEvents(eventCard)
+    setEve({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
+    setShowModal({ show: false, index: null })
 
   }
   // modal state
   const closeModal = () => {
-    setEve({name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: ""});
-    setShowModal({show:false,index:null})
+    setEve({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
+    setShowModal({ show: false, index: null })
   }
-  
+
   // qr modal state
   const [showqrModal, setShowQrModal] = useState(false);
 
@@ -114,15 +114,15 @@ function AdminEvents() {
         <div className="grid grid-cols-2">
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Event Name</h2>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter event name" type="text" name='name' value={eve.name} onChange={onChange}/>
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter event name" type="text" name='name' value={eve.name} onChange={onChange} />
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Event Date</h2>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter event date" type="date" name='date' value={eve.date} onChange={onChange}/>
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter event date" type="date" name='date' value={eve.date} onChange={onChange} />
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Event Venue</h2>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter event venue" type="text" name='venue' value={eve.venue} onChange={onChange}/>
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter event venue" type="text" name='venue' value={eve.venue} onChange={onChange} />
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Status</h2>
@@ -180,42 +180,42 @@ function AdminEvents() {
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Event Sheet ID</h2>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter event Sheet ID" type="text" name='sheetId' value={eve.sheetId} onChange={onChange}/>
-          </div>          
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter event Sheet ID" type="text" name='sheetId' value={eve.sheetId} onChange={onChange} />
+          </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Description</h2>
             <textarea className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter description of the event..." name="description" value={eve.description} onChange={onChange} id="" cols="30" rows="5"></textarea>
           </div>
-          
+
         </div>
 
         <button type="submit" onClick={handleClick} className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white" > Add event </button>
       </div>
 
       {/* card */}
-      {events.map((eventsData,i) => {
-          return (
-            <div key={i} className='flex flex-col md:flex-row h-[] px-10 py-10 items-center justify-between'>
-              <div className='text-white order-2 md:order-1 w-full md:w-2/3 py-10 px-10 flex flex-col justify-between'>
-                <div>
-                  <h1 className='text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-semibold pb-8 text-center md:text-left text-yellow-500'>{eventsData.name}</h1>
-                  <h6 className='text-1xl sm:text-1xl  md:text-1xl xl:text-1xl font-light pb-8 text-center md:text-left text-yellow-500'><i>{eventsData.date} <br/>{eventsData.venue}</i></h6>
-                  <p className='text-2x1 font-thin sm:text-xl text-justify'>{eventsData.description}</p><br />
-                </div>
-                <div className="flex space-x-4 pt-4">
-                  <Link className="text-white" onClick={() => deleteEvent(eventsData.name)} to=""><img className='w-6' src={Delete} alt="dlt" /></Link>
-                  <Link className="text-white" onClick={() => updateCard(i)} to=""><img className='w-6' src={Edit} alt="edit" /></Link>   
-                  <Link className="text-white" onClick={() => setShowQrModal(true)} to=""><img className='w-6' src={qr} alt="qr" /></Link>     
-                </div>
+      {events.map((eventsData, i) => {
+        return (
+          <div key={i} className='flex flex-col md:flex-row h-[] px-10 py-10 items-center justify-between'>
+            <div className='text-white order-2 md:order-1 w-full md:w-2/3 py-10 px-10 flex flex-col justify-between'>
+              <div>
+                <h1 className='text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-semibold pb-8 text-center md:text-left text-yellow-500'>{eventsData.name}</h1>
+                <h6 className='text-1xl sm:text-1xl  md:text-1xl xl:text-1xl font-light pb-8 text-center md:text-left text-yellow-500'><i>{eventsData.date} <br />{eventsData.venue}</i></h6>
+                <p className='text-2x1 font-thin sm:text-xl text-justify'>{eventsData.description}</p><br />
               </div>
-              <div  className='w-[350px] bg-white order-1 md:order-2 h-[350px] sm:w-[400px] sm:h-[400px] py-2 px-2 event_slider_body '>
-              <EventSlider key={i} />
+              <div className="flex space-x-4 pt-4">
+                <Link className="text-white" onClick={() => deleteEvent(eventsData.name)} to=""><img className='w-6' src={Delete} alt="dlt" /></Link>
+                <Link className="text-white" onClick={() => updateCard(i)} to=""><img className='w-6' src={Edit} alt="edit" /></Link>
+                <Link className="text-white" onClick={() => setShowQrModal(true)} to=""><img className='w-6' src={qr} alt="qr" /></Link>
               </div>
             </div>
-          )
-        })}
-      
-      
+            <div className='w-[350px] bg-white order-1 md:order-2 h-[350px] sm:w-[400px] sm:h-[400px] py-2 px-2 event_slider_body '>
+              <EventSlider key={i} />
+            </div>
+          </div>
+        )
+      })}
+
+
 
       {/* modal */}
       {showModal.show ? (
@@ -344,7 +344,7 @@ function AdminEvents() {
                     <h2 className="text-xl p-1 my-1 text-white">Description</h2>
                     <textarea className="text-base w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter description of the event..." name="description" value={eve.description} onChange={onChange} id="" cols="30" rows="3"></textarea>
                   </div>
-                  
+
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end px-6 py-2 border-t border-solid border-slate-200 rounded-b">
