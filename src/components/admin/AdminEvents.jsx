@@ -71,17 +71,28 @@ function AdminEvents() {
   const handleClick = (e) => {
     e.preventDefault();
 
-    const { name, date, venue, status, mode, team, img1, img2, img3, description, sheetId } = setEve;
+    const { name, date, venue, status, mode, team, img1, img2, img3, description, sheetId } = eve;
     if (name !== "" && date !== "" && venue !== "" && status !== "" && mode !== "" && team !== "" && img1 !== "" && img2 !== "" && img3 !== "" && description !== "" && sheetId !== "") {
-      setEvents(events.concat(eve));
-      setEve({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
-
+      // setEvents(events.concat(eve));
+      // setEve({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
+      console.log(name)
+      console.log("Add")
     }
   };
+
   const onChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if (value === "") {
+      e.target.style.border = "2px solid  #FF0000";
+      e.target.style.outline = "none";
+    } else {
+      e.target.style.border = "2px solid  transparent";
+    }
+
     setEve({ ...eve, [e.target.name]: e.target.value });
   };
-  console.log(eve);
 
   // deleting events
   const deleteEvent = (name) => {
@@ -91,11 +102,13 @@ function AdminEvents() {
     setEvents(newEvents);
     console.log(newEvents);
   };
+
   //editing events
   const updateCard = (i) => {
     setEve({ name: eventCard[i].name, date: eventCard[i].date, venue: eventCard[i].venue, status: eventCard[i].status, mode: eventCard[i].mode, team: eventCard[i].team, img1: eventCard[i].img1, img2: eventCard[i].img2, img3: eventCard[i].img3, description: eventCard[i].description, sheetId: eventCard[i].sheetId });
     setShowModal({ show: true, index: i })
   }
+
   const editEvents = () => {
     eventCard[showModal.index] = { name: eve.name, date: eve.date, venue: eve.venue, status: eve.status, mode: eve.mode, team: eve.team, img1: eve.img1, img2: eve.img2, img3: eve.img3, description: eve.description, }
     setEvents(eventCard)
@@ -103,6 +116,7 @@ function AdminEvents() {
     setShowModal({ show: false, index: null })
 
   }
+
   // modal state
   const closeModal = () => {
     setEve({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
