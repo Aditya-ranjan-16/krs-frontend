@@ -14,7 +14,7 @@ function SigninMain() {
   const login = () => {
     const { email, password } = showUser;
 
-    if (password !== "" && email !== "" && email.indexOf('@') > -1 && value.indexOf('.') !== -1) {
+    if (password !== "" && email !== "" && email.indexOf('@') > -1 && email.indexOf('.') !== -1) {
       authCtx.login("dede", 1000)
       redirect('/');
     } else {
