@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import KRS from '../../public/krslogo.jpg'
 import BG from '../../public/dronebackground.jpg'
 import AuthContext from '../../store/auth-context';
+import "./../C"
 
 function SigninMain() {
   const [showUser, setUser] = useState({ email: "", password: "" });
@@ -14,14 +15,12 @@ function SigninMain() {
     const { email, password } = showUser;
 
     if (password !== "" && email !== "" && email.indexOf('@') > -1) {
-      console.log(email, password);
-
+      authCtx.login("dede", 1000)
+      redirect('/')
     } else {
       console.log("error")
     }
 
-    // authCtx.login("dede", 1000)
-    // redirect('/')
   }
 
   const PostData = async (e) => {
