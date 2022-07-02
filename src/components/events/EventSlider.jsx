@@ -63,9 +63,7 @@ function EventSlider(){
         
       }, 6000);
 
-    return ()=>{clearInterval(slideInterval) 
- 
-    }
+    return ()=>{clearInterval(slideInterval) }
     }, []);
     return(
         <div class="event_container" >

@@ -11,6 +11,7 @@ function AdminSidebar() {
           <Link to="/admin/userprofile" className="py-2 text-center">User Profile</Link>
           <Link to="/admin/createteam" className="py-2 text-center">Create Team</Link>
           <Link to="/admin/memberprofile" className="py-2 text-center">Member Profile</Link>
+          <Link to="/admin/forms" className="py-2 text-center">Forms</Link>
         </div>
     </div>
   )

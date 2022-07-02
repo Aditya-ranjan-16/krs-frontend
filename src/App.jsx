@@ -11,6 +11,7 @@ import Events from './pages/Events';
 import Members from './pages/Members';
 import Recruitment from './pages/Recruitment';
 import Signin from './pages/Signin';
+import Signup from './pages/Signup';
 import AboutUs from './pages/AboutUs';
 import Achievementss from './pages/Achievements';
 import Collaborations from './pages/Collaborations';
@@ -33,6 +34,7 @@ function App() {
           <Route path='/recruitment' element={<Recruitment/>} />
           <Route path='/achievements' element={<Achievementss />} />
           {!(authCtx.isLoggedIn) && <Route path='/signin' element={<Signin/>} /> }
+          {!(authCtx.isLoggedIn) && <Route path='/signup' element={<Signup/>} /> }
           <Route path='/featured' element={<Featured />} />
           <Route path='/collaborations' element={<Collaborations />} />
           <Route path='/contactus' element={<ContactUs />} />

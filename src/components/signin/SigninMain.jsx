@@ -5,9 +5,11 @@ import KRS from '../../public/krslogo.jpg'
 import BG from '../../public/dronebackground.jpg'
 import {useNavigate} from 'react-router-dom'
 import AuthContext from '../../store/auth-context';
+import { useEffect } from 'react'
 
 function SigninMain() {
   const authCtx = useContext(AuthContext);
+
   const redirect=useNavigate();
 const login=()=>{
   authCtx.login("dede",1000)
@@ -21,7 +23,7 @@ const login=()=>{
         <h1 className='text-white text-3xl font-bold'>Welcome to KRS</h1><br /><br />
         <input className='w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded' type="text" name="" id="email" placeholder='Enter email address' /><br />
         <input className='w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded' type="password" name="" id="password" placeholder='Password' />
-        <h2 className='text-white leading-10'><Link to='/signin' >forgot password?</Link></h2><br />
+        <h2 className='text-white leading-10'><Link to='/signin' >forgot password?</Link><Link style={{color:"blue"}} to='/signup' > SignUp</Link></h2><br />
         <button className='w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold' onClick={login}>Log in</button>
       </div>
     </div>

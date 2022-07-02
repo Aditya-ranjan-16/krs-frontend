@@ -32,12 +32,12 @@ function AdminAchievements() {
 
   const [achievements, setAchievements] = useState(achievementsCard)  
   const [ach, setAch] = useState({teamName: "", img1: "", img2: "", position: "", year: "", teamName: "", eventName1: "", eventName2: "", eventPlace: ""})
-
+  const [showModal, setShowModal] = useState({show:false,index:null});
   //  add events
   const handleClick = (e)=>{
     e.preventDefault();
-    setAch({teamName: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: ""})
     setAchievements(achievements.concat(ach))
+    setAch({teamName: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: ""})
   }
   const onChange = (e)=>{
     setAch({...ach, [e.target.name]: e.target.value})
@@ -52,10 +52,23 @@ function AdminAchievements() {
   }
 
   // editing events
-
+  const updateCard = (i) => {
+    setAch({teamName: achievementsCard[i].teamName, img1: achievementsCard[i].img1, img2: achievementsCard[i].img2, position: achievementsCard[i].position, year: achievementsCard[i].year, eventName1: achievementsCard[i].eventName1, eventName2: achievementsCard[i].eventName2, eventPlace: achievementsCard[i].eventPlace});
+    setShowModal({show:true,index:i})
+  }
+  const editAchievements=()=>{
+    achievementsCard[showModal.index]={teamName:ach.teamName,img1:ach.img1,img2:ach.img2,position:ach.position,year:ach.year,eventName1:ach.eventName1,eventName2:ach.eventName2,eventPlace:ach.eventPlace}
+    setAchievements(achievementsCard)
+    setAch({teamName: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: ""})
+    setShowModal({show:false,index:null})
+ 
+   }
 
   // modal state
-  const [showModal, setShowModal] = useState(false)
+  const closeModal = () => {
+    setAch({teamName: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: ""})
+    setShowModal({show:false,index:null})
+  }
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
@@ -101,9 +114,9 @@ function AdminAchievements() {
 
 
             {/* cards */}
-            {achievementsCard.map((achievementsData) => {
+            {achievements.map((achievementsData,i) => {
               return (
-              <div className=' border-2 border-yellow-500 rounded-xl my-5'>  
+              <div  key={i} className=' border-2 border-yellow-500 rounded-xl my-5'>  
                 <div className='flex flex-col lg:flex-row lg:px-10 py-10 items-center lg:justify-between'>
                     <div className='text-white w-1/2 py-10 px-10 flex flex-col items-center lg:items-start'>
                         <div className=''>
@@ -143,14 +156,14 @@ function AdminAchievements() {
                 </div>
                 <div className="flex space-x-4 pb-4 justify-center">
                     <Link className="text-white" onClick={() => deleteAchievement(achievementsData.teamName)} to=""><img className='w-6' src={Delete} alt="dlt" /></Link>
-                    <Link className="text-white" onClick={() => setShowModal(true)} to=""><img className='w-6' src={Edit} alt="edit" /></Link>      
+                    <Link className="text-white" onClick={() => updateCard(i)} to=""><img className='w-6' src={Edit} alt="edit" /></Link>      
                 </div>
             </ div>    
        )
       })}
 
       {/* modal */}
-      {showModal ? (
+      {showModal.show ? (
               <>
                 <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                   <div className="relative w-auto my-6 mx-auto max-w-3xl">
@@ -158,62 +171,50 @@ function AdminAchievements() {
                     <div className="bg-[#111111] border-2 border-yellow-500 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none">
                       {/*header*/}
                       <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                        <h3 className="text-3xl text-white font-semibold">Edit member</h3>
-                        <button className="ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={() => setShowModal(false)}>
+                        <h3 className="text-3xl text-white font-semibold">Edit achievements</h3>
+                        <button className="ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={closeModal}>
                           <span className="text-white h-6 w-6 text-2xl block outline-none focus:outline-none">x</span>
                         </button>
                       </div>
                       {/*body*/}
                       <div className='grid grid-cols-3'>
                         <div className="py-2 px-4">
-                          <h2 className="text-xl p-1 my-1 text-white">Name</h2>
-                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter name' type="text" />
+                          <h2 className="text-xl p-1 my-1 text-white">Team Name</h2>
+                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter name' type="text"name='teamName' value={ach.teamName} onChange={onChange}  />
                         </div>
                         <div className="py-2 px-4">
-                          <h2 className="text-xl p-1 my-1 text-white">Roll Number</h2>
-                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter Roll no.' type="text" />
+                          <h2 className="text-xl p-1 my-1 text-white">Event Name1</h2>
+                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter Roll no.' type="text" name='eventName1' value={ach.eventName1} onChange={onChange} />
                         </div>
                         <div className="py-2 px-4">
-                          <h2 className="text-xl p-1 my-1 text-white">Domain</h2>
-                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter domain' type="text" />
-                        </div>
-                        <div className="py-2 px-4">
-                          <h2 className="text-xl p-1 my-1 text-white">Designation</h2>
-                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter designation' type="text" />
+                          <h2 className="text-xl p-1 my-1 text-white">Event Name2</h2>
+                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter domain' type="text" name='eventName2' value={ach.eventName2} onChange={onChange} />
                         </div>
                         <div className="py-2 px-4">
                           <h2 className="text-xl p-1 my-1 text-white">Year</h2>
-                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter Year' type="text" />
+                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter designation' type="text" name='year' value={ach.year} onChange={onChange} />
                         </div>
                         <div className="py-2 px-4">
-                          <h2 className="text-xl p-1 my-1 text-white">Image</h2>
-                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter image' type="text" />
+                          <h2 className="text-xl p-1 my-1 text-white">Image 1</h2>
+                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter Year' type="text" name='img1' value={ach.img1} onChange={onChange} />
                         </div>
                         <div className="py-2 px-4">
-                          <h2 className="text-xl p-1 my-1 text-white">About</h2>
-                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter About' type="text" />
+                          <h2 className="text-xl p-1 my-1 text-white">Image 2</h2>
+                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter image' type="text" name='img2' value={ach.img2} onChange={onChange} />
                         </div>
                         <div className="py-2 px-4">
-                          <h2 className="text-xl p-1 my-1 text-white">Linkdin</h2>
-                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter Linkedin link' type="text" />
+                          <h2 className="text-xl p-1 my-1 text-white">Position</h2>
+                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter About' type="text" name='position' value={ach.position} onChange={onChange} />
                         </div>
                         <div className="py-2 px-4">
-                          <h2 className="text-xl p-1 my-1 text-white">Email</h2>
-                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter Email link' type="text" />
-                        </div>
-                        <div className="py-2 px-4">
-                          <h2 className="text-xl p-1 my-1 text-white">Instagram</h2>
-                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter Instageam link' type="text" />
-                        </div>
-                        <div className="py-2 px-4">
-                          <h2 className="text-xl p-1 my-1 text-white">Github</h2>
-                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter Github link' type="text" />
+                          <h2 className="text-xl p-1 my-1 text-white">Event Place</h2>
+                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter Linkedin link' type="text" name='eventPlace' value={ach.eventPlace} onChange={onChange} />
                         </div>
                       </div>
                       {/*footer*/}
                       <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                        <button className="text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={() => setShowModal(false)}>Close </button>
-                        <button className="bg-yellow-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={() => setShowModal(false)} >Save Changes </button>
+                        <button className="text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"  onClick={closeModal}>Close </button>
+                        <button className="bg-yellow-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"  onClick={editAchievements} >Save Changes </button>
                       </div>
                     </div>
                   </div>
