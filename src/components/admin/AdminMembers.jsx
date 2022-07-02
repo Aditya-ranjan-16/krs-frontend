@@ -45,14 +45,16 @@ function AdminMembers() {
 
   //  add members
   const handleClick = (e) => {
-    // e.preventDefault();
-    // setMembers(members.concat(mem))
-    // setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
+    e.preventDefault();
 
     const { name, roll, domain, designation, about, year, img, linkedin, email, insta, github } = mem;
 
-    if (name !== "" || roll !== "" || domain !== "" || designation !== "" || about !== "" || year !== "" || img !== "" || linkedin !== "" || email !== "" || insta !== "" || github !== "")
-      console.log("Add");
+    if (name !== "" && roll !== "" && domain !== "" && designation !== "" && about !== "" && year !== "" && img !== "" && linkedin !== "" && email !== "" && insta !== "" && github !== "") {
+      setMembers(members.concat(mem))
+      setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
+    } else {
+      console.log("Please Fill all feilds");
+    }
   };
 
   const onChange = (e) => {
