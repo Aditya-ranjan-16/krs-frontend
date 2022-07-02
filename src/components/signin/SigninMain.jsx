@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import KRS from '../../public/krslogo.jpg'
 import BG from '../../public/dronebackground.jpg'
 import AuthContext from '../../store/auth-context';
+import Error from "./../Error"
 
 function SigninMain() {
   const [showUser, setUser] = useState({ email: "", password: "" });
@@ -54,6 +55,7 @@ function SigninMain() {
         <h2 className='text-white leading-10'><Link to='/signin' >forgot password?</Link><Link style={{ color: "blue" }} to='/signup' > SignUp</Link></h2><br />
         <button className='w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold' onClick={login}>Log in</button>
       </div>
+      <Error />
     </div>
   )
 }
