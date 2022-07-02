@@ -35,9 +35,13 @@ function AdminAchievements() {
   //  add events
   const handleClick = (e) => {
     e.preventDefault();
-    setAchievements(achievements.concat(ach))
-    setAch({ teamName: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: "" })
+    const { teamName, img1, img2, position, password, year, eventName1, eventName2, eventPlace } = setAch;
+    if (teamName !== "" && img1 !== "" && img2 !== "" && position !== "" && password !== "" && year !== "" && eventName1 !== "" && eventName2 !== "" && eventPlace !== "") {
+      setAchievements(achievements.concat(ach))
+      setAch({ teamName: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: "" })
+    }
   }
+
   const onChange = (e) => {
     setAch({ ...ach, [e.target.name]: e.target.value })
   }
