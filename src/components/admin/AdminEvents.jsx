@@ -74,11 +74,9 @@ function AdminEvents() {
 
     const { name, date, venue, status, mode, team, img1, img2, img3, description, sheetId } = eve;
     if (name !== "" && date !== "" && venue !== "" && status !== "" && mode !== "" && team !== "" && img1 !== "" && img2 !== "" && img3 !== "" && description !== "" && sheetId !== "") {
-      // setEvents(events.concat(eve));
-      // setEve({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
+      setEvents(events.concat(eve));
+      setEve({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
       set("");
-      console.log(name)
-      console.log("Add")
     } else {
       set("Please fill all the fields");
 
@@ -95,8 +93,6 @@ function AdminEvents() {
     } else {
       e.target.style.border = "2px solid  transparent";
     }
-
-    console.log(value)
 
     setEve({ ...eve, [e.target.name]: e.target.value });
   };
