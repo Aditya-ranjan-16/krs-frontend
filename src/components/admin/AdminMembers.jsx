@@ -42,6 +42,7 @@ function AdminMembers() {
   const [members, setMembers] = useState(memberCard)
   const [mem, setMem] = useState({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
   const [showModal, setShowModal] = useState({ show: false, index: null });
+  const [show, set] = useState("");
 
   //  add members
   const handleClick = (e) => {
@@ -53,7 +54,7 @@ function AdminMembers() {
       setMembers(members.concat(mem))
       setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
     } else {
-      console.log("Please Fill all feilds");
+      set("Please fill all the fields");
     }
   };
 
@@ -150,6 +151,8 @@ function AdminMembers() {
             <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter github link' type="text" name='github' value={mem.github} onChange={onChange} />
           </div>
         </div>
+        <br />
+        {show ? <p className="alertText">{show}</p> : ""}
         <button type="submit" onClick={handleClick} className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white">Add member</button>
       </div>
 
