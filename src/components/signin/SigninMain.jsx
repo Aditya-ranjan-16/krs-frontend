@@ -7,6 +7,7 @@ import Error from "./../Error"
 
 function SigninMain() {
   const [showUser, setUser] = useState({ email: "", password: "" });
+  const [showError, setError] = useState("");
 
   const authCtx = useContext(AuthContext);
 
@@ -18,7 +19,8 @@ function SigninMain() {
       authCtx.login("dede", 1000)
       redirect('/')
     } else {
-      console.log("error")
+      setError("Error")
+      // console.log("error")
     }
 
   }
@@ -55,7 +57,7 @@ function SigninMain() {
         <h2 className='text-white leading-10'><Link to='/signin' >forgot password?</Link><Link style={{ color: "blue" }} to='/signup' > SignUp</Link></h2><br />
         <button className='w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold' onClick={login}>Log in</button>
       </div>
-      <Error />
+      {showError === "" ? "" : <Error msg={showError} />}
     </div>
   )
 }
