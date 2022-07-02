@@ -7,7 +7,7 @@ import "./css/Sign.css";
 
 function SigninUp() {
   const [showUser, setUser] = useState({ name: "", email: "", Branch: "", Year: "", password: "", cpassword: "", });
-  const [show, set] = useState({});
+  const [show, set] = useState();
 
   const authCtx = useContext(AuthContext);
 
