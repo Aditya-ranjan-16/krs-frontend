@@ -6,7 +6,6 @@ import AuthContext from '../../store/auth-context';
 
 function SigninMain() {
   const [showUser, setUser] = useState({ email: "", password: "" });
-  const [showError, setError] = useState("");
 
   const authCtx = useContext(AuthContext);
 
@@ -28,14 +27,21 @@ function SigninMain() {
     const value = e.target.value;
 
     if (name === "email") {
-      if (value.indexOf('@') === -1) {
+      if (value.indexOf('@') === -1 || value.indexOf('.') === -1) {
         e.target.style.border = "2px solid  #FF0000";
         e.target.style.outline = "none";
       } else {
         e.target.style.border = "2px solid  transparent";
       }
     }
-    if (name === "password") { }
+    if (name === "password") {
+      if (value === "") {
+        e.target.style.border = "2px solid  #FF0000";
+        e.target.style.outline = "none";
+      } else {
+        e.target.style.border = "2px solid  transparent";
+      }
+    }
 
     setUser({ ...showUser, [name]: value });
   }
