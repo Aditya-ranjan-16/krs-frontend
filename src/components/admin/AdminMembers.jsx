@@ -59,7 +59,24 @@ function AdminMembers() {
   };
 
   const onChange = (e) => {
-    setMem({ ...mem, [e.target.name]: e.target.value })
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if (name === "email") {
+      if (value.indexOf('@') === -1 || value.indexOf('.') === -1) {
+        e.target.style.border = "2px solid  #FF0000";
+        e.target.style.outline = "none";
+      } else {
+        e.target.style.border = "2px solid  transparent";
+      }
+    } else if (value === "") {
+      e.target.style.border = "2px solid  #FF0000";
+      e.target.style.outline = "none";
+    } else {
+      e.target.style.border = "2px solid  transparent";
+    }
+
+    setMem({ ...mem, [name]: value })
   }
   console.log(mem)
 
