@@ -65,6 +65,7 @@ function AdminEvents() {
   const [events, setEvents] = useState(eventCard);
   const [eve, setEve] = useState({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
   const [showModal, setShowModal] = useState({ show: false, index: null });
+  const [show, set] = useState("");
 
 
   //  add events
@@ -75,8 +76,12 @@ function AdminEvents() {
     if (name !== "" && date !== "" && venue !== "" && status !== "" && mode !== "" && team !== "" && img1 !== "" && img2 !== "" && img3 !== "" && description !== "" && sheetId !== "") {
       // setEvents(events.concat(eve));
       // setEve({ name: "", date: "", venue: "", status: "", mode: "", team: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
+      set("");
       console.log(name)
       console.log("Add")
+    } else {
+      set("Please fill all the fields");
+
     }
   };
 
@@ -90,6 +95,8 @@ function AdminEvents() {
     } else {
       e.target.style.border = "2px solid  transparent";
     }
+
+    console.log(value)
 
     setEve({ ...eve, [e.target.name]: e.target.value });
   };
@@ -146,29 +153,29 @@ function AdminEvents() {
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Status</h2>
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="status" id="">
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="status" id="" onChange={onChange}>
               <option selected disabled hidden>Select</option>
-              <option value={eve.status} onChange={onChange}>Upcoming</option>
-              <option value={eve.status} onChange={onChange}>Registrations Open</option>
-              <option value={eve.status} onChange={onChange}>Registrations Closed</option>
-              <option value={eve.status} onChange={onChange}>Over</option>
+              <option value="Upcoming">Upcoming</option>
+              <option value="Registrations Open">Registrations Open</option>
+              <option value="Registrations Closed">Registrations Closed</option>
+              <option value="Over">Over</option>
             </select>
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Mode</h2>
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="mode" id="">
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="mode" id="" onChange={onChange}>
               <option selected disabled hidden>Select</option>
-              <option value={eve.mode} onChange={onChange}>Offline</option>
-              <option value={eve.mode} onChange={onChange}>Online</option>
-              <option value={eve.mode} onChange={onChange}>Hybrid</option>
+              <option value="Offline">Offline</option>
+              <option value="Online">Online</option>
+              <option value="Hybrid">Hybrid</option>
             </select>
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Team Creation</h2>
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="team" id="">
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="team" id="" onChange={onChange}>
               <option selected disabled hidden>Select</option>
-              <option value={eve.team} onChange={onChange}>Allowed</option>
-              <option value={eve.team} onChange={onChange}>Not allowed</option>
+              <option value="Allowed">Allowed</option>
+              <option value="Not allowed">Not allowed</option>
             </select>
           </div>
           <div className="py-2 px-4">
@@ -208,7 +215,8 @@ function AdminEvents() {
           </div>
 
         </div>
-
+        <br />
+        {show ? <p className="alertText">{show}</p> : ""}
         <button type="submit" onClick={handleClick} className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white" > Add event </button>
       </div>
 
