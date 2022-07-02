@@ -22,12 +22,12 @@ function AdminMain() {
         <Route path='/adminmembers' element={<AdminMembers />} />
         <Route path='/adminevents' element={<AdminEvents />} />
         <Route path='/adminachievements' element={<AdminAchievements />} />
-        <Route path='/userprofile' element={<UserProfile /> } />
-        <Route path='/createteam' element={<CreateTeam /> } />
-        <Route path='/memberprofile' element={<MemberProfile /> } />
-        <Route path='/forms' element={<Forms /> } />
+        <Route path='/userprofile' element={<UserProfile />} />
+        <Route path='/createteam' element={<CreateTeam />} />
+        <Route path='/memberprofile' element={<MemberProfile />} />
+        <Route path='/forms' element={<Forms />} />
       </Routes>
-      
+
     </div>
   )
 }
