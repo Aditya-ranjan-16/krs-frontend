@@ -1,11 +1,9 @@
-import React from 'react'
-import { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import KRS from '../../public/krslogo.jpg'
 import BG from '../../public/dronebackground.jpg'
 import { useNavigate } from 'react-router-dom'
 import AuthContext from '../../store/auth-context';
-import { useEffect } from 'react'
 
 function SigninUp() {
   const authCtx = useContext(AuthContext);
