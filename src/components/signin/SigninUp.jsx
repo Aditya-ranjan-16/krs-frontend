@@ -22,8 +22,6 @@ function SigninUp() {
 
         authCtx.login("dede", 1000)
         redirect('/')
-        console.log("Done");
-
       } else {
         set("Passwords Does Not Match");
       }
