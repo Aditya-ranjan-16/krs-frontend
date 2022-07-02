@@ -6,3 +6,5 @@ export default function Error(props) {
         <div className="ErrorMdiv">Error</div>
     )
 }
+
+// backdrop-blur-2xl
