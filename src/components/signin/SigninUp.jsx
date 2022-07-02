@@ -104,7 +104,6 @@ function SigninUp() {
           onChange={PostData}
           className='w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded' type="password" name="cpassword" id="password" placeholder='Confirm Password' />
         <br />
-
         {show ? <p className="alertText">{show}</p> : ""}
         <br />
         <button className='w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold' onClick={signup}>Sign Up</button>
