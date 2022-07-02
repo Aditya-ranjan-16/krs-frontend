@@ -29,7 +29,6 @@ const achievementsCard = [
 
 
 function AdminAchievements() {
-
   const [achievements, setAchievements] = useState(achievementsCard)
   const [ach, setAch] = useState({ teamName: "", img1: "", img2: "", position: "", year: "", teamName: "", eventName1: "", eventName2: "", eventPlace: "" })
   const [showModal, setShowModal] = useState({ show: false, index: null });
