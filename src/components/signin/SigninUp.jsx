@@ -10,13 +10,24 @@ function SigninUp() {
   const authCtx = useContext(AuthContext);
 
   const redirect = useNavigate();
+
   const signup = () => {
     const { name, email, Branch, Year, password, cpassword } = showUser;
     if (name !== "" && email !== "" && Branch !== "" && Year !== "" && password !== "" && cpassword !== "") {
 
+      if (password === cpassword) {
+        // authCtx.login("dede", 1000)
+        // redirect('/')
+        e.target.style.border = "2px solid  transparent";
+      } else {
+        e.target.style.border = "2px solid  #FF0000";
+        e.target.style.outline = "none";
+
+      }
+    } else {
+      console.log("Error")
     }
-    // authCtx.login("dede", 1000)
-    // redirect('/')
+
   }
 
   const PostData = async (e) => {
