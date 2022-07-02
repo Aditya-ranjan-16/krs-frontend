@@ -18,6 +18,7 @@ function SigninMain() {
       authCtx.login("dede", 1000)
       redirect('/');
     } else {
+      set("Please fill all the fields");
       console.log("Error")
     }
 
@@ -72,6 +73,8 @@ function SigninMain() {
           style={{ border: "2px solid  transparent" }}
         />
         <h2 className='text-white leading-10'><Link to='/signin' >forgot password?</Link><Link style={{ color: "blue" }} to='/signup' > SignUp</Link></h2><br />
+        {show ? <p className="alertText">{show}</p> : ""}
+        <br />
         <button className='w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold' onClick={login}>Log in</button>
       </div>
     </div>
