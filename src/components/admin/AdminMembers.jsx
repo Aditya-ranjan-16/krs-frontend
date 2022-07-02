@@ -50,8 +50,9 @@ function AdminMembers() {
 
     const { name, roll, domain, designation, about, year, img, linkedin, email, insta, github } = mem;
 
-    if (name !== "" && roll !== "" && domain !== "" && designation !== "" && about !== "" && year !== "" && img !== "" && linkedin !== "" && email !== "" && insta !== "" && github !== "") {
+    if (name !== "" && roll !== "" && domain !== "" && designation !== "" && about !== "" && year !== "" && img !== "" && linkedin !== "" && email !== "" && insta !== "" && github !== "" && email.indexOf('@') > -1 && email.indexOf('.') !== -1) {
       setMembers(members.concat(mem))
+      set("");
       setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
     } else {
       set("Please fill all the fields");
