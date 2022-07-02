@@ -6,6 +6,7 @@ import AuthContext from '../../store/auth-context';
 
 function SigninMain() {
   const [showUser, setUser] = useState({ email: "", password: "" });
+  const [show, set] = useState("");
 
   const authCtx = useContext(AuthContext);
 
