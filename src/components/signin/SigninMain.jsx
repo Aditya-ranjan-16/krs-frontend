@@ -13,7 +13,7 @@ function SigninMain() {
   const login = () => {
     const { email, password } = showUser;
 
-    if (password !== "" && email !== "" &&) {
+    if (password !== "" && email !== "" && email.indexOf('@') > -1) {
       console.log(email, password);
 
     } else {
