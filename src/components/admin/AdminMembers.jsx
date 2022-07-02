@@ -45,10 +45,16 @@ function AdminMembers() {
 
   //  add members
   const handleClick = (e) => {
-    e.preventDefault();
-    setMembers(members.concat(mem))
-    setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
+    // e.preventDefault();
+    // setMembers(members.concat(mem))
+    // setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
+
+    const { name, roll, domain, designation, about, year, img, linkedin, email, insta, github } = mem;
+
+    if (name !== "" || roll !== "" || domain !== "" || designation !== "" || about !== "" || year !== "" || img !== "" || linkedin !== "" || email !== "" || insta !== "" || github !== "")
+      console.log("Add");
   };
+
   const onChange = (e) => {
     setMem({ ...mem, [e.target.name]: e.target.value })
   }
