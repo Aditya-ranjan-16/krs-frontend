@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import KRS from '../../public/krslogo.jpg'
 import BG from '../../public/dronebackground.jpg'
 import AuthContext from '../../store/auth-context';
-import Error from "./../Error"
 
 function SigninMain() {
   const [showUser, setUser] = useState({ email: "", password: "" });
@@ -20,7 +19,6 @@ function SigninMain() {
       redirect('/')
     } else {
       setError("Error")
-      console.log("error")
     }
 
   }
@@ -33,11 +31,11 @@ function SigninMain() {
       if (value.indexOf('@') === -1) {
         e.target.style.border = "2px solid  #FF0000";
         e.target.style.outline = "none";
-        console.log(e.target);
       } else {
         e.target.style.border = "2px solid  transparent";
       }
     }
+    if (name === "password") { }
 
     setUser({ ...showUser, [name]: value });
   }
