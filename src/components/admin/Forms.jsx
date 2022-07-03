@@ -3,7 +3,9 @@ import cross from '../../public/cross.png'
 
 function Forms() {
 
-
+  const checkName = useRef(null)
+  const checkType = useRef(null)
+  const checkDefault = useRef(null)
 
   const field = [
     {
@@ -40,9 +42,9 @@ function Forms() {
   ]
 
   const [forms, setForms] = useState(formdata);
-  const [form, setForm] = useState({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" })
+  const [fieldList, setfieldList] = useState(field);
 
-  const [fieldList, setfieldList] = useState(field)
+  const [form, setForm] = useState({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" })
   const [newfieldlist, setNewfieldList] = useState({ name: "", type: "", value: "" })
 
 
@@ -152,8 +154,8 @@ function Forms() {
         </div>
 
         <button className="text-xl py-1 px-2 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={handleAddField}>+ Add field</button>
-
-        <br /><button type="submit" className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={handleClick} >Create Form</button>
+        <br />
+        <button type="submit" className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={handleClick} >Create Form</button>
 
       </div>
 
