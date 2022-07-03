@@ -9,11 +9,6 @@ function Forms() {
 
   const field = [
     {
-      name: "Name",
-      type: "text",
-      value: "",
-    },
-    {
       name: "Roll Number",
       type: "number",
       value: ""
@@ -139,14 +134,31 @@ function Forms() {
             <label className='text-white text-xl text-center' htmlFor="">Value</label>
           </div>
 
+          {/* Name Inp Feild */}
           <div className="px-5 grid grid-cols-3 gap-4 py-2">
             <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" value="Name" />
             <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" value="text">
-              <option value="text" selected disabled hidden>text</option>
+              <option value="text" selected>text</option>
             </select>
-            {/* <div className='flex'> */}
             <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" />
-            {/* </div> */}
+          </div>
+
+          {/* Roll Number Inp Feild */}
+          <div className="px-5 grid grid-cols-3 gap-4 py-2">
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" value="Roll Number" />
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" value="text">
+              <option value="number" selected>number</option>
+            </select>
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" />
+          </div>
+
+          {/* Email Inp Feild */}
+          <div className="px-5 grid grid-cols-3 gap-4 py-2">
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" value="Email" />
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" value="text">
+              <option value="email" selected>email</option>
+            </select>
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" />
           </div>
 
           {fieldList.map((list, index) => {
