@@ -85,7 +85,7 @@ function Forms() {
 
   const handleRemoveField = (index) => {
     console.log(index)
-    let newField = [...fieldList];
+    var newField = [...fieldList];
 
     for (var i = 0; i < newField.length; i++) {
       if (newField[i] === index) {
