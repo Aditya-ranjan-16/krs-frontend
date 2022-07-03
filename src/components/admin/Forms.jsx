@@ -51,22 +51,24 @@ function Forms() {
   };
 
   const onChange2 = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+    // const name = e.target.name;
+    // const value = e.target.value;
 
-    console.log(name + `\t` + value);
+    // console.log(name + `\t` + value);
 
-    // setNewfieldList({ ...newfieldlist, [e.target.name]: e.target.value });
+    setNewfieldList({ ...newfieldlist, [e.target.name]: e.target.value });
   };
 
   // field
   const handleAddField = () => {
-    if (checkName.current.value !== "" && checkType.current.value !== "select") {  //checking if fields are empty
-      setfieldList([...fieldList, {
-        name: "",
-        type: "",
-        value: ""
-      }])
+    const { name, type, value } = newfieldlist
+    if (name !== "" && type !== "" && value !== "select") {  //checking if fields are empty
+      console.log("Add")
+      //   setfieldList([...fieldList, {
+      //     name: "",
+      //     type: "",
+      //     value: ""
+      //   }])
     } else {
       alert("please fill all the name and type inputs")
     }
@@ -158,8 +160,8 @@ function Forms() {
             <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Emailvalue" onChange={preDefinedFeilds} />
           </div>
 
+          {/* For More Feilds */}
           {fieldList.map((list, index) => {
-            console.table(list)
             return (
               <div key={index} className="px-5 grid grid-cols-3 gap-4 py-2">
                 <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" onChange={onChange2} id="" />
