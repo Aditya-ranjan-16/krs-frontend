@@ -33,7 +33,7 @@ function Forms() {
     e.preventDefault();
 
     const { event, typeofform, heading, subtitle, instructions } = form;
-    if (event !== "" && typeofform !== "" && heading !== "" && subtitle !== "" && instructions !== "") {
+    if (event !== "" && typeofform !== "" && heading !== "" && subtitle !== "" && instructions !== "" && newfieldlist.name !== "" && newfieldlist.type !== "") {
       set("");
       setForms(forms.concat(form));
       setForm({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" });
@@ -41,6 +41,7 @@ function Forms() {
       setfieldList(newfieldlist.concat(fieldList));
       setNewfieldList({ name: "", type: "", value: "" })
     } else {
+      console.log(newfieldlist.name);
       set("Please fill all the fields");
     }
   };
