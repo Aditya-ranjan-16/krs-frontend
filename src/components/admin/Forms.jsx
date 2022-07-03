@@ -78,8 +78,6 @@ function Forms() {
         type: "",
         value: ""
       })
-
-      console.log(fieldList)
     } else {
       alert("please fill all the name and type inputs")
     }
