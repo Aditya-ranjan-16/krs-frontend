@@ -79,6 +79,13 @@ function Forms() {
     console.log(newField)
   }
 
+  const preDefinedFeilds = async (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    console.log(name + `\t` + value);
+  }
+
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
       <div className="py-4 px-8 rounded-xl bg-[#111111] border-2 border-yellow-500">
@@ -130,7 +137,7 @@ function Forms() {
             <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" value="text">
               <option value="text" selected>text</option>
             </select>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Namevalue" onChange={preDefinedFeilds} />
           </div>
 
           {/* Roll Number Inp Feild */}
@@ -139,7 +146,7 @@ function Forms() {
             <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" value="text">
               <option value="number" selected>number</option>
             </select>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Rollvalue" onChange={preDefinedFeilds} />
           </div>
 
           {/* Email Inp Feild */}
@@ -148,7 +155,7 @@ function Forms() {
             <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" value="text">
               <option value="email" selected>email</option>
             </select>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Emailvalue" onChange={preDefinedFeilds} />
           </div>
 
           {fieldList.map((list, index) => {
