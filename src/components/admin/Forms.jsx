@@ -87,13 +87,6 @@ function Forms() {
     console.log(index)
     var newField = [...fieldList];
 
-    for (var i = 0; i < newField.length; i++) {
-      if (newField[i] === index) {
-        newField.splice(i, 1);
-      }
-
-    }
-
     console.log(newField)
 
     // newField.splice(index, 1);
