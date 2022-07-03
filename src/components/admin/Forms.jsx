@@ -51,11 +51,6 @@ function Forms() {
   };
 
   const onChange2 = (e) => {
-    // const name = e.target.name;
-    // const value = e.target.value;
-
-    // console.log(name + `\t` + value);
-
     setNewfieldList({ ...newfieldlist, [e.target.name]: e.target.value });
   };
 
