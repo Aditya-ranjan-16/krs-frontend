@@ -64,8 +64,15 @@ function Forms() {
 
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    // setNewfieldList({ ...newfieldlist, [e.target.name]: e.target.value});
-    setNewfieldList({ name: [e.target.name], value: [e.target.value], type: [e.target.type] })
+  };
+
+  const onChange2 = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    console.log(name + `\t` + value);
+
+    // setNewfieldList({ ...newfieldlist, [e.target.name]: e.target.value });
   };
 
   // field
@@ -136,12 +143,12 @@ function Forms() {
           {fieldList.map((list, index) => {
             return (
               <div key={index} className="px-5 grid grid-cols-3 gap-4 py-2">
-                <input ref={checkName} className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" value={newfieldlist} onChange={onChange} id="" />
-                <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" ref={checkType} name="type" id="">
+                <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" value={newfieldlist} onChange={onChange} id="" />
+                <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" onChange={onChange2}>
                   <option value="select" selected disabled hidden>Select</option>
-                  <option name='type' value={list.type} onChange={onChange} >text</option>
-                  <option name='type' value={list.type} onChange={onChange}>number</option>
-                  <option name='type' value={list.type} onChange={onChange} >email</option>
+                  <option name='type' value="text">text</option>
+                  <option name='type' value="number">number</option>
+                  <option name='type' value="email">email</option>
                 </select>
                 <div className='flex'>
                   <input ref={checkDefault} className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" value={list.value} onChange={onChange} id="" />
