@@ -26,6 +26,7 @@ function Forms() {
   const [form, setForm] = useState({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" })
   const [newfieldlist, setNewfieldList] = useState({ name: "", type: "", value: "" })
   const [show, set] = useState("");
+  const [perdefined, setperdefined] = useState({ Namevalue: "", Rollvalue: "", Emailvalue: "" });
 
 
   //  create form
@@ -33,9 +34,14 @@ function Forms() {
     e.preventDefault();
 
     const { event, typeofform, heading, subtitle, instructions } = form;
+    const { Namevalue, Rollvalue, Emailvalue } = perdefined
+
     if (event !== "" && typeofform !== "" && heading !== "" && subtitle !== "" && instructions !== "" && newfieldlist.name !== "" && newfieldlist.type !== "") {
       set("");
-      setForms(forms.concat(form));
+      var concatform = {
+        event, typeofform, heading, subtitle, instructions, Namevalue, Rollvalue, Emailvalue
+      }
+      setForms(forms.concat(concatform));
       setForm({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" });
 
       setfieldList(newfieldlist.concat(fieldList));
@@ -90,10 +96,7 @@ function Forms() {
   }
 
   const preDefinedFeilds = async (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-
-    console.log(name + `\t` + value);
+    setperdefined({ ...perdefined, [e.target.name]: e.target.value });
   }
 
   useEffect(() => {
@@ -211,6 +214,12 @@ function Forms() {
               {fieldList.map((field) => {
                 return (
                   <div className="text-white">
+                    <div>
+                      <label htmlFor="">Name</label>
+                      <input className='text-black' type="text" placeholder={field.value} id="" />
+                    </div>
+                    <div></div>
+                    <div></div>
                     <label htmlFor="">{field.name}</label>
                     <input className='text-black' type={field.type} name={field.name} placeholder={field.value} id="" />
                   </div>
