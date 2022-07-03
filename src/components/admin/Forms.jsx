@@ -58,8 +58,8 @@ function Forms() {
       setForm({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" });
     }
 
-    setfieldList(newfieldlist.concat(fieldList));
-    setNewfieldList({ name: "", type: "", value: "" })
+    // setfieldList(newfieldlist.concat(fieldList));
+    // setNewfieldList({ name: "", type: "", value: "" })
 
   };
   const onChange = (e) => {
