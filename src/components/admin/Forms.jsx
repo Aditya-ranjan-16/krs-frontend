@@ -23,12 +23,6 @@ function Forms() {
       type: "email",
       value: ""
     },
-    {
-      name: "",
-      type: "",
-      value: ""
-    },
-
   ]
 
   const formdata = [
