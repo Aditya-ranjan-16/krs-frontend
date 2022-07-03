@@ -65,6 +65,7 @@ function Forms() {
     // setNewfieldList({ name: "", type: "", value: "" })
 
   };
+
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     // setNewfieldList({ ...newfieldlist, [e.target.name]: e.target.value});
@@ -82,17 +83,17 @@ function Forms() {
 
   // field
 
-  const handleAddField = () => {
-    // if (checkName.current.value !== "" && checkType.current.value !== "select") {  //checking if fields are empty
-    // setfieldList([...fieldList, {
-    // name: "",
-    // type: "",
-    // value: ""
-    // }])
-    // } else {
-    // alert("please fill all the name and type inputs")
-    // }
-  }
+  // const handleAddField = () => {
+  // if (checkName.current.value !== "" && checkType.current.value !== "select") {  //checking if fields are empty
+  // setfieldList([...fieldList, {
+  // name: "",
+  // type: "",
+  // value: ""
+  // }])
+  // } else {
+  // alert("please fill all the name and type inputs")
+  // }
+  // }
 
   const handleRemoveField = (index) => {
     const newField = [...fieldList];
@@ -167,7 +168,9 @@ function Forms() {
           })}
         </div>
 
-        <button className="text-xl py-1 px-2 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={handleAddField}>+ Add field</button>
+        <button className="text-xl py-1 px-2 mx-1 my-6 bg-yellow-500 rounded-lg text-white"
+        // onClick={handleAddField}
+        >+ Add field</button>
         <br />
         <button type="submit" className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={handleClick} >Create Form</button>
 
