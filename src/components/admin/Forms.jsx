@@ -67,19 +67,17 @@ function Forms() {
       let AddField = {
         name, type, value
       }
-      // console.log("Add")
-      // console.table(AddField)
       setfieldList(fieldList.concat(AddField))
       setfieldList([...fieldList, {
         name: "",
         type: "",
         value: ""
       }])
-      setNewfieldList([...newfieldlist, {
+      setNewfieldList({
         name: "",
         type: "",
         value: ""
-      }])
+      })
     } else {
       alert("please fill all the name and type inputs")
     }
