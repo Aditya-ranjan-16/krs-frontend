@@ -95,20 +95,20 @@ function Forms() {
         <div className="grid grid-cols-2">
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Select Event</h2>
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="event" id="">
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="event" id="" onChange={onChange}>
               <option selected disabled hidden>Select</option>
-              <option value={form.event} onChange={onChange} >Pradarshana</option>
-              <option value={form.event} onChange={onChange} >Robowar</option>
-              <option value={form.event} onChange={onChange} >Drone Workshop</option>
-              <option value={form.event} onChange={onChange} >IoT Bootcamp</option>
+              <option value="Pradarshana">Pradarshana</option>
+              <option value="Robowar">Robowar</option>
+              <option value="Drone Workshop">Drone Workshop</option>
+              <option value="IoT Bootcamp">IoT Bootcamp</option>
             </select>
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Type of Form</h2>
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="typeofform" id="">
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="typeofform" id="" onChange={onChange}>
               <option selected disabled hidden>Select</option>
-              <option value={form.typeofform} onChange={onChange} >Registration</option>
-              <option value={form.typeofform} onChange={onChange} >Normal</option>
+              <option value="Registration">Registration</option>
+              <option value="Normal">Normal</option>
             </select>
           </div>
           <div className="py-2 px-4">
