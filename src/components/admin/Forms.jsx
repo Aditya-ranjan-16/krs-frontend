@@ -2,11 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import cross from '../../public/cross.png'
 
 function Forms() {
-
-  const checkName = useRef(null)
-  const checkType = useRef(null)
-  const checkDefault = useRef(null)
-
   const field = [
     {
       name: "",
@@ -30,6 +25,7 @@ function Forms() {
 
   const [form, setForm] = useState({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" })
   const [newfieldlist, setNewfieldList] = useState({ name: "", type: "", value: "" })
+  const [show, set] = useState("");
 
 
   //  create form
@@ -38,11 +34,14 @@ function Forms() {
 
     const { event, typeofform, heading, subtitle, instructions } = form;
     if (event !== "" && typeofform !== "" && heading !== "" && subtitle !== "" && instructions !== "") {
+      set("");
       setForms(forms.concat(form));
       setForm({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" });
 
       setfieldList(newfieldlist.concat(fieldList));
       setNewfieldList({ name: "", type: "", value: "" })
+    } else {
+      set("Please fill all the fields");
     }
   };
 
