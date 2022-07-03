@@ -9,16 +9,6 @@ function Forms() {
 
   const field = [
     {
-      name: "Roll Number",
-      type: "number",
-      value: ""
-    },
-    {
-      name: "Email",
-      type: "email",
-      value: "rishav"
-    },
-    {
       name: "",
       type: "",
       value: ""
