@@ -53,6 +53,10 @@ function Forms() {
     e.preventDefault();
 
     const { event, typeofform, heading, subtitle, instructions } = form;
+    const { name, type, value } = newfieldlist;
+
+    console.log(name, type, value);
+
     if (event !== "" && typeofform !== "" && heading !== "" && subtitle !== "" && instructions !== "") {
       setForms(forms.concat(form));
       setForm({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" });
