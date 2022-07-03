@@ -143,7 +143,7 @@ function Forms() {
           {fieldList.map((list, index) => {
             return (
               <div key={index} className="px-5 grid grid-cols-3 gap-4 py-2">
-                <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" value={newfieldlist} onChange={onChange} id="" />
+                <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" onChange={onChange2} id="" />
                 <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" onChange={onChange2}>
                   <option value="select" selected disabled hidden>Select</option>
                   <option name='type' value="text">text</option>
@@ -151,7 +151,7 @@ function Forms() {
                   <option name='type' value="email">email</option>
                 </select>
                 <div className='flex'>
-                  <input ref={checkDefault} className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" value={list.value} onChange={onChange} id="" />
+                  <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" onChange={onChange2} id="" />
                   {index > 2 && (
                     <button className="text-xl  px-2 mx-1 rounded-lg text-white" onClick={() => handleRemoveField(index)}><img className='w-6' src={cross} alt="remove" /></button>
                   )}
