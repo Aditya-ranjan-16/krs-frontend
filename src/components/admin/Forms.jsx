@@ -139,11 +139,11 @@ function Forms() {
             return (
               <div key={index} className="px-5 grid grid-cols-3 gap-4 py-2">
                 <input ref={checkName} className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" value={newfieldlist} onChange={onChange} id="" />
-                <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" ref={checkType} name="type" id="">
-                  <option value="select" selected disabled hidden>Select</option>
-                  <option name='type' value={list.type} onChange={onChange} >text</option>
-                  <option name='type' value={list.type} onChange={onChange}>number</option>
-                  <option name='type' value={list.type} onChange={onChange} >email</option>
+                <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" ref={checkType} name="type" id="" onChange={onChange}>
+                  <option value="select" selected disabled hidden >Select</option>
+                  <option name='type' value="text">text</option>
+                  <option name='type' value="number">number</option>
+                  <option name='type' value="email">email</option>
                 </select>
                 <div className='flex'>
                   <input ref={checkDefault} className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" value={list.value} onChange={onChange} id="" />
