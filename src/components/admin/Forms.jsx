@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import cross from '../../public/cross.png'
 
 function Forms() {
@@ -68,22 +68,25 @@ function Forms() {
         name, type, value
       }
       setfieldList(fieldList.concat(AddField))
-      setfieldList([...fieldList, {
-        name: "",
-        type: "",
-        value: ""
-      }])
+      // setfieldList([...fieldList, {
+      //   name: "",
+      //   type: "",
+      //   value: ""
+      // }])
       setNewfieldList({
         name: "",
         type: "",
         value: ""
       })
+
+      console.log(fieldList)
     } else {
       alert("please fill all the name and type inputs")
     }
   }
 
   const handleRemoveField = (index) => {
+    console.log(index)
     const newField = [...fieldList];
     newField.splice(index, 1);
     setfieldList(newField)
@@ -96,6 +99,10 @@ function Forms() {
 
     console.log(name + `\t` + value);
   }
+
+  useEffect(() => {
+    console.log(fieldList)
+  }, [fieldList])
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
