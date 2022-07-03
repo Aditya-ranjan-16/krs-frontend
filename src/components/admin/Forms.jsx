@@ -152,7 +152,6 @@ function Forms() {
           </div>
 
           {fieldList.map((list, index) => {
-            console.table(list)
             return (
               <div key={index} className="px-5 grid grid-cols-3 gap-4 py-2">
                 <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" onChange={onChange2} id="" />
@@ -164,9 +163,7 @@ function Forms() {
                 </select>
                 <div className='flex'>
                   <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" onChange={onChange2} id="" />
-                  {/* {index > 2 && ( */}
                   <button className="text-xl  px-2 mx-1 rounded-lg text-white" onClick={() => handleRemoveField(index)}><img className='w-6' src={cross} alt="remove" /></button>
-                  {/* )} */}
                 </div>
               </div>
 
