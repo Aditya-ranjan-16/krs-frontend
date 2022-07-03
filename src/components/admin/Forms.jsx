@@ -2,10 +2,9 @@ import React, { useState, useRef } from 'react'
 import cross from '../../public/cross.png'
 
 function Forms() {
-
-  const checkName = useRef(null)
-  const checkType = useRef(null)
-  const checkDefault = useRef(null)
+  // const checkName = useRef(null)
+  // const checkType = useRef(null)
+  // const checkDefault = useRef(null)
 
   const field = [
     {
