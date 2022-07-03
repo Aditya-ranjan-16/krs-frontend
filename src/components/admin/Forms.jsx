@@ -152,7 +152,7 @@ function Forms() {
               <div key={index} className="px-5 grid grid-cols-3 gap-4 py-2">
                 <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" value={newfieldlist.name} onChange={onChange2} id="" />
                 <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" onChange={onChange2}>
-                  <option value="select" selected disabled hidden >Select</option>
+                  <option value="select" selected disabled hidden>Select</option>
                   <option name='type' value="text">text</option>
                   <option name='type' value="number">number</option>
                   <option name='type' value="email">email</option>
