@@ -141,6 +141,7 @@ function Forms() {
           </div>
 
           {fieldList.map((list, index) => {
+            console.table(list)
             return (
               <div key={index} className="px-5 grid grid-cols-3 gap-4 py-2">
                 <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" onChange={onChange2} id="" />
@@ -177,7 +178,6 @@ function Forms() {
               <h1>{data.subtitle}</h1>
               <h1>{data.instructions}</h1>
               {fieldList.map((field) => {
-                console.log(fieldList)
                 return (
                   <div className="text-white">
                     <label htmlFor="">{field.name}</label>
