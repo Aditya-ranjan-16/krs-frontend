@@ -195,6 +195,7 @@ function Forms() {
 
         <button className="text-xl py-1 px-2 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={handleAddField}>+ Add field</button>
         <br />
+        {show ? <p className="alertText">{show}</p> : ""}
         <button type="submit" className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={handleClick} >Create Form</button>
 
       </div>
