@@ -85,10 +85,19 @@ function Forms() {
 
   const handleRemoveField = (index) => {
     console.log(index)
-    const newField = [...fieldList];
-    newField.splice(index, 1);
-    setfieldList(newField)
+    let newField = [...fieldList];
+
+    for (var i = 0; i < newField.length; i++) {
+      if (newField[i] === index) {
+        newField.splice(i, 1);
+      }
+
+    }
+
     console.log(newField)
+
+    // newField.splice(index, 1);
+    // setfieldList(newField)
   }
 
   const preDefinedFeilds = async (e) => {
