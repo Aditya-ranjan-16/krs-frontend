@@ -51,8 +51,12 @@ function Forms() {
   //  create form
   const handleClick = (e) => {
     e.preventDefault();
-    setForms(forms.concat(form));
-    setForm({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" });
+
+    const { event, typeofform, heading, subtitle, instructions } = setForm;
+    if (event !== "" && typeofform !== "" && heading !== "" && subtitle !== "" && instructions !== "") {
+      setForms(forms.concat(form));
+      setForm({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" });
+    }
 
     setfieldList(newfieldlist.concat(fieldList));
     setNewfieldList({ name: "", type: "", value: "" })
