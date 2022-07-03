@@ -58,7 +58,8 @@ function Forms() {
   const handleAddField = () => {
     const { name, type, value } = newfieldlist
 
-    if (name !== "" && type !== "") {  //checking if fields are empty
+    //checking if fields are empty
+    if (name !== "" && type !== "") {
       let AddField = {
         name, type, value
       }
