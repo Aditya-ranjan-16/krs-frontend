@@ -62,8 +62,14 @@ function Forms() {
   // field
   const handleAddField = () => {
     const { name, type, value } = newfieldlist
-    if (name !== "" && type !== "" && value !== "select") {  //checking if fields are empty
+
+    if (name !== "" && type !== "") {  //checking if fields are empty
+      let AddField = {
+        name, type, value
+      }
       console.log("Add")
+      console.table(AddField)
+      // setfieldList(fieldList.concat())
       //   setfieldList([...fieldList, {
       //     name: "",
       //     type: "",
