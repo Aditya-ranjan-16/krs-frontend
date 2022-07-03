@@ -51,22 +51,24 @@ function Forms() {
   //  create form
   const handleClick = (e) => {
     e.preventDefault();
-    setForms(forms.concat(form));
-    setForm({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" });
 
-    setfieldList(newfieldlist.concat(fieldList));
-    setNewfieldList({ name: "", type: "", value: "" })
+    const { event, typeofform, heading, subtitle, instructions } = form;
+    if (event !== "" && typeofform !== "" && heading !== "" && subtitle !== "" && instructions !== "") {
+      setForms(forms.concat(form));
+      setForm({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" });
 
+      setfieldList(newfieldlist.concat(fieldList));
+      setNewfieldList({ name: "", type: "", value: "" })
+    }
   };
+
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     // setNewfieldList({ ...newfieldlist, [e.target.name]: e.target.value});
     setNewfieldList({ name: [e.target.name], value: [e.target.value], type: [e.target.type] })
   };
 
-
   // field
-
   const handleAddField = () => {
     if (checkName.current.value !== "" && checkType.current.value !== "select") {  //checking if fields are empty
       setfieldList([...fieldList, {
