@@ -81,7 +81,6 @@ function Forms() {
       setAddFeild(addFeild.concat(arr))
       setCurFeild({ name: "", type: "", value: "" })
     } else {
-      console.log("error")
       console.log(show)
     }
   }
