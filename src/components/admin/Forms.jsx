@@ -53,6 +53,11 @@ function Forms() {
     del.current.style.display = "none"
   }
 
+  const removeFeild = (e) => {
+    setAddFeild(addFeild.filter())
+    console.log(e)
+  }
+
   // useEffect(() => { console.log(curFeild) }, [curFeild])
 
   return (
@@ -136,7 +141,7 @@ function Forms() {
                   <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" value={value.type} />
                   <div className='flex'>
                     <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" value={value.value} />
-                    <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" onClick={removeFeild} /></button>
+                    <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" onClick={() => removeFeild(key)} /></button>
                   </div>
                 </div>
               )
