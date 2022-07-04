@@ -49,8 +49,9 @@ function Forms() {
         ]
       }
 
-      console.log(addFeild)
-      // console.log(final.fields)
+      // console.log(addFeild)
+      final.fields.concat(addFeild)
+      console.log(final)
     } else {
       console.log("error");
     }
