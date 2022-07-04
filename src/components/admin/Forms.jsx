@@ -24,12 +24,21 @@ function Forms() {
     setformData({ ...formData, [e.target.name]: e.target.value });
   }
   const onChange2 = (e) => {
-
+    setCurFeild({ ...curFeild, [e.target.name]: e.target.value });
   }
 
   const addFeildCheck = (e) => {
-    console.log("first")
+    const { name, type, value } = curFeild
+
+    var arr = [name, type, value]
+    if (name !== "" && type !== "") {
+      setAddFeild(addFeild.concat(arr))
+    } else {
+      console.log("error")
+    }
   }
+
+  useEffect(() => { console.log(curFeild) }, [curFeild])
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
