@@ -51,7 +51,6 @@ function Forms() {
       console.log(final)
     } else {
       console.log("error");
-      console.log(event, typeofform, heading, subtitle, instructions, Namevalue, Rollvalue, Emailvalue)
     }
   }
 
