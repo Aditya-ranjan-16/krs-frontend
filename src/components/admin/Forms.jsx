@@ -53,6 +53,10 @@ function Forms() {
 
       final.fields = final.fields.concat(addFeild)
       setshowFInalData(showFInalData.concat(final))
+
+      setformData({
+        event: "", typeofform: "", heading: "", subtitle: "", instructions: "", Namevalue: "", Rollvalue: "", Emailvalue: ""
+      })
       setE("");
     } else {
       setE("Please fill all the fields");
