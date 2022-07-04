@@ -268,7 +268,7 @@ function Forms() {
                   {value.fields.map((val, key) => {
                     return (
                       <div key={key}>
-                        <p>{val.name}</p>
+                        <label className='text-white text-xl text-center' htmlFor="">{val.name}</label>
                         <p>{val.type}</p>
                         <p>{val.value}</p>
                       </div>
