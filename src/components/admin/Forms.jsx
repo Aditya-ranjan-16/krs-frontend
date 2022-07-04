@@ -256,7 +256,25 @@ function Forms() {
       })}
 
       {showFInalData ? <div>
-        {showFInalData.map()}
+        {showFInalData.map((value, key) => {
+          return (
+            <div key={key} className="text-white border-2">
+              <h1>{value.event}</h1>
+              <h1>{value.heading}</h1>
+              <h1>{value.subtitle}</h1>
+              <h1>{value.instructions}</h1>
+              {showFInalData.fields.map((value, key) => {
+                return (
+                  <div key={key}>
+                    <p>{value.name}</p>
+                    <p>{value.type}</p>
+                    <p>{value.value}</p>
+                  </div>
+                )
+              })}
+            </div>
+          )
+        })}
       </div> : ""}
     </div>
   )
