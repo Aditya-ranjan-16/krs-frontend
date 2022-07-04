@@ -127,6 +127,7 @@ function Forms() {
             <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Emailvalue" onChange={onChange} />
           </div>
 
+          {/* Add Feilds With Values */}
           {addFeild ? <div>
             {addFeild.map((value, key) => {
               return (
@@ -135,7 +136,7 @@ function Forms() {
                   <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" value={value.type} />
                   <div className='flex'>
                     <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" value={value.value} />
-                    <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" /></button>
+                    <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" onClick={removeFeild} /></button>
                   </div>
                 </div>
               )
