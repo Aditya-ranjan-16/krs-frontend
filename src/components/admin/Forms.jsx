@@ -30,7 +30,7 @@ function Forms() {
   const addFeildCheck = (e) => {
     const { name, type, value } = curFeild
 
-    var arr = [name, type, value]
+    var arr = { name, type, value }
     if (name !== "" && type !== "") {
       setAddFeild(addFeild.concat(arr))
     } else {
@@ -38,7 +38,7 @@ function Forms() {
     }
   }
 
-  useEffect(() => { console.log(curFeild) }, [curFeild])
+  useEffect(() => { console.log(addFeild) }, [addFeild])
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
@@ -112,7 +112,20 @@ function Forms() {
             <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Emailvalue" onChange={onChange} />
           </div>
 
-          {addFeild}
+          {addFeild ? <div>
+            {addFeild.map((value, key) => {
+              return (
+                <div key={key} className="px-5 grid grid-cols-3 gap-4 py-2">
+                  <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" value={value.name} />
+                  <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" value={value.type} />
+                  <div className='flex'>
+                    <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" value={value.value} />
+                    <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" /></button>
+                  </div>
+                </div>
+              )
+            })}
+          </div> : ""}
 
           {/* For More Feilds */}
           <div className="px-5 grid grid-cols-3 gap-4 py-2">
