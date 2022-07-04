@@ -15,6 +15,7 @@ function Forms() {
   ]
 
   const [forms, setForms] = useState(formdata);
+  const [showFInalData, setshowFInalData] = useState([])
 
   const [formData, setformData] = useState({
     event: "", typeofform: "", heading: "", subtitle: "", instructions: "", Namevalue: "", Rollvalue: "", Emailvalue: ""
@@ -51,6 +52,7 @@ function Forms() {
       }
 
       final.fields = final.fields.concat(addFeild)
+      setshowFInalData(showFInalData.concat(final))
       setE("");
     } else {
       setE("Please fill all the fields");
@@ -252,6 +254,10 @@ function Forms() {
           </div>
         )
       })}
+
+      {showFInalData ? <div>
+        {showFInalData.map()}
+      </div> : ""}
     </div>
   )
 }
