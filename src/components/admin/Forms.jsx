@@ -61,7 +61,6 @@ function Forms() {
       setE("");
     } else {
       setE("Please fill all the fields");
-      console.log("error");
     }
   }
 
