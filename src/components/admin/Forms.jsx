@@ -57,7 +57,7 @@ function Forms() {
     setAddFeild(addFeild.filter((el) => el.type !== type || el.name !== name));
   }
 
-  useEffect(() => { console.log(addFeild) }, [addFeild])
+  // useEffect(() => { console.log(addFeild) }, [addFeild])
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
