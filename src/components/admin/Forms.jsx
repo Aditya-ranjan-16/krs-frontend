@@ -12,6 +12,10 @@ function Forms() {
     },
   ]
 
+  const [forms, setForms] = useState(formdata);
+
+  // const []
+
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
       <div className="py-4 px-8 rounded-xl bg-[#111111] border-2 border-yellow-500">
@@ -111,7 +115,7 @@ function Forms() {
 
       </div>
 
-      {/* {forms.map((data) => {
+      {forms.map((data) => {
         return (
           <div className="text-white border-2">
             <form action="">
@@ -119,7 +123,7 @@ function Forms() {
               <h1>{data.heading}</h1>
               <h1>{data.subtitle}</h1>
               <h1>{data.instructions}</h1>
-              {fieldList.map((field) => {
+              {/* {fieldList.map((field) => {
                 return (
                   <div className="text-white">
                     <div>
@@ -132,11 +136,11 @@ function Forms() {
                     <input className='text-black' type={field.type} name={field.name} placeholder={field.value} />
                   </div>
                 )
-              })}
+              })} */}
             </form>
           </div>
         )
-      })} */}
+      })}
     </div>
   )
 }
