@@ -273,8 +273,8 @@ function Forms() {
       {showFInalData ? <div>
         {showFInalData.map((value, key) => {
           return (
-            <div key={key} className="text-white border-2">
-              <h1 className="p-2 text-3xl text-white text-center">{value.event}</h1>
+            <div key={key} className="text-white border-2 px- my-5">
+              <h1 className="p-2 text-3xl text-white text-center mt-5">{value.event}</h1>
               <div className="grid grid-cols-2">
                 <h1 className='text-xl text-center my-2'>{value.heading}</h1>
                 <h1 className='text-xl text-center my-2'>{value.subtitle}</h1>
@@ -286,7 +286,7 @@ function Forms() {
                     return (
                       <div key={key} className="my-5 px-10">
                         <label className='text-xl text-center' htmlFor="">{val.name}</label>
-                        <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type={val.type} placeholder={val.value} />
+                        <input className="text-lg w-full py-0.5 px-1 mx-1 rounded mt-2" type={val.type} placeholder={val.value} />
                       </div>
                     )
                   })}
