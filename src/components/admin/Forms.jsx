@@ -95,7 +95,7 @@ function Forms() {
     setAddFeild(addFeild.filter((el) => el.type !== type || el.name !== name));
   }
 
-  // useEffect(() => { console.log(addFeild) }, [addFeild])
+  useEffect(() => { console.log(showFInalData) }, [showFInalData])
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
@@ -263,15 +263,18 @@ function Forms() {
               <h1>{value.heading}</h1>
               <h1>{value.subtitle}</h1>
               <h1>{value.instructions}</h1>
-              {showFInalData.fields.map((value, key) => {
-                return (
-                  <div key={key}>
-                    <p>{value.name}</p>
-                    <p>{value.type}</p>
-                    <p>{value.value}</p>
-                  </div>
-                )
-              })}
+              {value.fields ?
+                <div>
+                  {value.fields.map((val, key) => {
+                    return (
+                      <div key={key}>
+                        <p>{val.name}</p>
+                        <p>{val.type}</p>
+                        <p>{val.value}</p>
+                      </div>
+                    )
+                  })}
+                </div> : ""}
             </div>
           )
         })}
