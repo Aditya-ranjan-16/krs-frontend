@@ -2,14 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import cross from '../../public/cross.png'
 
 function Forms() {
-  const field = [
-    {
-      name: "",
-      type: "",
-      value: ""
-    },
-  ]
-
   const formdata = [
     {
       event: "pradarshana",
@@ -20,89 +12,6 @@ function Forms() {
     },
   ]
 
-  const [forms, setForms] = useState(formdata);
-  const [fieldList, setfieldList] = useState(field);
-
-  const [form, setForm] = useState({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" })
-  const [newfieldlist, setNewfieldList] = useState({ name: "", type: "", value: "" })
-  const [show, set] = useState("");
-  const [perdefined, setperdefined] = useState({ Namevalue: "", Rollvalue: "", Emailvalue: "" });
-
-
-  //  create form
-  const handleClick = (e) => {
-    e.preventDefault();
-
-    const { event, typeofform, heading, subtitle, instructions } = form;
-    const { Namevalue, Rollvalue, Emailvalue } = perdefined
-
-    if (event !== "" && typeofform !== "" && heading !== "" && subtitle !== "" && instructions !== "" && newfieldlist.name !== "" && newfieldlist.type !== "") {
-      set("");
-      var concatform = {
-        event, typeofform, heading, subtitle, instructions, Namevalue, Rollvalue, Emailvalue
-      }
-      setForms(forms.concat(concatform));
-      setForm({ event: "", typeofform: "", heading: "", subtitle: "", instructions: "" });
-
-      setfieldList(newfieldlist.concat(fieldList));
-      setNewfieldList({ name: "", type: "", value: "" })
-    } else {
-      console.log(newfieldlist.name);
-      set("Please fill all the fields");
-    }
-  };
-
-  const onChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const onChange2 = (e) => {
-    setNewfieldList({ ...newfieldlist, [e.target.name]: e.target.value });
-  };
-
-  // field
-  const handleAddField = () => {
-    const { name, type, value } = newfieldlist
-
-    //checking if fields are empty
-    if (name !== "" && type !== "") {
-      let AddField = {
-        name, type, value
-      }
-      setfieldList(fieldList.concat(AddField))
-      // setfieldList([...fieldList, {
-      //   name: "",
-      //   type: "",
-      //   value: ""
-      // }])
-      setNewfieldList({
-        name: "",
-        type: "",
-        value: ""
-      })
-    } else {
-      alert("please fill all the name and type inputs")
-    }
-  }
-
-  const handleRemoveField = (index) => {
-    console.log(index)
-    var newField = [...fieldList];
-
-    console.log(newField)
-
-    // newField.splice(index, 1);
-    // setfieldList(newField)
-  }
-
-  const preDefinedFeilds = async (e) => {
-    setperdefined({ ...perdefined, [e.target.name]: e.target.value });
-  }
-
-  useEffect(() => {
-    console.log(fieldList)
-  }, [fieldList])
-
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
       <div className="py-4 px-8 rounded-xl bg-[#111111] border-2 border-yellow-500">
@@ -110,7 +19,7 @@ function Forms() {
         <div className="grid grid-cols-2">
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Select Event</h2>
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="event" id="" onChange={onChange}>
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="event">
               <option selected disabled hidden>Select</option>
               <option value="Pradarshana">Pradarshana</option>
               <option value="Robowar">Robowar</option>
@@ -120,7 +29,7 @@ function Forms() {
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Type of Form</h2>
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="typeofform" id="" onChange={onChange}>
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="typeofform">
               <option selected disabled hidden>Select</option>
               <option value="Registration">Registration</option>
               <option value="Normal">Normal</option>
@@ -128,15 +37,15 @@ function Forms() {
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Heading</h2>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter heading" type="text" name='heading' value={form.heading} onChange={onChange} />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter heading" type="text" name='heading' />
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Subtitle</h2>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter subtitle" type="text" name='subtitle' value={form.subtitle} onChange={onChange} />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter subtitle" type="text" name='subtitle' />
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Instructions</h2>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter instructions" type="text" name='instructions' value={form.instructions} onChange={onChange} />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter instructions" type="text" name='instructions' />
           </div>
         </div>
 
@@ -151,43 +60,43 @@ function Forms() {
           {/* Name Inp Feild */}
           <div className="px-5 grid grid-cols-3 gap-4 py-2">
             <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" value="Name" />
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" value="text">
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" value="text">
               <option value="text" selected>text</option>
             </select>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Namevalue" onChange={preDefinedFeilds} />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Namevalue" />
           </div>
 
           {/* Roll Number Inp Feild */}
           <div className="px-5 grid grid-cols-3 gap-4 py-2">
             <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" value="Roll Number" />
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" value="text">
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" value="text">
               <option value="number" selected>number</option>
             </select>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Rollvalue" onChange={preDefinedFeilds} />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Rollvalue" />
           </div>
 
           {/* Email Inp Feild */}
           <div className="px-5 grid grid-cols-3 gap-4 py-2">
             <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" value="Email" />
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" value="text">
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" value="text">
               <option value="email" selected>email</option>
             </select>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Emailvalue" onChange={preDefinedFeilds} />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Emailvalue" />
           </div>
 
           {/* For More Feilds */}
           {fieldList.map((list, index) => {
             return (
               <div key={index} className="px-5 grid grid-cols-3 gap-4 py-2">
-                <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" onChange={onChange2} id="" />
-                <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" id="" onChange={onChange2}>
+                <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" />
+                <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type">
                   <option value="select" selected disabled hidden>Select</option>
                   <option name='type' value="text">text</option>
                   <option name='type' value="number">number</option>
                   <option name='type' value="email">email</option>
                 </select>
                 <div className='flex'>
-                  <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" onChange={onChange2} id="" />
+                  <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" />
                   <button className="text-xl  px-2 mx-1 rounded-lg text-white" onClick={() => handleRemoveField(index)}><img className='w-6' src={cross} alt="remove" /></button>
                 </div>
               </div>
@@ -216,12 +125,12 @@ function Forms() {
                   <div className="text-white">
                     <div>
                       <label htmlFor="">Name</label>
-                      <input className='text-black' type="text" placeholder={field.value} id="" />
+                      <input className='text-black' type="text" placeholder={field.value} />
                     </div>
                     <div></div>
                     <div></div>
                     <label htmlFor="">{field.name}</label>
-                    <input className='text-black' type={field.type} name={field.name} placeholder={field.value} id="" />
+                    <input className='text-black' type={field.type} name={field.name} placeholder={field.value} />
                   </div>
                 )
               })}
