@@ -97,7 +97,7 @@ function Forms() {
                 </select>
                 <div className='flex'>
                   <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" />
-                  <button className="text-xl  px-2 mx-1 rounded-lg text-white" onClick={() => handleRemoveField(index)}><img className='w-6' src={cross} alt="remove" /></button>
+                  <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" /></button>
                 </div>
               </div>
 
