@@ -24,6 +24,7 @@ function Forms() {
   const [curFeild, setCurFeild] = useState({ name: "", type: "", value: "" })
   const [show, set] = useState(false);
   const [showE, setE] = useState("");
+  const [showE2, setE2] = useState("");
 
   const createForm = () => {
     const { event, typeofform, heading, subtitle, instructions, Namevalue, Rollvalue, Emailvalue } = formData
@@ -94,6 +95,7 @@ function Forms() {
       setAddFeild(addFeild.concat(arr))
       setCurFeild({ name: "", type: "", value: "" })
     } else {
+      setE2("Please fill the name and type field");
       console.log(show)
     }
   }
