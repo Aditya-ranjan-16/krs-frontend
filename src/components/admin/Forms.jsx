@@ -22,6 +22,7 @@ function Forms() {
   const [addFeild, setAddFeild] = useState([]);
   const [curFeild, setCurFeild] = useState({ name: "", type: "", value: "" })
   const [show, set] = useState(false);
+  const [showE, setE] = useState("");
 
   const createForm = () => {
     const { event, typeofform, heading, subtitle, instructions, Namevalue, Rollvalue, Emailvalue } = formData
@@ -49,10 +50,10 @@ function Forms() {
         ]
       }
 
-      // console.log(addFeild)
-      final.fields.concat(addFeild)
-      console.log(final)
+      final.fields = final.fields.concat(addFeild)
+      setE("");
     } else {
+      setE("Please fill all the fields");
       console.log("error");
     }
   }
@@ -220,7 +221,7 @@ function Forms() {
 
         <button className="text-xl py-1 px-2 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={addFeildCheck}>+ Add field</button>
         <br />
-        {/* {show ? <p className="alertText">{show}</p> : ""} */}
+        {showE ? <p className="alertText">{showE}</p> : ""}
         <button type="submit" className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={createForm}>Create Form</button>
 
       </div>
