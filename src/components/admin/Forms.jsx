@@ -53,12 +53,13 @@ function Forms() {
     del.current.style.display = "none"
   }
 
-  const removeFeild = (e) => {
-    setAddFeild(addFeild.filter((el)))
-    console.log(e)
+  const removeFeild = (name, type) => {
+    // setAddFeild(addFeild.filter((el) => console.log(el)))
+    console.log(type);
+    console.log(addFeild.filter((el) => el.type !== type || el.name !== name))
   }
 
-  // useEffect(() => { console.log(curFeild) }, [curFeild])
+  useEffect(() => { console.log(addFeild) }, [addFeild])
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
@@ -141,7 +142,7 @@ function Forms() {
                   <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" value={value.type} />
                   <div className='flex'>
                     <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" value={value.value} />
-                    <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" onClick={() => removeFeild(key)} /></button>
+                    <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" onClick={() => removeFeild(value.name, value.type)} /></button>
                   </div>
                 </div>
               )
