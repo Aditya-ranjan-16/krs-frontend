@@ -104,14 +104,14 @@ function Forms() {
           })} */}
         </div>
 
-        <button className="text-xl py-1 px-2 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={handleAddField}>+ Add field</button>
+        <button className="text-xl py-1 px-2 mx-1 my-6 bg-yellow-500 rounded-lg text-white">+ Add field</button>
         <br />
         {show ? <p className="alertText">{show}</p> : ""}
-        <button type="submit" className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={handleClick} >Create Form</button>
+        <button type="submit" className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white">Create Form</button>
 
       </div>
 
-      {forms.map((data) => {
+      {/* {forms.map((data) => {
         return (
           <div className="text-white border-2">
             <form action="">
@@ -136,7 +136,7 @@ function Forms() {
             </form>
           </div>
         )
-      })}
+      })} */}
     </div>
   )
 }
