@@ -269,8 +269,7 @@ function Forms() {
                     return (
                       <div key={key}>
                         <label className='text-white text-xl text-center' htmlFor="">{val.name}</label>
-                        <p>{val.type}</p>
-                        <p>{val.value}</p>
+                        <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type={val.type} placeholder={val.value} />
                       </div>
                     )
                   })}
