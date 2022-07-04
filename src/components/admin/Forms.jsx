@@ -48,7 +48,7 @@ function Forms() {
           }
         ]
       }
-      console.log(final)
+      console.log(final.fields)
     } else {
       console.log("error");
     }
