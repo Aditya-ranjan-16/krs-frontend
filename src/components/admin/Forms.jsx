@@ -239,7 +239,6 @@ function Forms() {
         <br />
         {showE ? <p className="alertText">{showE}</p> : ""}
         <button type="submit" className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={createForm}>Create Form</button>
-
       </div>
 
       {forms.map((data) => {
