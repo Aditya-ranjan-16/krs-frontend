@@ -66,6 +66,14 @@ function Forms() {
   }
 
   const onChange = (e) => {
+    const value = e.target.value;
+
+    if (value === "") {
+      e.target.style.border = "2px solid  #FF0000";
+      e.target.style.outline = "none";
+    } else {
+      e.target.style.border = "2px solid  transparent";
+    }
     setformData({ ...formData, [e.target.name]: e.target.value });
   }
   const onChange2 = (e) => {
