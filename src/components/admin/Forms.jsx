@@ -274,7 +274,7 @@ function Forms() {
         {showFInalData.map((value, key) => {
           return (
             <div key={key} className="text-white border-2 px- my-5 rounded-xl">
-              <h1 className="p-2 text-3xl text-white text-center mt-5">{value.event}</h1>
+              <h1 className="p-2 text-3xl text-white text-center mt-5 text-amber-300"></h1>
               <div className="grid grid-cols-2">
                 <h1 className='text-xl text-center my-2'>{value.heading}</h1>
                 <h1 className='text-xl text-center my-2'>{value.subtitle}</h1>
