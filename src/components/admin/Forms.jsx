@@ -17,11 +17,43 @@ function Forms() {
   const [forms, setForms] = useState(formdata);
 
   const [formData, setformData] = useState({
-    events: "", typeofform: "", heading: "", subtitle: "", instructions: "", Namevalue: "", Rollvalue: "", Emailvalue: ""
+    event: "", typeofform: "", heading: "", subtitle: "", instructions: "", Namevalue: "", Rollvalue: "", Emailvalue: ""
   });
   const [addFeild, setAddFeild] = useState([]);
   const [curFeild, setCurFeild] = useState({ name: "", type: "", value: "" })
   const [show, set] = useState(false);
+
+  const createForm = () => {
+    const { event, typeofform, heading, subtitle, instructions, Namevalue, Rollvalue, Emailvalue } = formData
+    if (event !== "" && typeofform !== "" && heading !== "" && subtitle !== "" && instructions !== "") {
+      var final = {
+        event,
+        typeofform,
+        heading,
+        subtitle,
+        instructions,
+        fields: [
+          {
+            name: "Name",
+            type: "text",
+            value: Namevalue
+          }, {
+            name: "Roll Number",
+            type: "number",
+            value: Rollvalue
+          }, {
+            name: "Email",
+            type: "email",
+            value: Emailvalue
+          }
+        ]
+      }
+      console.log(final)
+    } else {
+      console.log("error");
+      console.log(event, typeofform, heading, subtitle, instructions, Namevalue, Rollvalue, Emailvalue)
+    }
+  }
 
   const onChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
@@ -36,6 +68,7 @@ function Forms() {
       set(false)
       return;
     }
+
     const { name, type, value } = curFeild
 
     var arr = { name, type, value }
@@ -186,7 +219,7 @@ function Forms() {
         <button className="text-xl py-1 px-2 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={addFeildCheck}>+ Add field</button>
         <br />
         {/* {show ? <p className="alertText">{show}</p> : ""} */}
-        <button type="submit" className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white">Create Form</button>
+        <button type="submit" className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={createForm}>Create Form</button>
 
       </div>
 
