@@ -56,7 +56,8 @@ function Forms() {
 
       setformData({
         event: "", typeofform: "", heading: "", subtitle: "", instructions: "", Namevalue: "", Rollvalue: "", Emailvalue: ""
-      })
+      });
+      setAddFeild([]);
       setE("");
     } else {
       setE("Please fill all the fields");
@@ -107,7 +108,7 @@ function Forms() {
         <div className="grid grid-cols-2">
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Select Event</h2>
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="event" value={formData.event} onChange={onChange}>
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="event" onChange={onChange}>
               <option selected disabled hidden>Select</option>
               <option value="Pradarshana">Pradarshana</option>
               <option value="Robowar">Robowar</option>
