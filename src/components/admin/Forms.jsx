@@ -107,7 +107,7 @@ function Forms() {
         <div className="grid grid-cols-2">
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Select Event</h2>
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="event" onChange={onChange}>
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="event" value={formData.event} onChange={onChange}>
               <option selected disabled hidden>Select</option>
               <option value="Pradarshana">Pradarshana</option>
               <option value="Robowar">Robowar</option>
@@ -125,15 +125,15 @@ function Forms() {
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Heading</h2>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter heading" type="text" name='heading' onChange={onChange} />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter heading" type="text" name='heading' value={formData.heading} onChange={onChange} />
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Subtitle</h2>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter subtitle" type="text" name='subtitle' onChange={onChange} />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter subtitle" type="text" name='subtitle' value={formData.subtitle} onChange={onChange} />
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Instructions</h2>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter instructions" type="text" name='instructions' onChange={onChange} />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter instructions" type="text" name='instructions' value={formData.instructions} onChange={onChange} />
           </div>
         </div>
 
