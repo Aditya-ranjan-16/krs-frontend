@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import cross from '../../public/cross.png'
 
 function Forms() {
+  const del = useRef(null)
+
   const formdata = [
     {
       event: "pradarshana",
@@ -19,6 +21,7 @@ function Forms() {
   });
   const [addFeild, setAddFeild] = useState([]);
   const [curFeild, setCurFeild] = useState({ name: "", type: "", value: "" })
+  const [show, set] = useState(false);
 
   const onChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
@@ -28,17 +31,29 @@ function Forms() {
   }
 
   const addFeildCheck = (e) => {
+    if (show === true) {
+      del.current.style.display = "flex"
+      set(false)
+      return;
+    }
     const { name, type, value } = curFeild
 
     var arr = { name, type, value }
     if (name !== "" && type !== "") {
       setAddFeild(addFeild.concat(arr))
+      setCurFeild({ name: "", type: "", value: "" })
     } else {
       console.log("error")
+      console.log(show)
     }
   }
 
-  useEffect(() => { console.log(addFeild) }, [addFeild])
+  const currDelete = () => {
+    set(true)
+    del.current.style.display = "none"
+  }
+
+  // useEffect(() => { console.log(curFeild) }, [curFeild])
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
@@ -128,8 +143,8 @@ function Forms() {
           </div> : ""}
 
           {/* For More Feilds */}
-          <div className="px-5 grid grid-cols-3 gap-4 py-2">
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" onChange={onChange2} />
+          <div className="px-5 grid grid-cols-3 gap-4 py-2" ref={del}>
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" value={curFeild.name} onChange={onChange2} />
             <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" onChange={onChange2}>
               <option value="select" selected disabled hidden>Select</option>
               <option name='type' value="text">text</option>
@@ -137,8 +152,8 @@ function Forms() {
               <option name='type' value="email">email</option>
             </select>
             <div className='flex'>
-              <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" onChange={onChange2} />
-              <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" /></button>
+              <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" value={curFeild.value} onChange={onChange2} />
+              <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" onClick={currDelete} /></button>
             </div>
           </div>
 
