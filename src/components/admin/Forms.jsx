@@ -18,9 +18,17 @@ function Forms() {
     events: "", typeofform: "", heading: "", subtitle: "", instructions: "", Namevalue: "", Rollvalue: "", Emailvalue: ""
   });
   const [addFeild, setAddFeild] = useState([]);
+  const [curFeild, setCurFeild] = useState({ name: "", type: "", value: "" })
 
   const onChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
+  }
+  const onChange2 = (e) => {
+
+  }
+
+  const addFeildCheck = (e) => {
+    console.log("first")
   }
 
   return (
@@ -99,15 +107,15 @@ function Forms() {
 
           {/* For More Feilds */}
           <div className="px-5 grid grid-cols-3 gap-4 py-2">
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" />
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type">
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" onChange={onChange2} />
+            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" onChange={onChange2}>
               <option value="select" selected disabled hidden>Select</option>
               <option name='type' value="text">text</option>
               <option name='type' value="number">number</option>
               <option name='type' value="email">email</option>
             </select>
             <div className='flex'>
-              <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" />
+              <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" onChange={onChange2} />
               <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" /></button>
             </div>
           </div>
