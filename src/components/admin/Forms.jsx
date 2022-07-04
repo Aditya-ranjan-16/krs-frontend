@@ -22,10 +22,6 @@ function Forms() {
     setformData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  useEffect(() => {
-    console.log(formData)
-  }, [formData])
-
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
       <div className="py-4 px-8 rounded-xl bg-[#111111] border-2 border-yellow-500">
