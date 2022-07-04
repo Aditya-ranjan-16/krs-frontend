@@ -19,7 +19,8 @@ import ContactUs from './pages/ContactUs';
 import Featured from './pages/Featured';
 import Admin from './pages/Admin';
 import AuthContext from './store/auth-context';
-
+import axios from 'axios';
+axios.defaults.baseURL = "http://localhost:5000"
 function App() {
   const authCtx = useContext(AuthContext);
   console.log(authCtx.isLoggedIn)

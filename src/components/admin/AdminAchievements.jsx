@@ -9,7 +9,7 @@ const achievementsCard = [
     img2: "https://user-images.githubusercontent.com/88647567/150991382-9fe442a8-0b36-4294-a4bd-fb3fbf590e18.jpg",
     position: "2nd",
     year: "2019",
-    teamName: "Technocrats",
+    teamname: "Technocrats",
     eventName1: "Treckon",
     eventName2: "Teck Fest",
     eventPlace: "IIT BBSR"
@@ -19,7 +19,7 @@ const achievementsCard = [
     img2: "https://user-images.githubusercontent.com/88647567/150991382-9fe442a8-0b36-4294-a4bd-fb3fbf590e18.jpg",
     position: "2nd",
     year: "2019",
-    teamName: "Technocratsx",
+    teamname: "Technocratsx",
     eventName1: "Treckon",
     eventName2: "Teck Fest",
     eventPlace: "IIT KGP"
@@ -30,18 +30,18 @@ const achievementsCard = [
 
 function AdminAchievements() {
   const [achievements, setAchievements] = useState(achievementsCard)
-  const [ach, setAch] = useState({ teamName: "", img1: "", img2: "", position: "", year: "", teamName: "", eventName1: "", eventName2: "", eventPlace: "" })
+  const [ach, setAch] = useState({ teamname: "", img1: "", img2: "", position: "", year: "", teamname: "", eventName1: "", eventName2: "", eventPlace: "" })
   const [showModal, setShowModal] = useState({ show: false, index: null });
   const [show, set] = useState("");
 
   //  add events
   const handleClick = (e) => {
     e.preventDefault();
-    const { teamName, img1, img2, position, password, year, eventName1, eventName2, eventPlace } = ach;
-    if (teamName !== "" && img1 !== "" && img2 !== "" && position !== "" && password !== "" && year !== "" && eventName1 !== "" && eventName2 !== "" && eventPlace !== "") {
+    const { teamname, img1, img2, position, password, year, eventName1, eventName2, eventPlace } = ach;
+    if (teamname !== "" && img1 !== "" && img2 !== "" && position !== "" && password !== "" && year !== "" && eventName1 !== "" && eventName2 !== "" && eventPlace !== "") {
       setAchievements(achievements.concat(ach))
       set("");
-      setAch({ teamName: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: "" })
+      setAch({ teamname: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: "" })
     } else {
       set("Please fill all the fields");
 
@@ -54,28 +54,28 @@ function AdminAchievements() {
   console.log(ach)
 
   // deleting events
-  const deleteAchievement = (teamName) => {
-    const newAchievements = achievements.filter((achievement) => { return achievement.teamName !== teamName });
+  const deleteAchievement = (teamname) => {
+    const newAchievements = achievements.filter((achievement) => { return achievement.teamname !== teamname });
     setAchievements(newAchievements)
     console.log(newAchievements)
   }
 
   // editing events
   const updateCard = (i) => {
-    setAch({ teamName: achievementsCard[i].teamName, img1: achievementsCard[i].img1, img2: achievementsCard[i].img2, position: achievementsCard[i].position, year: achievementsCard[i].year, eventName1: achievementsCard[i].eventName1, eventName2: achievementsCard[i].eventName2, eventPlace: achievementsCard[i].eventPlace });
+    setAch({ teamname: achievementsCard[i].teamname, img1: achievementsCard[i].img1, img2: achievementsCard[i].img2, position: achievementsCard[i].position, year: achievementsCard[i].year, eventName1: achievementsCard[i].eventName1, eventName2: achievementsCard[i].eventName2, eventPlace: achievementsCard[i].eventPlace });
     setShowModal({ show: true, index: i })
   }
   const editAchievements = () => {
-    achievementsCard[showModal.index] = { teamName: ach.teamName, img1: ach.img1, img2: ach.img2, position: ach.position, year: ach.year, eventName1: ach.eventName1, eventName2: ach.eventName2, eventPlace: ach.eventPlace }
+    achievementsCard[showModal.index] = { teamname: ach.teamname, img1: ach.img1, img2: ach.img2, position: ach.position, year: ach.year, eventName1: ach.eventName1, eventName2: ach.eventName2, eventPlace: ach.eventPlace }
     setAchievements(achievementsCard)
-    setAch({ teamName: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: "" })
+    setAch({ teamname: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: "" })
     setShowModal({ show: false, index: null })
 
   }
 
   // modal state
   const closeModal = () => {
-    setAch({ teamName: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: "" })
+    setAch({ teamname: "", img1: "", img2: "", position: "", year: "", eventName1: "", eventName2: "", eventPlace: "" })
     setShowModal({ show: false, index: null })
   }
 
@@ -87,7 +87,7 @@ function AdminAchievements() {
         <div className='grid grid-cols-3'>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Team Name</h2>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter Team Name' type="text" name='teamName' value={ach.teamName} onChange={onChange} />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter Team Name' type="text" name='teamname' value={ach.teamname} onChange={onChange} />
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Event Name1</h2>
@@ -131,7 +131,7 @@ function AdminAchievements() {
             <div className='flex flex-col lg:flex-row lg:px-10 py-10 items-center lg:justify-between'>
               <div className='text-white w-1/2 py-10 px-10 flex flex-col items-center lg:items-start'>
                 <div className=''>
-                  <h1 className='text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-semibold pb-8 text-yellow-500'>Team <br />{achievementsData.teamName}</h1>
+                  <h1 className='text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-semibold pb-8 text-yellow-500'>Team <br />{achievementsData.teamname}</h1>
                   <h2 className='text-2xl md:text-3xl'>Participated by: </h2>
                   <h2 className='text-xl'>Ram Kumar <br />Ram Kumar <br />Ram Kumar <br /> Ram Kumar</h2>
                 </div>
@@ -144,7 +144,7 @@ function AdminAchievements() {
                       <h1 className='text-3xl font-bold text-gray-400'>{achievementsData.year}</h1>
                     </div>
                     <div className='px-4 flex justify-between items-center'>
-                      <h1 className='text-2xl md:text-3xl font-bold text-white'>Team <br /> {achievementsData.teamName}</h1>
+                      <h1 className='text-2xl md:text-3xl font-bold text-white'>Team <br /> {achievementsData.teamname}</h1>
                       <h1 className='md:text-base font-bold text-white'>{achievementsData.eventName1} <br /> {achievementsData.eventName2} <br />{achievementsData.eventPlace}</h1>
                     </div>
                   </div>
@@ -157,7 +157,7 @@ function AdminAchievements() {
                       <h1 className='text-3xl font-bold text-gray-400'>{achievementsData.year}</h1>
                     </div>
                     <div className='px-4 flex justify-between items-center'>
-                      <h1 className='text-3xl font-bold text-white'>Team <br /> {achievementsData.teamName}</h1>
+                      <h1 className='text-3xl font-bold text-white'>Team <br /> {achievementsData.teamname}</h1>
                       <h1 className='text-base font-bold text-white'>{achievementsData.eventName1} <br /> {achievementsData.eventName2} <br />{achievementsData.eventPlace}</h1>
                     </div>
                   </div>
@@ -166,7 +166,7 @@ function AdminAchievements() {
 
             </div>
             <div className="flex space-x-4 pb-4 justify-center">
-              <Link className="text-white" onClick={() => deleteAchievement(achievementsData.teamName)} to=""><img className='w-6' src={Delete} alt="dlt" /></Link>
+              <Link className="text-white" onClick={() => deleteAchievement(achievementsData.teamname)} to=""><img className='w-6' src={Delete} alt="dlt" /></Link>
               <Link className="text-white" onClick={() => updateCard(i)} to=""><img className='w-6' src={Edit} alt="edit" /></Link>
             </div>
           </ div>
@@ -191,7 +191,7 @@ function AdminAchievements() {
                 <div className='grid grid-cols-3'>
                   <div className="py-2 px-4">
                     <h2 className="text-xl p-1 my-1 text-white">Team Name</h2>
-                    <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter name' type="text" name='teamName' value={ach.teamName} onChange={onChange} />
+                    <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder='Enter name' type="text" name='teamname' value={ach.teamname} onChange={onChange} />
                   </div>
                   <div className="py-2 px-4">
                     <h2 className="text-xl p-1 my-1 text-white">Event Name1</h2>

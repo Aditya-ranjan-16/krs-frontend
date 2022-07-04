@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import KRS from '../../public/krslogo.jpg'
 import BG from '../../public/dronebackground.jpg'
+import axios from 'axios';
 import AuthContext from '../../store/auth-context';
 import "./css/Sign.css";
 
@@ -13,15 +14,38 @@ function SigninUp() {
 
   const redirect = useNavigate();
 
-  const signup = () => {
+  const signup = async() => {
     const { name, email, Branch, Year, password, cpassword } = showUser;
     if (name !== "" && email !== "" && Branch !== "" && Year !== "" && password !== "" && cpassword !== "" && email.indexOf('@') > -1 && email.indexOf('.') !== -1) {
 
       if (password === cpassword) {
-        set("");
 
-        authCtx.login("dede", 1000)
-        redirect('/')
+          const userObject={
+            name:name,
+            email:email,
+            branch:Branch,
+            year:Year,
+            password:password,
+            designation:"user",
+            image:"sds"
+          }
+          try{
+            const res = await axios.post("/api/login/signup", userObject,{headers:{ "Authorization": ``}});
+           
+          
+            if(res.data.exists==false){
+              redirect('/admin')
+              authCtx.login("dede",'30000')
+}else{
+  setUser({ name: "", email: "", Branch: "", Year: "", password: "", cpassword: "", });
+alert("Account already exists . please login")
+}
+           
+          }
+        catch (error) {
+          console.error(error);
+        }
+    
       } else {
         set("Passwords Does Not Match");
       }
