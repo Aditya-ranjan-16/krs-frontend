@@ -85,7 +85,7 @@ function Forms() {
           </div>
 
           {/* For More Feilds */}
-          {fieldList.map((list, index) => {
+          {/* {fieldList.map((list, index) => {
             return (
               <div key={index} className="px-5 grid grid-cols-3 gap-4 py-2">
                 <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" />
@@ -100,9 +100,8 @@ function Forms() {
                   <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" /></button>
                 </div>
               </div>
-
             )
-          })}
+          })} */}
         </div>
 
         <button className="text-xl py-1 px-2 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={handleAddField}>+ Add field</button>
