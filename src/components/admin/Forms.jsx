@@ -181,9 +181,6 @@ function Forms() {
               </div>
             )
           })} */}
-
-
-
         </div>
 
         <button className="text-xl py-1 px-2 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={addFeildCheck}>+ Add field</button>
