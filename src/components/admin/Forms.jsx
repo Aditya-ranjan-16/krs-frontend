@@ -15,25 +15,16 @@ function Forms() {
   const [forms, setForms] = useState(formdata);
 
   const [formData, setformData] = useState({
-    events: "", typeofform: "", heading: "", subtitle: "", instructions: "",
-    field: [
-      {
-        Name: 'Name',
-        type: 'text',
-        value: ""
-      }, {
-        Name: 'Roll Number',
-        type: 'number',
-        value: ""
-      }, {
-        Name: 'Email',
-        type: 'email',
-        value: ""
-      }
-    ]
+    events: "", typeofform: "", heading: "", subtitle: "", instructions: "", Namevalue: "", Rollvalue: "", Emailvalue: ""
   });
 
-  const onChange = () => { }
+  const onChange = (e) => {
+    setformData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  useEffect(() => {
+    console.log(formData)
+  }, [formData])
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
@@ -86,7 +77,7 @@ function Forms() {
             <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" value="text">
               <option value="text" selected>text</option>
             </select>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Namevalue" />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Namevalue" onChange={onChange} />
           </div>
 
           {/* Roll Number Inp Feild */}
@@ -95,7 +86,7 @@ function Forms() {
             <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" value="text">
               <option value="number" selected>number</option>
             </select>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Rollvalue" />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Rollvalue" onChange={onChange} />
           </div>
 
           {/* Email Inp Feild */}
@@ -104,7 +95,7 @@ function Forms() {
             <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type" value="text">
               <option value="email" selected>email</option>
             </select>
-            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Emailvalue" />
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="Emailvalue" onChange={onChange} />
           </div>
 
           {/* For More Feilds */}
