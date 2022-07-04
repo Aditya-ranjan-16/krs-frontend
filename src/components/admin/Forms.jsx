@@ -267,7 +267,7 @@ function Forms() {
                 <div>
                   {value.fields.map((val, key) => {
                     return (
-                      <div key={key}>
+                      <div key={key} stype={{ padding: "20px", margin: "20px 0px" }}>
                         <label className=' text-xl text-center' htmlFor="">{val.name}</label>
                         <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type={val.type} placeholder={val.value} />
                       </div>
