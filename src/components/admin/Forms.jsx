@@ -54,7 +54,7 @@ function Forms() {
   }
 
   const removeFeild = (e) => {
-    setAddFeild(addFeild.filter())
+    setAddFeild(addFeild.filter((el)))
     console.log(e)
   }
 
