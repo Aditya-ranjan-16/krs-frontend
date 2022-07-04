@@ -94,6 +94,7 @@ function Forms() {
     if (name !== "" && type !== "") {
       setAddFeild(addFeild.concat(arr))
       setCurFeild({ name: "", type: "", value: "" })
+      setE2("");
     } else {
       setE2("Please fill the name and type field");
       console.log(show)
@@ -234,7 +235,8 @@ function Forms() {
             )
           })} */}
         </div>
-
+        <br />
+        {showE2 ? <p className="alertText">{showE2}</p> : ""}
         <button className="text-xl py-1 px-2 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={addFeildCheck}>+ Add field</button>
         <br />
         {showE ? <p className="alertText">{showE}</p> : ""}
