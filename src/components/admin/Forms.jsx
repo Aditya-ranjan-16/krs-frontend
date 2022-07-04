@@ -259,10 +259,12 @@ function Forms() {
         {showFInalData.map((value, key) => {
           return (
             <div key={key} className="text-white border-2">
-              <h1 className="text-center">{value.event}</h1>
-              <h1>{value.heading}</h1>
-              <h1>{value.subtitle}</h1>
-              <h1>{value.instructions}</h1>
+              <h1 className="p-2 text-3xl text-white text-center">{value.event}</h1>
+              <div className="grid grid-cols-2">
+                <h1 className='text-xl text-center my-2'>{value.heading}</h1>
+                <h1 className='text-xl text-center my-2'>{value.subtitle}</h1>
+              </div>
+              <h1 className='text-xl text-center my-2'>{value.instructions}</h1>
               {value.fields ?
                 <div>
                   {value.fields.map((val, key) => {
