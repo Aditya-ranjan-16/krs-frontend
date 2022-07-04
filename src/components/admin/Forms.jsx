@@ -75,6 +75,7 @@ function Forms() {
     }
     setformData({ ...formData, [e.target.name]: e.target.value });
   }
+
   const onChange2 = (e) => {
     setCurFeild({ ...curFeild, [e.target.name]: e.target.value });
   }
