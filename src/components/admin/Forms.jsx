@@ -55,8 +55,6 @@ function Forms() {
 
   const removeFeild = (name, type) => {
     setAddFeild(addFeild.filter((el) => el.type !== type || el.name !== name));
-    console.log(type);
-    // console.log()
   }
 
   useEffect(() => { console.log(addFeild) }, [addFeild])
