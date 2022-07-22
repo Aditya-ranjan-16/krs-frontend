@@ -35,10 +35,12 @@ function SigninUp() {
           
             if(res.data.exists==false){
               redirect('/admin')
-              authCtx.login("dede",'30000')
+              authCtx.login(res.data.token,'3000')
 }else{
-  setUser({ name: "", email: "", Branch: "", Year: "", password: "", cpassword: "", });
+  
 alert("Account already exists . please login")
+redirect('/signin')
+
 }
            
           }
