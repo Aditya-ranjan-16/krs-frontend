@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import PP from "../../public/pp.jpeg"
 import Insta from "../../public/instagram.png"
@@ -7,6 +7,7 @@ import Linkedin from "../../public/linkedin.png"
 import Delete from '../../public/delete.png'
 import Edit from '../../public/edit.png'
 import Email from '../../public/email.png'
+import axios from "axios";
 
 const memberCard = [
   {
@@ -100,12 +101,33 @@ function AdminMembers() {
     setShowModal({ show: false, index: null })
   }
 
-
-
   // modal state
   const closeModal = () => {
     setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
     setShowModal({ show: false, index: null })
+  }
+
+  useEffect(() => {
+    // console.log("first")
+    async function makereq() {
+      try {
+        const resp = await axios.get(`${url}api/members`);
+        const data = resp.data;
+
+        console.table(data)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+    makereq();
+  }, [])
+
+  const url = "http://localhost:5000/";
+
+  // fetch members data 
+  const fetchData = () => {
+
   }
 
   return (
