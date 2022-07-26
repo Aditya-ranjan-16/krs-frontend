@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import cross from '../../public/cross.png'
+import Questions from './Questions';
+// import Questions from './Questions'
 
-function Forms() {
+function Forms(props) {
   const del = useRef(null)
 
   const formdata = [
@@ -81,6 +83,18 @@ function Forms() {
     setCurFeild({ ...curFeild, [e.target.name]: e.target.value });
   }
 
+  // const addFieldList = () => {
+  //   const { name, type, value } = curFeild
+  //   var arr = { name, type, value }
+  //   if (name !== "" && type !== "") {
+  //     setAddFeild(addFeild.concat(arr));
+  //   }
+  //   else 
+  //     setE2("Please fill the name and type field");
+     
+  //   console.log(addFeild)
+  // }
+
   const addFeildCheck = (e) => {
     if (show === true) {
       del.current.style.display = "flex"
@@ -111,6 +125,26 @@ function Forms() {
   }
 
   useEffect(() => { console.log(showFInalData) }, [showFInalData])
+
+
+  const [showForm, setshowForm] = useState(true);
+
+  const viewData = () => setshowForm(true);
+
+  // const [currentQuestion, setCurrentQuestion] = useState(0)
+  // function next() {
+  //   const nextQuestion = currentQuestion + 1;
+  //   if (nextQuestion < showFInalData[0].fields.length) {
+  //     setCurrentQuestion(nextQuestion);
+  //   }
+  //   console.log(nextQuestion)
+  // }
+  // function back() {
+  //   const prevQuestion = currentQuestion - 1;
+  //   if (prevQuestion >= 0) {
+  //     setCurrentQuestion(prevQuestion);
+  //   }
+  // }
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
@@ -211,7 +245,8 @@ function Forms() {
             </select>
             <div className='flex'>
               <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" value={curFeild.value} onChange={onChange2} />
-              <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" onClick={currDelete} /></button>
+              {/* <button className="text-xl   mx-3 rounded-lg text-white hover:brightness-200"><img className='w-6' src={tick} alt="remove" onClick={addFieldList} /></button> */}
+              <button className="text-xl   mx-3 rounded-lg text-white hover:brightness-75"><img className='w-6' src={cross} alt="remove" onClick={currDelete} /></button>
             </div>
           </div>
 
@@ -243,14 +278,14 @@ function Forms() {
         <button type="submit" className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white" onClick={createForm}>Create Form</button>
       </div>
 
-      {forms.map((data) => {
+      {/* {forms.map((data) => {
         return (
-          <div className="text-white border-2">
-            <form action="">
-              <h1>{data.event}</h1>
+          <div className="text-white border-2"> */}
+            {/* <form action=""> */}
+              {/* <h1>{data.event}</h1>
               <h1>{data.heading}</h1>
               <h1>{data.subtitle}</h1>
-              <h1>{data.instructions}</h1>
+              <h1>{data.instructions}</h1> */}
               {/* {fieldList.map((field) => {
                 return (
                   <div className="text-white">
@@ -265,32 +300,77 @@ function Forms() {
                   </div>
                 )
               })} */}
-            </form>
-          </div>
+            {/* </form> */}
+          {/* </div>
         )
-      })}
+      })} */}
 
       {showFInalData ? <div>
         {showFInalData.map((value, key) => {
           return (
-            <div key={key} className="text-white border-2 px- my-5 rounded-xl">
-              <h1 className="p-2 text-3xl text-white text-center mt-5 text-amber-300"><b>{value.event}</b></h1>
-              <div className="grid grid-cols-2">
-                <h1 className='text-xl text-center my-2'>{value.heading}</h1>
-                <h1 className='text-xl text-center my-2'>{value.subtitle}</h1>
-              </div>
-              <h1 className='text-xl text-center my-2'>{value.instructions}</h1>
-              {value.fields ?
-                <div>
-                  {value.fields.map((val, key) => {
-                    return (
-                      <div key={key} className="my-5 px-10">
-                        <label className='text-xl text-center' htmlFor="">{val.name}</label>
-                        <input className="text-lg w-full py-0.5 px-1 mx-1 rounded mt-2" type={val.type} placeholder={val.value} />
-                      </div>
-                    )
-                  })}
-                </div> : ""}
+            <div key={key} className="flex flex-row-reverse border-2 border-yellow-500 px- my-5 rounded-xl">
+              
+                <div className='w-1/3 border-l border-yellow-500 flex flex-col items-center'>
+                <h1 className="p-2 text-3x text-center mt-5 text-amber-300"><b>{value.event}</b></h1>
+                <div className="text-white py-3">
+                  <h1 className='text-xl text-center my-2'>{value.heading}</h1>
+                  <h1 className='text-xl text-center my-2'>{value.subtitle}</h1>
+                  <h1 className='text-xl text-white text-center my-2'>{value.instructions}</h1>
+                </div>
+
+                
+                {/* {value.fields ?
+                  <div>
+                    {value.fields.map((val, key) => {
+                      return (
+                        <div key={key} className="my-5 px-10">
+                          <label className='text-xl text-center text-white' htmlFor="">{val.name}</label>
+                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded mt-2" type={val.type} placeholder={val.value} />
+                        </div>
+                      )
+                    })}
+                  </div> : ""} */}
+                </div>
+              
+              {showForm && (
+                <div className='w-2/3' id='' key={key}>
+
+                  {/* <div>
+                        <div key={key} className="my-5 px-10">
+                          <label className='text-xl text-center text-white' htmlFor="">{value.fields[currentQuestion].name}</label>
+                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded mt-2" type={value.fields[currentQuestion].type} placeholder={value.fields[currentQuestion].value} />
+                        </div>
+                      
+                    
+                  </div> */}
+              
+                  <Questions  len={showFInalData[0].fields.length} fields={showFInalData[0].fields} />
+                  {/* buttons
+                  <div className="flex justify-center items-center m-10 ">
+                  <button className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500  font-medium rounded-lg text-sm px-5 py-2.5 mr-5 mb-2  "
+                    onClick={back} >
+                    Back
+                  </button> */}
+
+                  {/* {currentQuestion + 1 == value.fields.length ? (
+                    <div>
+                      <button className="focus:outline-none  text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 "
+                        onClick={onsubmit} >
+                        Submit
+                      </button> */}
+                      {/* <text className="text-5xl text-white">SUBMITTED SUCCESSFULLY!!</text> */}
+                    {/* </div>
+                  ) : (
+                    <button
+                      className="focus:outline-none  text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 "
+                      onClick={next} >
+                      Next
+                    </button>
+                  )}
+                  </div> */}
+                </div>
+              )}
+              
             </div>
           )
         })}
