@@ -96,7 +96,7 @@ function AdminMembers() {
 
   // editing members
   const updateCard = (i) => {
-    setMem({ name: showMemData[i].name, roll: showMemData[i].roll, domain: showMemData[i].domain, designation: showMemData[i].designation, about: showMemData[i].about, year: showMemData[i].year, img: showMemData[i].img, linkedin: showMemData[i].linkedin, email: showMemData[i].email, insta: showMemData[i].insta, github: showMemData[i].github })
+    setMem({ name: showMemData[i].name, roll: showMemData[i].roll, domain: showMemData[i].domain, designation: showMemData[i].designation, about: showMemData[i].bio, year: showMemData[i].year, img: showMemData[i].image, linkedin: showMemData[i].linkedin, email: showMemData[i].email, insta: showMemData[i].insta, github: showMemData[i].github })
     setShowModal({ show: true, index: i })
     console.table(showMemData[i]);
   }
