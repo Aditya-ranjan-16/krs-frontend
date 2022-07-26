@@ -45,6 +45,8 @@ function AdminMembers() {
   const [showModal, setShowModal] = useState({ show: false, index: null });
   const [show, set] = useState("");
 
+  const [showMemData, setMemData] = useState()
+
   //  add members
   const handleClick = (e) => {
     e.preventDefault();
@@ -114,7 +116,9 @@ function AdminMembers() {
         const resp = await axios.get(`${url}api/members`);
         const data = resp.data;
 
-        console.table(data)
+        console.table(data);
+
+        setMemData(data)
       } catch (e) {
         console.log(e)
       }
@@ -227,7 +231,41 @@ function AdminMembers() {
             </div>
           )
         })}
+        {showMemData ?
+          <div>
+            {showMemData.map((value, key) => {
+              return (
+                <div key={key} className='bg-[#111111] w-[80%] sm:w-[70%] md:w-[80%] lg:w-[90%] xl:w-[80%] space-y-4 mx-10 my-5 px-8 py-8 flex flex-col items-center rounded-2xl border-t-4 border-b-4 border-yellow-500'>
+                  <div className=''>
+                    <img className='w-40 h-40 rounded-3xl' src={value.image} alt="" />
+                  </div>
+                  <div className='flex flex-col justify-between space-y-5 h-full items-center mx-5'>
+                    <div className='space-y-1 flex flex-col items-center'>
+                      <h1 className='text-yellow-500 font-bold text-lg sm:text-xl text-center'>{value.name}</h1>
+                      <h2 className='text-white font-semibold text-base sm:text-lg text-center'>{value.designation}</h2>
+                    </div>
+                    <div className='flex flex-col items-center'>
+                      <p className='text-white text-justify text-sm xl:text-base'>"{value.about}"</p>
+                    </div>
+
+                    <div className='flex space-x-3'>
+                      <a className='' href=""><img className='w-8' src={Email} alt="" /></a>
+                      <a className='' href=""><img className='w-8' src={Insta} alt="" /></a>
+                      <a className='' href=""><img className='w-8' src={Git} alt="" /></a>
+                      <a className='' href=""><img className='w-8' src={Linkedin} alt="" /></a>
+                    </div>
+                    <div className="flex space-x-4">
+                      <Link className="text-white" onClick={() => deleteMember(value.roll)} to=""><img className='w-6' src={Delete} alt="dlt" /></Link>
+                      <Link className="text-white" onClick={() => updateCard(i)} to=""><img className='w-6' src={Edit} alt="edit" /></Link>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div> : ""}
+
       </div>
+
 
       {/* modal */}
       {showModal.show ? (
@@ -303,15 +341,16 @@ function AdminMembers() {
                   <button className="bg-yellow-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={editMembers} >Save Changes </button>
                 </div>
               </div>
-            </div>
-          </div>
+            </div >
+          </div >
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
-      ) : null}
+      ) : null
+      }
 
 
 
-    </div>
+    </div >
   )
 }
 
