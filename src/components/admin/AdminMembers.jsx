@@ -89,15 +89,16 @@ function AdminMembers() {
 
   // deleting members
   const deleteMember = (roll) => {
-    const newMembers = members.filter((member) => { return member.roll !== roll })
-    setMembers(newMembers)
+    // const newMembers = members.filter((member) => { return member.roll !== roll })
+    // setMembers(newMembers)
     console.log(newMembers)
   }
 
   // editing members
   const updateCard = (i) => {
-    setMem({ name: memberCard[i].name, roll: memberCard[i].roll, domain: memberCard[i].domain, designation: memberCard[i].designation, about: memberCard[i].about, year: memberCard[i].year, img: memberCard[i].img, linkedin: memberCard[i].linkedin, email: memberCard[i].email, insta: memberCard[i].insta, github: memberCard[i].github })
+    setMem({ name: showMemData[i].name, roll: showMemData[i].roll, domain: showMemData[i].domain, designation: showMemData[i].designation, about: showMemData[i].about, year: showMemData[i].year, img: showMemData[i].img, linkedin: showMemData[i].linkedin, email: showMemData[i].email, insta: showMemData[i].insta, github: showMemData[i].github })
     setShowModal({ show: true, index: i })
+    console.table(showMemData[i]);
   }
   const editMembers = () => {
     memberCard[showModal.index] = { name: mem.name, roll: mem.roll, domain: mem.domain, designation: mem.designation, about: mem.about, year: mem.year, img: mem.img, linkedin: mem.linkedin, email: mem.email, insta: mem.insta, github: mem.github }
@@ -216,7 +217,6 @@ function AdminMembers() {
         <button type="submit" onClick={handleClick} className="text-2xl py-1.5 px-3 mx-1 my-6 bg-yellow-500 rounded-lg text-white">Add member</button>
       </div>
 
-
       {/* <div className='w-full py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center'> */}
       {/* {members.map((data, i) => {
           return (
@@ -272,7 +272,7 @@ function AdminMembers() {
                   </div>
                   <div className="flex space-x-4">
                     <Link className="text-white" onClick={() => deleteMember(value.roll)} to=""><img className='w-6' src={Delete} alt="dlt" /></Link>
-                    <Link className="text-white" onClick={() => updateCard(i)} to=""><img className='w-6' src={Edit} alt="edit" /></Link>
+                    <div className="text-white" onClick={() => updateCard(key)} to=""><img className='w-6' src={Edit} alt="edit" /></div>
                   </div>
                 </div>
               </div>
