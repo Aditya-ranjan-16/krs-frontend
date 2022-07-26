@@ -110,8 +110,6 @@ function AdminMembers() {
   }
 
   useEffect(() => {
-
-
     makereq();
   }, [])
 
@@ -130,6 +128,7 @@ function AdminMembers() {
       console.log(e)
     }
   }
+
   return (
 
     <div className="flex-1 my-12 mx-20 justify-center items-center">
