@@ -24,11 +24,13 @@ function SigninMain() {
       const data=resp.data;
    
       if(data.success==true){
-        authCtx.login(data.token, 5000)
-       /* redirect('/admin');*/
+
+       await authCtx.login(data.token, 3600000)
+       redirect('/admin');
       }
     }catch(err){
       console.error(err);
+
       set("Invalid Credentials");
     }
   }
@@ -63,9 +65,9 @@ function SigninMain() {
         const data=res.data;
         console.log(res)
         if(data.success==true){
-          authCtx.login(data.token, 5000)
-
-          // redirect('/admin');
+          authCtx.login(data.token, 3600000)
+          
+         redirect('/admin');
         }else{
               
         }

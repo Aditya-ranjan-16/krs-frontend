@@ -4,13 +4,15 @@ import krslogo from "./krslogo.jpg";
 import kiitlogo from "./kiitlogo.jpg";
 import ksaclogo from "./ksaclogo.png";
 import { useContext } from "react";
+import GoToTop from "./GoToTop";
 import AuthContext from "../../store/auth-context"; 
 import menu from "../../public/menu1.png";
+
 
 function Navbar() {
   const [visible, setVisible] = useState("right-[100%]");
   const authCtx=useContext(AuthContext)
-  console.log(visible);
+  console.log(authCtx.isLoggedIn+" login status");
   function menuClick() {
     console.log("clicked");
     if (visible) {
@@ -67,10 +69,10 @@ function Navbar() {
             </div>
             {/* secondary nav */}
             {authCtx.isLoggedIn &&   <div className="ppic lg:flex my-5 px-4 rounded-[100px] font-semibold text-white  items-center text-sm">
-               <div className="ppic_text">
+              <Link to="/admin"> <div className="ppic_text">
                A
                 </div>    
-
+               </Link>
             </div> }
             {!(authCtx.isLoggedIn) &&
              <div className="hidden lg:flex my-4 rounded-full font-medium  bg-yellow-500 items-center text-lg">
@@ -123,6 +125,7 @@ function Navbar() {
             Log in
           </Link>
         </div>
+        <GoToTop/>
       </nav>
     </>
   );

@@ -2,7 +2,7 @@ import './events.css'
 import {useRef,useLayoutEffect} from 'react'
 
 let count_event=0;
-function EventSlider(){
+function EventSlider({thumb}){
        const posterRef=[useRef(1),useRef(2),useRef(3)]
    
    const changestate=()=>{
@@ -70,13 +70,13 @@ function EventSlider(){
      
       <div class="event_cards">
         <label  ref={posterRef[0]} class="event_card poster-1" for="item-1" >
-          <img class="event_img" src="https://images.unsplash.com/photo-1530651788726-1dbf58eeef1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=882&q=80" alt="song"/>
+          <img class="event_img" src={thumb[0]} alt="song"/>
         </label>
         <label  ref={posterRef[1]} class="event_card poster-2" for="item-2" >
-          <img class="event_img" src="https://images.unsplash.com/photo-1559386484-97dfc0e15539?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1234&q=80" alt="song"/>
+          <img class="event_img" src={thumb[1]} alt="song"/>
         </label>
         <label  ref={posterRef[2]}  class="event_card poster-3" for="item-3" >
-          <img class="event_img" src="https://images.unsplash.com/photo-1533461502717-83546f485d24?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="song"/>
+          <img class="event_img" src={thumb[2]} alt="song"/>
         </label>
       </div>
       

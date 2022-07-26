@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
+  Link,
 } from "react-router-dom";
 import { useContext } from 'react';
 import Home from './pages/Home';
@@ -39,7 +39,9 @@ function App() {
           <Route path='/featured' element={<Featured />} />
           <Route path='/collaborations' element={<Collaborations />} />
           <Route path='/contactus' element={<ContactUs />} />
-          <Route path='/admin/*' element={<Admin />} />
+          {(authCtx.isLoggedIn) && <Route path='/admin/*' element={<Admin />} />}
+           <Route path="*" element={<Home/>} / >          
+       
         </Routes>
       </Router>
     </div>
