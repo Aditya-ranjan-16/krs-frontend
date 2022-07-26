@@ -110,7 +110,6 @@ function AdminMembers() {
   }
 
   useEffect(() => {
-    // console.log("first")
     async function makereq() {
       try {
         const resp = await axios.get(`${url}api/members`);
