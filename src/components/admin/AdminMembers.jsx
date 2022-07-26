@@ -134,8 +134,9 @@ function AdminMembers() {
 
   // add members
   const addmem = async () => {
+    console.log(mem);
     const resp = await axios.post(`api/members/addMember`, mem, { headers: { "Authorization": `${authCtx.token}` } })
-    console.log(resp)
+    // console.log(resp)
   }
 
   return (
