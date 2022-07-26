@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from "react-router-dom";
 import PP from "../../public/pp.jpeg"
 import Insta from "../../public/instagram.png"
@@ -8,6 +8,7 @@ import Delete from '../../public/delete.png'
 import Edit from '../../public/edit.png'
 import Email from '../../public/email.png'
 import axios from "axios";
+import AuthContext from '../../store/auth-context';
 
 const memberCard = [
   {
@@ -44,19 +45,21 @@ function AdminMembers() {
   const [mem, setMem] = useState({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
   const [showModal, setShowModal] = useState({ show: false, index: null });
   const [show, set] = useState("");
-
+  const authCtx = useContext(AuthContext);
   const [showMemData, setMemData] = useState()
 
   //  add members
   const handleClick = (e) => {
     e.preventDefault();
 
-    const { name, roll, domain, designation, about, year, img, linkedin, email, insta, github } = mem;
+    const { name, domain, designation, about, year, img, linkedin, email, insta, github } = mem;
 
-    if (name !== "" && roll !== "" && domain !== "" && designation !== "" && about !== "" && year !== "" && img !== "" && linkedin !== "" && email !== "" && insta !== "" && github !== "" && email.indexOf('@') > -1 && email.indexOf('.') !== -1) {
-      setMembers(members.concat(mem))
+    if (name !== "" && domain !== "" && designation !== "" && about !== "" && year !== "" && img !== "" && linkedin !== "" && email !== "" && insta !== "" && github !== "" && email.indexOf('@') > -1 && email.indexOf('.') !== -1) {
+      // setMembers(members.concat(mem))
+
+      addmem();
       set("");
-      setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
+      setMem({ name: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
     } else {
       set("Please fill all the fields");
     }
@@ -127,6 +130,12 @@ function AdminMembers() {
     } catch (e) {
       console.log(e)
     }
+  }
+
+  // add members
+  const addmem = async () => {
+    const resp = await axios.post(`api/members/addMember`, mem, { headers: { "Authorization": `${authCtx.token}` } })
+    console.log(resp)
   }
 
   return (
