@@ -134,9 +134,20 @@ function AdminMembers() {
 
   // add members
   const addmem = async () => {
-    console.log(mem);
-    const resp = await axios.post(`api/members/addMember`, mem, { headers: { "Authorization": `${authCtx.token}` } })
-    // console.log(resp)
+
+    let dataAdd = {
+      name: mem.name,
+      designation: mem.designation,
+      image: mem.img,
+      domain: mem.domain,
+      year: mem.year,
+      bio: mem.about,
+      email: mem.email,
+      // password: mem,
+    }
+
+    const resp = await axios.post(`api/members/addMember`, dataAdd, { headers: { "Authorization": `${authCtx.token}` } })
+    console.log(resp)
   }
 
   return (
