@@ -110,18 +110,7 @@ function AdminMembers() {
   }
 
   useEffect(() => {
-    async function makereq() {
-      try {
-        const resp = await axios.get(`${url}api/members`);
-        const data = resp.data;
 
-        console.table(data);
-
-        setMemData(data)
-      } catch (e) {
-        console.log(e)
-      }
-    }
 
     makereq();
   }, [])
@@ -129,10 +118,18 @@ function AdminMembers() {
   const url = "http://localhost:5000/";
 
   // fetch members data 
-  const fetchData = () => {
+  async function makereq() {
+    try {
+      const resp = await axios.get(`${url}api/members`);
+      const data = resp.data;
 
+      console.table(data);
+
+      setMemData(data)
+    } catch (e) {
+      console.log(e)
+    }
   }
-
   return (
 
     <div className="flex-1 my-12 mx-20 justify-center items-center">
