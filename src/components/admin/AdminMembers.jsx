@@ -43,7 +43,7 @@ const memberCard = [
 function AdminMembers() {
   const [members, setMembers] = useState(memberCard)
   const [mem, setMem] = useState({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
-  const [showModal, setShowModal] = useState({ show: false, index: null });
+  const [showModal, setShowModal] = useState({ show: false, index: null, id: null });
   const [show, set] = useState("");
   const authCtx = useContext(AuthContext);
   const [showMemData, setMemData] = useState()
@@ -85,32 +85,51 @@ function AdminMembers() {
 
     setMem({ ...mem, [name]: value })
   }
-  console.log(mem)
 
   // deleting members
-  const deleteMember = (roll) => {
+  const deleteMember = async (email) => {
     // const newMembers = members.filter((member) => { return member.roll !== roll })
     // setMembers(newMembers)
-    console.log(newMembers)
+    const resp = await axios.delete(`${url}api/members/removeMember/${email}`, { headers: { "Authorization": `${authCtx.token}` } });
+    // const data = resp.data;
+    console.table(resp);
   }
 
   // editing members
-  const updateCard = (i) => {
+  const updateCard = (i, id) => {
     setMem({ name: showMemData[i].name, roll: showMemData[i].roll, domain: showMemData[i].domain, designation: showMemData[i].designation, about: showMemData[i].bio, year: showMemData[i].year, img: showMemData[i].image, linkedin: showMemData[i].linkedin, email: showMemData[i].email, insta: showMemData[i].insta, github: showMemData[i].github })
-    setShowModal({ show: true, index: i })
+    setShowModal({ show: true, index: i, id: id })
     console.table(showMemData[i]);
   }
-  const editMembers = () => {
+  const editMembers = async () => {
     memberCard[showModal.index] = { name: mem.name, roll: mem.roll, domain: mem.domain, designation: mem.designation, about: mem.about, year: mem.year, img: mem.img, linkedin: mem.linkedin, email: mem.email, insta: mem.insta, github: mem.github }
+    // console.log(showModal.id);
     setMembers(memberCard)
+
+    let dataAdd = {
+      name: mem.name,
+      designation: mem.designation,
+      image: mem.img,
+      domain: mem.domain,
+      year: mem.year,
+      bio: mem.about,
+      email: mem.email,
+      // password: mem,
+    }
+
+    // console.log(dataAdd)
+
+    const resp = await axios.post(`api/members/updateMember/${showModal.id}`, dataAdd, { headers: { "Authorization": `${authCtx.token}` } })
+    console.log(resp)
+
     setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
-    setShowModal({ show: false, index: null })
+    setShowModal({ show: false, index: null, id: null })
   }
 
   // modal state
   const closeModal = () => {
     setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
-    setShowModal({ show: false, index: null })
+    setShowModal({ show: false, index: null, id: null })
   }
 
   useEffect(() => {
@@ -271,8 +290,8 @@ function AdminMembers() {
                     <a className='' href=""><img className='w-8' src={Linkedin} alt="" /></a>
                   </div>
                   <div className="flex space-x-4">
-                    <Link className="text-white" onClick={() => deleteMember(value.roll)} to=""><img className='w-6' src={Delete} alt="dlt" /></Link>
-                    <div className="text-white" onClick={() => updateCard(key)} to=""><img className='w-6' src={Edit} alt="edit" /></div>
+                    <Link className="text-white" onClick={() => deleteMember(value.email)} to=""><img className='w-6' src={Delete} alt="dlt" /></Link>
+                    <div className="text-white" onClick={() => updateCard(key, value._id)} to=""><img className='w-6' src={Edit} alt="edit" /></div>
                   </div>
                 </div>
               </div>
