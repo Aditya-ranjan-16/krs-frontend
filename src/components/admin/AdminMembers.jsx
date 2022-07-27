@@ -115,11 +115,12 @@ function AdminMembers() {
 
 
     const resp = await axios.patch(`${url}api/members/updateMember/${showModal.id}`, dataAdd, { headers: { "Authorization": `${authCtx.token}` } })
-    console.log(resp);
-    makereq();
+    // console.log(resp);
 
     setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
     setShowModal({ show: false, index: null, id: null })
+
+    makereq();
   }
 
   // modal state
