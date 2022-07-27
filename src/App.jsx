@@ -38,7 +38,7 @@ function App() {
           {!(authCtx.isLoggedIn) && <Route path='/signup' element={<Signup/>} /> }
           <Route path='/featured' element={<Featured />} />
           <Route path='/collaborations' element={<Collaborations />} />
-          <Route path='/contactus' element={<ContactUs />} />
+          {/* <Route path='/contactus' element={<ContactUs />} /> */}
           <Route path='/admin/*' element={<Admin />} />
         </Routes>
       </Router>

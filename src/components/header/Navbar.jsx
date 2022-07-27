@@ -42,9 +42,9 @@ function Navbar() {
                 <Link to="/" className="py-5 px-2 text-white hover:text-yellow-500 hover:underline hover:underline-offset-2">
                   Home
                 </Link>
-                <Link to="/aboutus" className="py-5 px-2 text-white hover:text-yellow-500 hover:underline hover:underline-offset-2">
+                {/* <Link to="/aboutus" className="py-5 px-2 text-white hover:text-yellow-500 hover:underline hover:underline-offset-2">
                   About Us
-                </Link>
+                </Link> */}
                 <Link to="/featured" className="py-5 px-2 text-white hover:text-yellow-500 hover:underline hover:underline-offset-2">
                   Featured
                 </Link>
@@ -57,9 +57,9 @@ function Navbar() {
                 <Link to="/members" className="py-5 px-2 text-white hover:text-yellow-500 hover:underline hover:underline-offset-2">
                   Members
                 </Link>
-                <Link to="/contactus" className="py-5 px-2 text-white hover:text-yellow-500 hover:underline hover:underline-offset-2">
+                <a href="#footer" className="py-5 px-2 text-white hover:text-yellow-500 hover:underline hover:underline-offset-2">
                   Contact Us
-                </Link>
+                </a>
                 {/* <Link to="/admin" className="py-5 px-3 text-gray-700 hover:text-black hover:underline hover:underline-offset-2">
                   Admin
                 </Link> */}
@@ -77,7 +77,7 @@ function Navbar() {
              <Link to="/signin" className="py-1 px-3 hover:text-black rounded transition duration-300">
                Log in
              </Link>
-           </div>
+          </div>
             }
            
             {/* mobile button goes here */}
@@ -95,9 +95,7 @@ function Navbar() {
             Home
           </Link>
           <hr className="w-[50%]" />
-          <Link to="/About" className="block py-2 px-4 my-1 text-sm hover:bg-gray-200">
-            About Us
-          </Link>
+          
           <hr className="w-[50%]" />
           <Link to="/Featured" className="block py-2 px-4 my-1 text-sm hover:bg-gray-200">
             Featured
@@ -115,13 +113,15 @@ function Navbar() {
             Members
           </Link>
           <hr className="w-[50%]" />
-          <Link to="/contactus" className="block py-2 px-4 my-1 text-sm hover:bg-gray-200">
-            Contact Us
-          </Link>
+          <a href="#footer" className="py-5 px-2 text-white hover:text-yellow-500 hover:underline hover:underline-offset-2">
+                  Contact Us
+                </a>
           <hr className="w-[50%]" />
-          <Link to="/signin" className="block py-2 px-4 my-1 text-sm hover:bg-gray-200">
-            Log in
-          </Link>
+          <div className="hidden lg:flex my-4 rounded-full font-medium  bg-yellow-500 items-center text-lg">
+             <Link to="/signin" className="py-1 px-3 hover:text-black rounded transition duration-300">
+               Log in
+             </Link>
+          </div>
         </div>
       </nav>
     </>

@@ -6,7 +6,7 @@ import News from "./News";
 
 function Footer() {
   return (
-    <div className="bg-[#111111] px-12 pt-8">
+    <div id="footer" className="bg-[#111111] px-12 pt-8">
       <div className="p-4 flex flex-col lg:flex-row items-center justify-between ">
         <Text />
         <div className="flex space-x-20">
