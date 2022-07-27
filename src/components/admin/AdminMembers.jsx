@@ -88,11 +88,8 @@ function AdminMembers() {
 
   // deleting members
   const deleteMember = async (email) => {
-    // const newMembers = members.filter((member) => { return member.roll !== roll })
-    // setMembers(newMembers)
     const resp = await axios.delete(`${url}api/members/removeMember/${email}`, { headers: { "Authorization": `${authCtx.token}` } });
-    // const data = resp.data;
-    console.table(resp);
+    makereq();
   }
 
   // editing members
@@ -199,7 +196,7 @@ function AdminMembers() {
               <option value="Coordinator">Coordinator</option>
               <option value="Assistant Coordinator">Assistant Coordinator</option>
               <option value="Alumni">Alumni</option>
-              <option value="Admin">Admin</option>
+              <option value="admin">Admin</option>
             </select>
           </div>
           <div className="py-2 px-4">
