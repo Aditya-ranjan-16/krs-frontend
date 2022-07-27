@@ -46,7 +46,7 @@ async  function makerq(){
       <AdminSidebar level={level} />
       <Routes>
        {level=="admin" &&  <Route path='/adminmembers' element={<AdminMembers />} />}
-       {level=="admin" &&  <Route path='/adminevents' element={<AdminEvents />} />}
+       {level=="admin" &&  <Route path='/adminevents' element={<AdminEvents level={level} />} />}
        {level=="admin" &&  <Route path='/adminachievements' element={<AdminAchievements />} />}
        {level=="user" && <Route path='/userprofile' element={<UserProfile />} />}
        {level=="member" &&<Route path='/memberprofile' element={<MemberProfile />} />}
