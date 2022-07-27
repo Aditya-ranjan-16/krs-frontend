@@ -96,8 +96,8 @@ function AdminMembers() {
   const updateCard = (i, id) => {
     setMem({ name: showMemData[i].name, roll: showMemData[i].roll, domain: showMemData[i].domain, designation: showMemData[i].designation, about: showMemData[i].bio, year: showMemData[i].year, img: showMemData[i].image, linkedin: showMemData[i].linkedin, email: showMemData[i].email, insta: showMemData[i].insta, github: showMemData[i].github })
     setShowModal({ show: true, index: i, id: id })
-    console.table(showMemData[i]);
   }
+
   const editMembers = async () => {
     memberCard[showModal.index] = { name: mem.name, roll: mem.roll, domain: mem.domain, designation: mem.designation, about: mem.about, year: mem.year, img: mem.img, linkedin: mem.linkedin, email: mem.email, insta: mem.insta, github: mem.github }
     setMembers(memberCard)
