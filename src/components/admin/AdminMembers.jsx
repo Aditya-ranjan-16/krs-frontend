@@ -140,8 +140,6 @@ function AdminMembers() {
       const resp = await axios.get(`${url}api/members`);
       const data = resp.data;
 
-      console.table(data);
-
       setMemData(data)
     } catch (e) {
     }
