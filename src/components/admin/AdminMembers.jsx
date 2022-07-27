@@ -100,7 +100,6 @@ function AdminMembers() {
   }
   const editMembers = async () => {
     memberCard[showModal.index] = { name: mem.name, roll: mem.roll, domain: mem.domain, designation: mem.designation, about: mem.about, year: mem.year, img: mem.img, linkedin: mem.linkedin, email: mem.email, insta: mem.insta, github: mem.github }
-    // console.log(showModal.id);
     setMembers(memberCard)
 
     let dataAdd = {
@@ -114,10 +113,8 @@ function AdminMembers() {
       // password: mem,
     }
 
-    // console.log(dataAdd)
 
     const resp = await axios.post(`api/members/updateMember/${showModal.id}`, dataAdd, { headers: { "Authorization": `${authCtx.token}` } })
-    console.log(resp)
 
     makereq();
 
@@ -147,7 +144,6 @@ function AdminMembers() {
 
       setMemData(data)
     } catch (e) {
-      console.log(e)
     }
   }
 
@@ -169,7 +165,6 @@ function AdminMembers() {
     console.log(resp)
 
     makereq();
-
   }
 
   return (
