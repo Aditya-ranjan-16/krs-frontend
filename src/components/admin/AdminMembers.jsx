@@ -160,7 +160,6 @@ function AdminMembers() {
     }
 
     const resp = await axios.post(`api/members/addMember`, dataAdd, { headers: { "Authorization": `${authCtx.token}` } })
-    console.log(resp)
 
     makereq();
   }
