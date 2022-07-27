@@ -115,7 +115,7 @@ function AdminMembers() {
 
 
     const resp = await axios.post(`api/members/updateMember/${showModal.id}`, dataAdd, { headers: { "Authorization": `${authCtx.token}` } })
-
+    console.log(resp);
     makereq();
 
     setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
