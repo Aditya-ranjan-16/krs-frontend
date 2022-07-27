@@ -13,7 +13,7 @@ let eventCard = [];
 
 function AdminEvents({level}) {
   const [events, setEvents] = useState(eventCard);
-  const [eve, setEve] = useState({ _id:"",title: "",subtitle:"", date: "", venue: "", status: "", mode: "", teamcreation: "",teamsize:0, img1: "", img2: "", img3: "", description: "", sheetId: "" });
+  const [eve, setEve] = useState({ _id:"",price:0,title: "",subtitle:"", date: "", venue: "", status: "", mode: "", teamcreation: "",teamsize:0, img1: "", img2: "", img3: "", description: "", sheetId: "" });
   const [showModal, setShowModal] = useState({ show: false, index: null });
   const [show, set] = useState("");
   const authCtx = useContext(AuthContext);
@@ -23,6 +23,7 @@ function AdminEvents({level}) {
     try{
       const resp = await axios.get("/api/events/");
       const data=resp.data;
+      console.log(data) 
       setEvents(events.concat(data));
     }catch(e){
     console.log(e)
@@ -34,7 +35,6 @@ function AdminEvents({level}) {
   //  add events
   const handleClick =async (e) => {
     e.preventDefault();
-
     const { title, date, venue, status, mode, teamcreation, img1, img2, img3, description, sheetId } = eve;
     if (title !== "" && date !== "" && venue !== "" && status !== "" && mode !== "" && teamcreation !== "" && img1 !== "" && img2 !== "" && img3 !== "" && description !== "" && sheetId !== "") {
       
@@ -44,11 +44,10 @@ function AdminEvents({level}) {
         eve._id=id;
         setEve(eve);
         setEvents(events.concat(eve));
-       
       }catch(err){
         console.log(err)
       }
-     setEve({ title: "",subtitle:"",teamsize:null, date: "", venue: "", status: "", mode: "", teamcreation:"Select", img1: "", img2: "", img3: "", description: "", sheetId: "" });
+     setEve({ title: "",price:0,subtitle:"",teamsize:null, date: "", venue: "", status: "", mode: "", teamcreation:"Select", img1: "", img2: "", img3: "", description: "", sheetId: "" });
     set("");
     } else {
       set("Please fill all the fields");
@@ -91,7 +90,7 @@ function AdminEvents({level}) {
 
   //editing events
   const updateCard = (i) => {
-    setEve({ _id:events[i]._id, subtitle:events[i].subtitle,title: events[i].title, date: events[i].date, venue: events[i].venue, status: events[i].status, mode: events[i].mode, teamcreation: events[i].teamcreation,teamsize:events[i].teamsize, img1: events[i].img1, img2: events[i].img2, img3: events[i].img3, description: events[i].description, sheetId: events[i].sheetId });
+    setEve({ _id:events[i]._id, price:events[i].price, subtitle:events[i].subtitle,title: events[i].title, date: events[i].date, venue: events[i].venue, status: events[i].status, mode: events[i].mode, teamcreation: events[i].teamcreation,teamsize:events[i].teamsize, img1: events[i].img1, img2: events[i].img2, img3: events[i].img3, description: events[i].description, sheetId: events[i].sheetId });
     setShowModal({ show: true, index: i })
   }
 
@@ -159,6 +158,11 @@ function AdminEvents({level}) {
               <option value="Online">Online</option>
               <option value="Hybrid">Hybrid</option>
             </select>
+          </div>
+
+          <div className="py-2 px-4">
+            <h2 className="text-xl p-1 my-1 text-white">price</h2>
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter team size" type="number" name='price' value={eve.price} onChange={onChange} />
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Team Creation</h2>
@@ -320,6 +324,10 @@ function AdminEvents({level}) {
                       {eve.mode=="Hybrid"?  <option value={eve.mode} onChange={onChange} selected>Hybrid</option>: <option value={eve.mode} onChange={onChange}>Hybrid</option>}                                      
                       </select>
                   </div>
+                  <div className="py-2 px-4">
+            <h2 className="text-xl p-1 my-1 text-white">price</h2>
+            <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" placeholder="Enter price" type="number" name='price' value={eve.price} onChange={onChange} />
+          </div>
                   <div className="py-2 px-4">
                     <h2 className="text-xl p-1 my-1 text-white">Team Creation</h2>
                     <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="teamcreation" id="">

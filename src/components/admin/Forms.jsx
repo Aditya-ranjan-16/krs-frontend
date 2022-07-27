@@ -16,6 +16,7 @@ function Forms(props) {
       try {
         const resp = await axios.get("/api/events/list");
         const data = resp.data;
+
         setEventlist(data.list);
       } catch (e) {
         console.log(e);
@@ -97,7 +98,6 @@ function Forms(props) {
 
       final.fields = final.fields.concat(addFeild);
       setshowFInalData(showFInalData.concat(final));
-
       setformData({
         event: "",
         typeofform: "",
