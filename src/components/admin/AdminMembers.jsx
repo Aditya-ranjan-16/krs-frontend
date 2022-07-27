@@ -307,7 +307,7 @@ function AdminMembers() {
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-3xl text-white font-semibold">Edit member</h3>
-                  <button className="ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={() => setShowModal(false)}>
+                  <button className="ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={closeModal}>
                     <span className="text-white h-6 w-6 text-2xl block outline-none focus:outline-none">x</span>
                   </button>
                 </div>
