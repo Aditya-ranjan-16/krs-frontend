@@ -119,6 +119,8 @@ function AdminMembers() {
     const resp = await axios.post(`api/members/updateMember/${showModal.id}`, dataAdd, { headers: { "Authorization": `${authCtx.token}` } })
     console.log(resp)
 
+    makereq();
+
     setMem({ name: "", roll: "", domain: "", designation: "", about: "", year: "", img: "", linkedin: "", email: "", insta: "", github: "" })
     setShowModal({ show: false, index: null, id: null })
   }
@@ -165,6 +167,9 @@ function AdminMembers() {
 
     const resp = await axios.post(`api/members/addMember`, dataAdd, { headers: { "Authorization": `${authCtx.token}` } })
     console.log(resp)
+
+    makereq();
+
   }
 
   return (
