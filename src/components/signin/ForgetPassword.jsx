@@ -24,7 +24,7 @@ export default function ForgetPassword() {
           style={{ border: "2px solid  transparent" }}
         />
         <br />
-        <input
+        {/* <input
           className="w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded"
           type="password"
           name="password"
@@ -32,7 +32,7 @@ export default function ForgetPassword() {
           placeholder="Password"
           //   onChange={PostData}
           style={{ border: "2px solid  transparent" }}
-        />
+        /> */}
 
         {/* {show ? <p className="alertText">{show}</p> : ""} */}
 
@@ -41,7 +41,7 @@ export default function ForgetPassword() {
           className="w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold"
           //   onClick={login}
         >
-          Log in
+          Send OTP
         </button>
         <div id="SignInDiv"></div>
         <br />
