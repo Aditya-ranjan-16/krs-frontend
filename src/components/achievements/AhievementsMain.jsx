@@ -6,6 +6,7 @@ const achievementsData = [
   {
     img1: "https://user-images.githubusercontent.com/88647567/166467933-2b3a2dab-8477-4ed1-8f4e-54c382342305.jpeg",
     img2: "https://user-images.githubusercontent.com/88647567/150991382-9fe442a8-0b36-4294-a4bd-fb3fbf590e18.jpg",
+    img3: "https://user-images.githubusercontent.com/88647567/150991382-9fe442a8-0b36-4294-a4bd-fb3fbf590e18.jpg",
     position: "2nd",
     year: "2019",
     teamName: "Technocrats",
@@ -15,6 +16,7 @@ const achievementsData = [
   {
     img1: "https://user-images.githubusercontent.com/88647567/166467933-2b3a2dab-8477-4ed1-8f4e-54c382342305.jpeg",
     img2: "https://user-images.githubusercontent.com/88647567/150991382-9fe442a8-0b36-4294-a4bd-fb3fbf590e18.jpg",
+    img3: "https://user-images.githubusercontent.com/88647567/150991382-9fe442a8-0b36-4294-a4bd-fb3fbf590e18.jpg",
     position: "2nd",
     year: "2019",
     teamName: "Technocrats",
@@ -89,7 +91,7 @@ function AhievementsMain() {
           </div>
           
           <div  className='w-1/2 bg-white order-1 md:order-2 h-[350px] sm:w-[400px] sm:h-[400px] py-2 mr-10 event_slider_body '>
-              <EventSlider key={i} />
+              <EventSlider thumb={[achievementsData.img1,achievementsData.img2,achievementsData.img3]} key={i} />
           </div> 
              
         </div>

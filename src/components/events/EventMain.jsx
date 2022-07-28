@@ -5,8 +5,8 @@ import bg from '../../public/bg.png'
 export const eventsData = [
   {
     img1: "https://user-images.githubusercontent.com/88647567/166467933-2b3a2dab-8477-4ed1-8f4e-54c382342305.jpeg",
-    img2: "",
-    img3: "",
+    img2: "https://ik.imagekit.io/ze2jrkl67/WhatsApp_Image_2022-07-17_at_6.25.43_PM_gIeQTsbLLf.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1658912612843",
+    img3: "https://ik.imagekit.io/ze2jrkl67/WhatsApp_Image_2022-07-17_at_6.25.43_PM_gIeQTsbLLf.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1658912612843",
     paragrapg: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem architecto voluptate numquam dicta id excepturi dolor, a nihil,  accusantium impedit minus animi, fugit nulla aspernatur itaque iste! Architecto odio molestias perspiciatis. Optio dolores nesciunt recusandae, delectus sed dolorem praesentium nihil quas sapiente! Voluptatum culpa et ipsam, aliquid magni totam. Mollitia voluptatum expedita obcaecati, natus ipsam alias, aliquam voluptate maiores labore eius quam maxime. Quos quis molestiae at. Reprehenderit cupiditate doloribus, a laudantium iure quis placeat!",
     eventName: "Drone Workshop",
     date: "22nd July",
@@ -15,8 +15,8 @@ export const eventsData = [
   
   {
     img1: "https://user-images.githubusercontent.com/88647567/166467933-2b3a2dab-8477-4ed1-8f4e-54c382342305.jpeg",
-    img2: "",
-    img3: "",
+    img2: "https://ik.imagekit.io/ze2jrkl67/WhatsApp_Image_2022-07-17_at_6.25.43_PM_gIeQTsbLLf.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1658912612843",
+    img3: "https://ik.imagekit.io/ze2jrkl67/WhatsApp_Image_2022-07-17_at_6.25.43_PM_gIeQTsbLLf.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1658912612843",
     paragrapg: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem architecto voluptate numquam dicta id excepturi dolor, a nihil,  accusantium impedit minus animi, fugit nulla aspernatur itaque iste! Architecto odio molestias perspiciatis. Optio dolores nesciunt recusandae, delectus sed dolorem praesentium nihil quas sapiente! Voluptatum culpa et ipsam, aliquid magni totam. Mollitia voluptatum expedita obcaecati, natus ipsam alias, aliquam voluptate maiores labore eius quam maxime. Quos quis molestiae at. Reprehenderit cupiditate doloribus, a laudantium iure quis placeat!",
     eventName: "Drone Workshop",
     date: "",
@@ -43,7 +43,7 @@ function EventMain() {
                 </div>
               </div>
               <div  className='w-[350px] bg-white order-1 md:order-2 h-[350px] sm:w-[400px] sm:h-[400px] py-2 px-2 event_slider_body '>
-              <EventSlider key={i} />
+              <EventSlider thumb={[eventsData.img1,eventsData.img2,eventsData.img3]} key={i} />
               </div> 
             </div>
           )

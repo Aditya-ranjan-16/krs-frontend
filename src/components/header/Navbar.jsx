@@ -44,9 +44,7 @@ function Navbar() {
                 <Link to="/" className="py-5 px-2 text-white hover:text-yellow-500 hover:underline hover:underline-offset-2">
                   Home
                 </Link>
-                <Link to="/aboutus" className="py-5 px-2 text-white hover:text-yellow-500 hover:underline hover:underline-offset-2">
-                  About Us
-                </Link>
+ 
                 <Link to="/featured" className="py-5 px-2 text-white hover:text-yellow-500 hover:underline hover:underline-offset-2">
                   Featured
                 </Link>
@@ -97,9 +95,6 @@ function Navbar() {
             Home
           </Link>
           <hr className="w-[50%]" />
-          <Link to="/About" className="block py-2 px-4 my-1 text-sm hover:bg-gray-200">
-            About Us
-          </Link>
           <hr className="w-[50%]" />
           <Link to="/Featured" className="block py-2 px-4 my-1 text-sm hover:bg-gray-200">
             Featured
