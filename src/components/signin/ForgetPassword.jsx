@@ -33,12 +33,12 @@ export default function ForgetPassword() {
     } else {
       var email = showEmail;
       const resp = await axios.post(
-        `${url}api/login/forgotPassword/sendEmail`,
-        email,
+        `${url}api/login/forgotPassword/sendEmail/`,
         {
           headers: { Authorization: `${authCtx.token}` },
         }
       );
+      console.log(email);
       console.log(resp.data);
     }
   };
