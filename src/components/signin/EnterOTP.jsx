@@ -17,7 +17,7 @@ export default function EnterOTP() {
     const value = e.target.value;
 
     if (name === "email") {
-      if (value.indexOf("@") === -1 || value.indexOf(".") === -1) {
+      if (value <= 0) {
         e.target.style.border = "2px solid  #FF0000";
         e.target.style.outline = "none";
       } else {
