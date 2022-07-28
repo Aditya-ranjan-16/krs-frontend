@@ -30,7 +30,6 @@ export default function ForgetPassword() {
     if (showEmail.indexOf("@") === -1 || showEmail.indexOf(".") === -1) {
       console.log("Error");
     } else {
-      // http://localhost:5000/
       const resp = await axios.delete(
         `${url}api/login/forgotPassword/sendEmail`,
         showEmail,
