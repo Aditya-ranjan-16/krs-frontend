@@ -26,7 +26,11 @@ export default function ForgetPassword() {
   };
 
   const sendOtp = async () => {
-    console.log("opt send");
+    if (showEmail.indexOf("@") === -1 || showEmail.indexOf(".") === -1) {
+      console.log("Error");
+    } else {
+      console.log("opt send");
+    }
   };
 
   return (
