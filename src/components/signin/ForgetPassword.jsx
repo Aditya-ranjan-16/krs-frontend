@@ -25,6 +25,10 @@ export default function ForgetPassword() {
     setEmail(value);
   };
 
+  const sendOtp = async () => {
+    console.log("opt send");
+  };
+
   return (
     <div
       className="bg-black  bg-cover flex justify-center items-center "
@@ -47,7 +51,7 @@ export default function ForgetPassword() {
         />
         <button
           className="w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold mt-5"
-          //   onClick={login}
+          onClick={sendOtp}
         >
           Send OTP
         </button>
