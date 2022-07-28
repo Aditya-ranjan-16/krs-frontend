@@ -3,6 +3,7 @@ import BG from "../../public/dronebackground.jpg";
 import KRS from "../../public/krslogo.jpg";
 import axios from "axios";
 import AuthContext from "../../store/auth-context";
+import { Navigate } from "react-router-dom";
 
 export default function ForgetPassword() {
   const [showEmail, setEmail] = useState();
@@ -42,6 +43,7 @@ export default function ForgetPassword() {
       if (resp.status == 200) {
         console.log(resp.data);
         console.log(resp.status);
+        <Navigate to="/EnterOTP" />;
       }
     }
   };
