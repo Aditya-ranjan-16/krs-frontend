@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BG from "../../public/dronebackground.jpg";
 import KRS from "../../public/krslogo.jpg";
+import axios from "axios";
 
 export default function ForgetPassword() {
   const [showEmail, setEmail] = useState();
@@ -29,6 +30,14 @@ export default function ForgetPassword() {
     if (showEmail.indexOf("@") === -1 || showEmail.indexOf(".") === -1) {
       console.log("Error");
     } else {
+      // http://localhost:5000/
+      const resp = await axios.delete(
+        `${url}api/login/forgotPassword/sendEmail`,
+        showEmail,
+        {
+          headers: { Authorization: `${authCtx.token}` },
+        }
+      );
       console.log("opt send");
     }
   };
