@@ -12,71 +12,71 @@ function SigninMain() {
   const authCtx = useContext(AuthContext);
 
   const redirect = useNavigate();
-  const glogin= async(email)=>{
-    const userObject={
-      email:email
+  const glogin = async (email) => {
+    const userObject = {
+      email: email
     }
-   
-    try{
-  
-      const resp = await axios.post("/api/login/glogin", userObject,{headers:{ "Authorization": ``}});
-    
-      const data=resp.data;
-   
-      if(data.success==true){
 
-       await authCtx.login(data.token, 3600000)
-       redirect('/admin');
+    try {
+
+      const resp = await axios.post("/api/login/glogin", userObject, { headers: { "Authorization": `` } });
+
+      const data = resp.data;
+
+      if (data.success == true) {
+
+        await authCtx.login(data.token, 3600000)
+        redirect('/admin');
       }
-    }catch(err){
+    } catch (err) {
       console.error(err);
 
       set("Invalid Credentials");
     }
   }
-  const handleCallbackResponse= (res)=>{
-  const userobject=jwtDecode(res.credential)  
-  glogin(userobject.email)
-  
+  const handleCallbackResponse = (res) => {
+    const userobject = jwtDecode(res.credential)
+    glogin(userobject.email)
+
   }
 
-  useEffect(()=>{
-   google.accounts.id.initialize({
-    client_id:"788042448796-4t3mpat9ss744o4787s3svj49q78ogo6.apps.googleusercontent.com",
-    callback:handleCallbackResponse
-   });
-   google.accounts.id.renderButton(
-    document.getElementById("SignInDiv"),
-    {theme:"outline",size:"large"}
-   );
+  useEffect(() => {
+    google.accounts.id.initialize({
+      client_id: "788042448796-4t3mpat9ss744o4787s3svj49q78ogo6.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("SignInDiv"),
+      { theme: "outline", size: "large" }
+    );
 
-  },[])
+  }, [])
 
-  const login = async() => {
+  const login = async () => {
     const { email, password } = showUser;
 
     if (password !== "" && email !== "" && email.indexOf('@') > -1 && email.indexOf('.') !== -1) {
-      const userObject={
-        email:email,
-        password:password,
+      const userObject = {
+        email: email,
+        password: password,
       }
-      try{
-        const res = await axios.post("/api/login/login", userObject,{headers:{ "Authorization": ``}});
-        const data=res.data;
+      try {
+        const res = await axios.post("/api/login/login", userObject, { headers: { "Authorization": `` } });
+        const data = res.data;
         console.log(res)
-        if(data.success==true){
+        if (data.success == true) {
           authCtx.login(data.token, 3600000)
-          
-         redirect('/admin');
-        }else{
-              
+
+          redirect('/admin');
+        } else {
+
         }
-      
-      }catch(err){
+
+      } catch (err) {
         console.error(err);
         set("Invalid Credentials");
       }
-     
+
     } else {
       set("Please fill all the fields");
       console.log("Error")
@@ -132,18 +132,18 @@ function SigninMain() {
           onChange={PostData}
           style={{ border: "2px solid  transparent" }}
         />
-   
-        <h2 className='text-white leading-10'><Link to='/signin' >forgot password?</Link><Link style={{ color: "blue" }} to='/signup' > SignUp</Link></h2><br />
-        
+
+        <h2 className='text-white leading-10'><Link to='/ForgetPassword' >forgot password?</Link><Link style={{ color: "blue" }} to='/signup' > SignUp</Link></h2><br />
+
         {show ? <p className="alertText">{show}</p> : ""}
- 
+
         <br />
         <button className='w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold' onClick={login}>Log in</button>
-        <br/>
-        <center style={{color:"white"}}>Or</center><br/>
+        <br />
+        <center style={{ color: "white" }}>Or</center><br />
         <div id="SignInDiv"></div>
-        <br/>
-   
+        <br />
+
       </div>
     </div>
   )
