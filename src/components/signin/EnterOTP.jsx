@@ -29,7 +29,7 @@ export default function EnterOTP() {
   };
 
   const sendOtp = async () => {
-    console.log(first);
+    console.log("first");
   };
 
   return (
