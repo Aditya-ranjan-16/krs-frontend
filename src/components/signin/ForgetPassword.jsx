@@ -38,8 +38,11 @@ export default function ForgetPassword() {
           headers: { Authorization: `${authCtx.token}` },
         }
       );
-      console.log(email);
-      console.log(resp.data);
+
+      if (resp.status == 200) {
+        console.log(resp.data);
+        console.log(resp.status);
+      }
     }
   };
 
