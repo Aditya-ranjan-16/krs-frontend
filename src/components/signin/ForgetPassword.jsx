@@ -5,7 +5,9 @@ import KRS from "../../public/krslogo.jpg";
 export default function ForgetPassword() {
   const [showEmail, setEmail] = useState();
 
-  useEffect(() => {}, [showEmail]);
+  useEffect(() => {
+    console.log(showEmail);
+  }, [showEmail]);
 
   const PostData = async (e) => {
     const name = e.target.name;
@@ -43,22 +45,8 @@ export default function ForgetPassword() {
           onChange={PostData}
           style={{ border: "2px solid  transparent" }}
         />
-        <br />
-        {/* <input
-          className="w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded"
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-          //   onChange={PostData}
-          style={{ border: "2px solid  transparent" }}
-        /> */}
-
-        {/* {show ? <p className="alertText">{show}</p> : ""} */}
-
-        <br />
         <button
-          className="w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold"
+          className="w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold mt-5"
           //   onClick={login}
         >
           Send OTP
