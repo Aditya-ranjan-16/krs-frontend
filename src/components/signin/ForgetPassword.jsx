@@ -3,13 +3,13 @@ import BG from "../../public/dronebackground.jpg";
 import KRS from "../../public/krslogo.jpg";
 import axios from "axios";
 import AuthContext from "../../store/auth-context";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function ForgetPassword() {
   const [showEmail, setEmail] = useState();
 
   const authCtx = useContext(AuthContext);
-
+  const navigate = useNavigate();
   const url = "http://localhost:5000/";
 
   const PostData = async (e) => {
@@ -43,7 +43,8 @@ export default function ForgetPassword() {
       if (resp.status == 200) {
         console.log(resp.data);
         console.log(resp.status);
-        <Navigate to="/EnterOTP" />;
+        // <Navigate to="/EnterOTP" />;
+        navigate("/EnterOTP");
       }
     }
   };
