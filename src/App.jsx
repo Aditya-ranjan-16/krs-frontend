@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Events from './pages/Events';
 import Members from './pages/Members';
 import Recruitment from './pages/Recruitment';
+import ForgetPassword from './pages/ForgetPassword';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import AboutUs from './pages/AboutUs';
@@ -28,20 +29,21 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/aboutus' element={<AboutUs/>} />
-          <Route path='/events' element={<Events/>} />
-          <Route path='/members' element={<Members/>} />
-          <Route path='/recruitment' element={<Recruitment/>} />
+          <Route path='/' element={<Home />} />
+          <Route path='/aboutus' element={<AboutUs />} />
+          <Route path='/events' element={<Events />} />
+          <Route path='/members' element={<Members />} />
+          <Route path='/recruitment' element={<Recruitment />} />
           <Route path='/achievements' element={<Achievementss />} />
-          {!(authCtx.isLoggedIn) && <Route path='/signin' element={<Signin/>} /> }
-          {!(authCtx.isLoggedIn) && <Route path='/signup' element={<Signup/>} /> }
+          {!(authCtx.isLoggedIn) && <Route path='/signin' element={<Signin />} />}
+          {!(authCtx.isLoggedIn) && <Route path='/signup' element={<Signup />} />}
+          {!(authCtx.isLoggedIn) && <Route path='/ForgetPassword' element={<ForgetPassword />} />}
           <Route path='/featured' element={<Featured />} />
           <Route path='/collaborations' element={<Collaborations />} />
           <Route path='/contactus' element={<ContactUs />} />
           {(authCtx.isLoggedIn) && <Route path='/admin/*' element={<Admin />} />}
-           <Route path="*" element={<Home/>} / >          
-       
+          <Route path="*" element={<Home />} />
+
         </Routes>
       </Router>
     </div>
