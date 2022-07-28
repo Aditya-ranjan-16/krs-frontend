@@ -7,6 +7,8 @@ import AuthContext from "../../store/auth-context";
 export default function ForgetPassword() {
   const [showEmail, setEmail] = useState();
 
+  const authCtx = useContext(AuthContext);
+
   const url = "http://localhost:5000/";
 
   useEffect(() => {
