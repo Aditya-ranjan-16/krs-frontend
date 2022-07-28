@@ -31,9 +31,10 @@ export default function ForgetPassword() {
     if (showEmail.indexOf("@") === -1 || showEmail.indexOf(".") === -1) {
       console.log("Error");
     } else {
+      var email = showEmail;
       const resp = await axios.post(
         `${url}api/login/forgotPassword/sendEmail`,
-        showEmail,
+        email,
         {
           headers: { Authorization: `${authCtx.token}` },
         }
