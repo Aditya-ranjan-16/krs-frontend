@@ -452,7 +452,7 @@ function AdminEvents({level}) {
       />
       <center><p style={{color:"white"}}>{qrdata}</p>
       <br/>
-      <span style={{color:"green"}}>Verified</span><span style={{color:"red"}}>unverified</span>
+      <span style={{color:"green"}}>Verified</span> <span style={{color:"red"}}>unverified</span>
       <button></button>
       </center>
       </div>:null}
