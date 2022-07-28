@@ -42,7 +42,7 @@ export default function ForgetPassword() {
           headers: { Authorization: `${authCtx.token}` },
         }
       );
-      console.log(res);
+      console.log(resp.data);
     }
   };
 
