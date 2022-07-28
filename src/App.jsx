@@ -36,7 +36,7 @@ function App() {
             <Route path="/ForgetPassword" element={<ForgetPassword />} />
           )}
           {!authCtx.isLoggedIn && (
-            <Route path="/ForgetPassword" element={<ForgetPassword />} />
+            <Route path="/EnterOTP" element={<EnterOTP />} />
           )}
           <Route path="/featured" element={<Featured />} />
           <Route path="/collaborations" element={<Collaborations />} />
