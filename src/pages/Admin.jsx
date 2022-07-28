@@ -8,7 +8,6 @@ function Admin() {
     <div>
         <Navbar />
         <AdminMain />
-        <Footer />
     </div>
   )
 }

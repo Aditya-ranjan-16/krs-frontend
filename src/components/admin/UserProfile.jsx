@@ -3,9 +3,23 @@ import { Link } from "react-router-dom";
 import PP from '../../public/pp.jpeg'
 import qrbg from '../../public/qrbg.jpg'
 import qr from '../../public/qr.png'
+import QRCode from 'qrcode'
+import { useEffect } from 'react';
 
 function UserProfile() {
+    const [qrimg,setQrimg]=useState("")
     
+ useEffect(()=>{
+  const generateQR = async () => {
+    try {
+      const imgurl=await QRCode.toDataURL("399den342e-di3sd")
+      setQrimg(imgurl)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+  generateQR()
+ },[])
   const usereventCard = [
     {
       name: "Drone workshop",
@@ -89,7 +103,7 @@ function UserProfile() {
                 </div>
                 {/*body*/}
                 <div className="flex justify-center px-16 py-8">
-                  <img src={qrbg} alt="" />
+                  <img src={qrimg} alt="" />
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">

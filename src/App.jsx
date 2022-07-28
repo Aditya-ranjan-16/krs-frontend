@@ -40,7 +40,7 @@ function App() {
           <Route path='/collaborations' element={<Collaborations />} />
           <Route path='/contactus' element={<ContactUs />} />
           {(authCtx.isLoggedIn) && <Route path='/admin/*' element={<Admin />} />}
-           <Route path="*" element={<Home/>} / >          
+           <Route path="*"  element={<Home/>} / >          
        
         </Routes>
       </Router>
