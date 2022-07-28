@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import Delete from '../../public/delete.png'
 import Edit from '../../public/edit.png'
@@ -7,7 +7,9 @@ import qrbg from '../../public/qrbg.jpg'
 import EventSlider from '../events/EventSlider'
 import axios from "axios";
 import AuthContext from '../../store/auth-context';
+import { QrReader } from 'react-qr-reader';
 import { useEffect } from "react";
+
 
 let eventCard = [];
 
@@ -17,7 +19,8 @@ function AdminEvents({level}) {
   const [showModal, setShowModal] = useState({ show: false, index: null });
   const [show, set] = useState("");
   const authCtx = useContext(AuthContext);
-
+  const [qrdata, setQrData] = useState('');
+ 
   useEffect(()=>{
    async function makereq (){
     try{
@@ -31,6 +34,7 @@ function AdminEvents({level}) {
   
    } 
    makereq();
+  
   },[])
   //  add events
   const handleClick =async (e) => {
@@ -120,9 +124,11 @@ function AdminEvents({level}) {
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
+   
       {/* form */}
       <div className="py-4 px-8 rounded-xl bg-[#111111] border-2 border-yellow-500">
-        <h1 className="p-2 text-3xl text-white">Add an event</h1>
+        <h1 className="p-2 text-3xl text-white">Add an event </h1>
+       
         <div className="grid grid-cols-2">
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Event Name</h2>
@@ -422,19 +428,34 @@ function AdminEvents({level}) {
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-3xl text-white font-semibold">
-                    QR Code
+                    QR Scan
                   </h3>
-                  <button className="ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={() => setShowQrModal(false)}>
+                  <button className="ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={() => {setShowQrModal(false);setQrData("")}}>
                     <span className="text-white h-6 w-6 text-2xl block outline-none focus:outline-none">x</span>
                   </button>
                 </div>
                 {/*body*/}
-                <div className="flex justify-center px-16 py-8">
-                  <img src={qrbg} alt="" />
+                <div className="flex justify-center px-16 py-2">
+                 {showqrModal==true ? <div><QrReader
+              
+                 className="h-64 w-64"
+        onResult={(result, error) => {
+          if (!!result) {
+            setQrData(result?.text);
+          }
+
+          if (!!error) {
+            console.info(error);
+          }
+        }}
+       
+      />
+      <center><p style={{color:"white"}}>{qrdata}</p></center></div>:null}
+              
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button className="text-white bg-yellow-500 rounded-lg font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={() => setShowQrModal(false)}>Close</button>
+                  <button className="text-white bg-yellow-500 rounded-lg font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={() => {setShowQrModal(false);setQrData("")}}>Close</button>
                 </div>
               </div>
             </div>
