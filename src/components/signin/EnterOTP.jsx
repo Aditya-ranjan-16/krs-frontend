@@ -6,11 +6,11 @@ import AuthContext from "../../store/auth-context";
 import { useNavigate } from "react-router-dom";
 
 export default function EnterOTP() {
-  const [showEmail, setEmail] = useState();
+  const [showOTP, setOTP] = useState();
 
   useEffect(() => {
-    console.log(showEmail);
-  }, [showEmail]);
+    console.log(showOTP);
+  }, [showOTP]);
 
   const PostData = async (e) => {
     const name = e.target.name;
@@ -25,7 +25,11 @@ export default function EnterOTP() {
       }
     }
 
-    setEmail(value);
+    setOTP(value);
+  };
+
+  const sendOtp = async () => {
+    console.log(first);
   };
 
   return (
@@ -50,7 +54,7 @@ export default function EnterOTP() {
         />
         <button
           className="w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold mt-5"
-          // onClick={sendOtp}
+          onClick={sendOtp}
         >
           Submit
         </button>
