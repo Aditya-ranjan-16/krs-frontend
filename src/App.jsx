@@ -6,6 +6,7 @@ import Events from "./pages/Events";
 import Members from "./pages/Members";
 import Recruitment from "./pages/Recruitment";
 import ForgetPassword from "./pages/ForgetPassword";
+import EnterOTP from "./pages/EnterOTP";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import AboutUs from "./pages/AboutUs";
