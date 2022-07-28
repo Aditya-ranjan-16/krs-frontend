@@ -41,8 +41,8 @@ export default function ForgetPassword() {
       );
 
       if (resp.status == 200) {
-        console.log(resp.data);
-        console.log(resp.status);
+        localStorage.setItem("email", JSON.stringify(email));
+
         navigate("/EnterOTP");
       }
     }
