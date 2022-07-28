@@ -8,10 +8,6 @@ import { useNavigate } from "react-router-dom";
 export default function EnterOTP() {
   const [showOTP, setOTP] = useState();
 
-  useEffect(() => {
-    console.log(showOTP);
-  }, [showOTP]);
-
   const PostData = async (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -29,7 +25,7 @@ export default function EnterOTP() {
   };
 
   const sendOtp = async () => {
-    console.log("first");
+    console.log(showOTP);
   };
 
   return (
