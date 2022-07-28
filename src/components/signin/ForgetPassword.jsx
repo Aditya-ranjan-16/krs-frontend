@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import BG from "../../public/dronebackground.jpg";
 import KRS from "../../public/krslogo.jpg";
 import axios from "axios";
+import AuthContext from "../../store/auth-context";
 
 export default function ForgetPassword() {
   const [showEmail, setEmail] = useState();
