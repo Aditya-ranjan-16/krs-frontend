@@ -19,8 +19,8 @@ const homePageData = [
   {
     img: robocon,
     heading1: "Robocon 2022",
-    heading2: "Qualified For Nationals!! ",
-    description: "KRS is participating in The prestigious international competion Robocon 2022.Our Team has qualified for Nationals! We are ready to compete"
+    heading2: "Went For Nationals!! ",
+    description: "KRS Participated in The prestigious international competion Robocon 2022.Our Team SKYPAVAR played in the Nationals and competed among 43 colleges all over India and represented KIIT for the first time in the national arena of ROBOCON "
   },
   {
     img: ff,
@@ -60,7 +60,7 @@ function HomeMain() {
           setTimeout(()=>{
             slideRef.current.classList.remove("fade-anim");
           }, 2000);
-        }, 6000);
+        }, 7000);
 
       return ()=>{clearInterval(slideInterval) 
    
