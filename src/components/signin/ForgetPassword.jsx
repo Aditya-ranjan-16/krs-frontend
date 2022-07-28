@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BG from "../../public/dronebackground.jpg";
 import KRS from "../../public/krslogo.jpg";
 
 export default function ForgetPassword() {
   const [showEmail, setEmail] = useState();
+
+  useEffect(() => {}, [showEmail]);
 
   const PostData = async (e) => {
     const name = e.target.name;
@@ -20,6 +22,7 @@ export default function ForgetPassword() {
 
     setEmail(value);
   };
+
   return (
     <div
       className="bg-black  bg-cover flex justify-center items-center "
