@@ -2,6 +2,7 @@ import React from 'react'
 import AdminEvents from './AdminEvents'
 import AdminMembers from './AdminMembers'
 import AdminSidebar from './AdminSidebar'
+import bg from '../../public/bg.png'
 import {
   BrowserRouter as Router,
   Routes,
@@ -42,7 +43,7 @@ async  function makerq(){
   },[])
 
   return (
-    <div className='flex bg-black'>
+    <div className="bg-black flex bg-cover bg-bottom bg-fixed" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url(${bg})`,backgroundRepeat:"no-repeat",backgroundSize:"cover"}}>
       <AdminSidebar level={level} />
       <Routes>
        {level=="admin" &&  <Route path='/adminmembers' element={<AdminMembers />} />}

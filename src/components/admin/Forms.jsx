@@ -122,7 +122,7 @@ function Forms(props) {
   const onChange = (e) => {
     
     const value = e.target.value;
-   
+    // console.log(value)
     if (value === "") {
       e.target.style.border = "2px solid  #FF0000";
       e.target.style.outline = "none";
@@ -147,7 +147,7 @@ function Forms(props) {
      }
 
     setformData({ ...formData, [e.target.name]: e.target.value });
-    setformM({ ...formData, [e.target.name]: e.target.value })
+    // setformM({ ...formData, [e.target.name]: e.target.value })
   };
 
  
@@ -194,30 +194,41 @@ function Forms(props) {
 
   // delete form
   const deleteForm = (event) => {
-    const newFinalData = formdata.filter((data) => { return data.event !== event })
-    setformData(newFinalData)
+    const newFinalData = showFInalData.filter((data) => { return data.event !== event })
+    console.log("fghjk"+ newFinalData)
+    setshowFInalData(newFinalData)
   }
   
   
   const [showModal, setShowModal] = useState({show:false,index:null});
-  const [formM, setformM] = useState({event: "", typeofform: "", heading: "", subtitle: "", instructions: ""})
+  const [formM, setformM] = useState({heading: "", subtitle: "", instructions: ""})
   // editing form
   const updateCard = (key) => {
-    setformM({event: showFInalData[key].event, typeofform: showFInalData[key].typeofform, heading: showFInalData[key].heading, subtitle: showFInalData[key].subtitle, instructions: showFInalData[key].instructions})
+    setformData({heading: showFInalData[key].heading, subtitle: showFInalData[key].subtitle, instructions: showFInalData[key].instructions})
     
     setShowModal({show:true,index:key})
   }
   // add changes
   const editForms = () => {
-    console.log(formM.event, formM.subtitle)
-    // showFInalData[showModal.index]={event:formM.event,typeofform:formM.typeofform,heading:formM.heading,subtitle:formM.subtitle,instructions:formM.instructions}
-    // setshowFInalData(showFInalData)
-    setformM({event: "", typeofform: "", heading: "", subtitle: "", instructions: ""})
+    showFInalData[showModal.index].heading = formData.heading
+    showFInalData[showModal.index].subtitle = formData.subtitle
+    showFInalData[showModal.index].instructions = formData.instructions
+    setshowFInalData(showFInalData)
     setShowModal({show:false,index:null})
+    setformData({
+      event: "",
+      typeofform: "",
+      heading: "",
+      subtitle: "",
+      instructions: "",
+      Namevalue: "",
+      Rollvalue: "",
+      Emailvalue: "",
+    });
   }
   // modal
   const closeModal = () => {
-    setformM({event: "", typeofform: "", heading: "", subtitle: "", instructions: ""})
+    // setformData({event: "", typeofform: "", heading: "", subtitle: "", instructions: ""})
     setShowModal({show:false,index:null})
   }
 
@@ -465,24 +476,7 @@ function Forms(props) {
             </div>
           </div>
 
-          {/* For More Feilds */}
-          {/* {fieldList.map((list, index) => {
-            return (
-              <div key={index} className="px-5 grid grid-cols-3 gap-4 py-2">
-                <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="name" />
-                <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="type">
-                  <option value="select" selected disabled hidden>Select</option>
-                  <option name='type' value="text">text</option>
-                  <option name='type' value="number">number</option>
-                  <option name='type' value="email">email</option>
-                </select>
-                <div className='flex'>
-                  <input className="text-lg w-full py-0.5 px-1 mx-1 rounded" type="text" name="value" />
-                  <button className="text-xl  px-2 mx-1 rounded-lg text-white"><img className='w-6' src={cross} alt="remove" /></button>
-                </div>
-              </div>
-            )
-          })} */}
+          
         </div>
         <br />
         {showE2 ? <p className="alertText">{showE2}</p> : ""}
@@ -503,43 +497,19 @@ function Forms(props) {
         </button>
       </div>
 
-      {/* {forms.map((data) => {
-        return (
-          <div className="text-white border-2"> */}
-      {/* <form action=""> */}
-      {/* <h1>{data.event}</h1>
-              <h1>{data.heading}</h1>
-              <h1>{data.subtitle}</h1>
-              <h1>{data.instructions}</h1> */}
-      {/* {fieldList.map((field) => {
-                return (
-                  <div className="text-white">
-                    <div>
-                      <label htmlFor="">Name</label>
-                      <input className='text-black' type="text" placeholder={field.value} />
-                    </div>
-                    <div></div>
-                    <div></div>
-                    <label htmlFor="">{field.name}</label>
-                    <input className='text-black' type={field.type} name={field.name} placeholder={field.value} />
-                  </div>
-                )
-              })} */}
-      {/* </form> */}
-      {/* </div>
-        )
-      })} */}
+      
 
       {showFInalData ? (
         <div>
           {showFInalData.map((value, key) => {
+            var l = showFInalData[0].fields.length
             return (
               <div
                 key={key}
-                className="flex flex-row-reverse border-2 border-yellow-500 px- my-5 rounded-xl"
+                className="flex flex-row-reverse border-2 bg-black bg-opacity-25 border-yellow-500 px- my-5 rounded-xl"
               >
-                <div className="w-1/3 border-l border-yellow-500 flex flex-col items-center">
-                  <h1 className="p-2 text-3x text-center mt-5 text-amber-300">
+                <div className="w-1/3 border-l border-yellow-500 p-4 flex flex-col items-center">
+                  <h1 className="p-2 text-3xl text-center text-amber-300">
                     <b>{eventlist.map((e)=>{
                       if(e.id==value.event){
                         return e.title
@@ -577,42 +547,11 @@ function Forms(props) {
 
                 {showForm && (
                   <div className="w-2/3" id="" key={key}>
-                    {/* <div>
-                        <div key={key} className="my-5 px-10">
-                          <label className='text-xl text-center text-white' htmlFor="">{value.fields[currentQuestion].name}</label>
-                          <input className="text-lg w-full py-0.5 px-1 mx-1 rounded mt-2" type={value.fields[currentQuestion].type} placeholder={value.fields[currentQuestion].value} />
-                        </div>
-                      
-                    
-                  </div> */}
-
                     <Questions
-                      len={showFInalData[0].fields.length}
+                      len={l}
                       fields={showFInalData[0].fields}
                     />
-                    {/* buttons
-                  <div className="flex justify-center items-center m-10 ">
-                  <button className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500  font-medium rounded-lg text-sm px-5 py-2.5 mr-5 mb-2  "
-                    onClick={back} >
-                    Back
-                  </button> */}
-
-                    {/* {currentQuestion + 1 == value.fields.length ? (
-                    <div>
-                      <button className="focus:outline-none  text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 "
-                        onClick={onsubmit} >
-                        Submit
-                      </button> */}
-                    {/* <text className="text-5xl text-white">SUBMITTED SUCCESSFULLY!!</text> */}
-                    {/* </div>
-                  ) : (
-                    <button
-                      className="focus:outline-none  text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 "
-                      onClick={next} >
-                      Next
-                    </button>
-                  )}
-                  </div> */}
+                    
                   </div>
                 )}
               </div>
@@ -640,23 +579,7 @@ function Forms(props) {
                       </div>
                       {/*body*/}
                       <div className='grid grid-cols-3'>
-                        <div className="py-2 px-4">
-                          <h2 className="text-xl p-1 my-1 text-white">Event</h2>
-                          <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="event" value={formM.event} onChange={onChange} >
-                            <option selected disabled hidden> Select </option>
-                            {eventlist.map((e) => (
-                              <option value={e.id}>{e.title}</option>
-                            ))}
-                          </select>
-                        </div>
-                        <div className="py-2 px-4">
-                          <h2 className="text-xl p-1 my-1 text-white">Type</h2>
-                          <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="typeofform" value={formM.typeofform} onChange={onChange} >
-                            <option selected disabled hidden> Select </option>
-                            {regexist==false && <option value="Registration">Registration</option>}
-                            <option value="Normal">Normal</option>
-                          </select>
-                        </div>
+                        
                         <div className="py-2 px-4">
                           <h2 className="text-xl p-1 my-1 text-white">Heading</h2>
                           <input
@@ -664,7 +587,7 @@ function Forms(props) {
                             placeholder="Enter heading"
                             type="text"
                             name="heading"
-                            value={formM.heading}
+                            value={formData.heading}
                             onChange={onChange}
                           />
                         </div>
@@ -675,7 +598,7 @@ function Forms(props) {
                             placeholder="Enter subtitle"
                             type="text"
                             name="subtitle"
-                            value={formM.subtitle}
+                            value={formData.subtitle}
                             onChange={onChange}
                           />
                         </div>
@@ -686,7 +609,7 @@ function Forms(props) {
                             placeholder="Enter instructions"
                             type="text"
                             name="instructions"
-                            value={formM.instructions}
+                            value={formData.instructions}
                             onChange={onChange}
                           />
                         </div>
