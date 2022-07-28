@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import BG from "../../public/dronebackground.jpg";
 import KRS from "../../public/krslogo.jpg";
 
 export default function ForgetPassword() {
+  const [showEmail, setEmail] = useState();
+
+  const PostData = async (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if (name === "email") {
+      if (value.indexOf("@") === -1 || value.indexOf(".") === -1) {
+        e.target.style.border = "2px solid  #FF0000";
+        e.target.style.outline = "none";
+      } else {
+        e.target.style.border = "2px solid  transparent";
+      }
+    }
+
+    setEmail(value);
+  };
   return (
     <div
       className="bg-black  bg-cover flex justify-center items-center "
@@ -20,7 +37,7 @@ export default function ForgetPassword() {
           name="email"
           id="email"
           placeholder="Enter email address"
-          //   onChange={PostData}
+          onChange={PostData}
           style={{ border: "2px solid  transparent" }}
         />
         <br />
