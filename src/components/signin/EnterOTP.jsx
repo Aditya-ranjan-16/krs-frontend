@@ -25,6 +25,8 @@ export default function EnterOTP() {
   };
 
   const sendOtp = async () => {
+    const email = localStorage.getItem("email");
+    console.log(email);
     console.log(showOTP);
   };
 
