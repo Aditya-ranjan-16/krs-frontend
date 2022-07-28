@@ -43,7 +43,6 @@ export default function ForgetPassword() {
       if (resp.status == 200) {
         console.log(resp.data);
         console.log(resp.status);
-        // <Navigate to="/EnterOTP" />;
         navigate("/EnterOTP");
       }
     }
