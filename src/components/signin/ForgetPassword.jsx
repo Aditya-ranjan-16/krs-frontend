@@ -42,7 +42,6 @@ export default function ForgetPassword() {
 
       if (resp.status == 200) {
         localStorage.setItem("email", JSON.stringify(email));
-
         navigate("/EnterOTP");
       }
     }
