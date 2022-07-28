@@ -1,13 +1,13 @@
 import React from "react";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/header/Navbar";
-import BG from "../../public/dronebackground.jpg";
+import ForgetPasswordC from "./../components/signin/ForgetPassword";
 
 export default function ForgetPassword() {
   return (
     <div>
       <Navbar />
-      ForgetPassword
+      <ForgetPasswordC />
       <Footer />
     </div>
   );
