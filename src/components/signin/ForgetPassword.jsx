@@ -6,6 +6,8 @@ import axios from "axios";
 export default function ForgetPassword() {
   const [showEmail, setEmail] = useState();
 
+  const url = "http://localhost:5000/";
+
   useEffect(() => {
     console.log(showEmail);
   }, [showEmail]);
