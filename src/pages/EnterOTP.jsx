@@ -3,5 +3,11 @@ import Footer from "../components/footer/Footer";
 import Navbar from "../components/header/Navbar";
 
 export default function EnterOTP() {
-  return <div>EnterOTP</div>;
+  return (
+    <div>
+      <Navbar />
+      EnterOTP
+      <Footer />
+    </div>
+  );
 }
