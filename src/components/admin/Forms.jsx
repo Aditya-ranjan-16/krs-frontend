@@ -3,6 +3,10 @@ import cross from "../../public/cross.png";
 import Questions from "./Questions";
 import axios from "axios";
 import AuthContext from "../../store/auth-context";
+import Delete from '../../public/delete.png'
+import Edit from '../../public/edit.png'
+import { Link } from "react-router-dom";
+
 // import Questions from './Questions'
 
 function Forms(props) {
@@ -116,48 +120,43 @@ function Forms(props) {
   };
 
   const onChange = (e) => {
+    
     const value = e.target.value;
-    if(e.target.name="event"){
-      
-     async function makereq1(){
-     
-        try{
-          const resp = await axios.get(`/api/events/checkform/${value}`);
-          const data = resp.data;
-          console.log(data,value)
-          if(data.exist==true){setRegexist(true)}
-          else{setRegexist(false)}
-
-        }catch(e){
-          console.log(e)
-        }
-      }
-      makereq1()
-    }
+   
     if (value === "") {
       e.target.style.border = "2px solid  #FF0000";
       e.target.style.outline = "none";
     } else {
       e.target.style.border = "2px solid  transparent";
     }
+    if(e.target.name=="event"){
+      
+      async function makereq1(){
+      
+        try{
+          const resp = await axios.get(`/api/events/checkform/${value}`);
+          const data = resp.data;
+          if(data.exist==true){setRegexist(true)}
+          else{setRegexist(false)}
+ 
+        }catch(e){
+          console.log(e)
+        }
+      }
+      makereq1()
+     }
+
     setformData({ ...formData, [e.target.name]: e.target.value });
+    setformM({ ...formData, [e.target.name]: e.target.value })
   };
+
+ 
 
   const onChange2 = (e) => {
     setCurFeild({ ...curFeild, [e.target.name]: e.target.value });
   };
 
-  // const addFieldList = () => {
-  //   const { name, type, value } = curFeild
-  //   var arr = { name, type, value }
-  //   if (name !== "" && type !== "") {
-  //     setAddFeild(addFeild.concat(arr));
-  //   }
-  //   else
-  //     setE2("Please fill the name and type field");
-
-  //   console.log(addFeild)
-  // }
+  
 
   const addFeildCheck = (e) => {
     if (show === true) {
@@ -175,7 +174,7 @@ function Forms(props) {
       setE2("");
     } else {
       setE2("Please fill the name and type field");
-      console.log(show);
+      
     }
   };
 
@@ -192,20 +191,35 @@ function Forms(props) {
 
   const viewData = () => setshowForm(true);
 
-  // const [currentQuestion, setCurrentQuestion] = useState(0)
-  // function next() {
-  //   const nextQuestion = currentQuestion + 1;
-  //   if (nextQuestion < showFInalData[0].fields.length) {
-  //     setCurrentQuestion(nextQuestion);
-  //   }
-  //   console.log(nextQuestion)
-  // }
-  // function back() {
-  //   const prevQuestion = currentQuestion - 1;
-  //   if (prevQuestion >= 0) {
-  //     setCurrentQuestion(prevQuestion);
-  //   }
-  // }
+
+  // delete form
+  const deleteForm = (event) => {
+    const newFinalData = formdata.filter((data) => { return data.event !== event })
+    setformData(newFinalData)
+  }
+  
+  
+  const [showModal, setShowModal] = useState({show:false,index:null});
+  const [formM, setformM] = useState({event: "", typeofform: "", heading: "", subtitle: "", instructions: ""})
+  // editing form
+  const updateCard = (key) => {
+    setformM({event: showFInalData[key].event, typeofform: showFInalData[key].typeofform, heading: showFInalData[key].heading, subtitle: showFInalData[key].subtitle, instructions: showFInalData[key].instructions})
+    
+    setShowModal({show:true,index:key})
+  }
+  // add changes
+  const editForms = () => {
+    console.log(formM.event, formM.subtitle)
+    // showFInalData[showModal.index]={event:formM.event,typeofform:formM.typeofform,heading:formM.heading,subtitle:formM.subtitle,instructions:formM.instructions}
+    // setshowFInalData(showFInalData)
+    setformM({event: "", typeofform: "", heading: "", subtitle: "", instructions: ""})
+    setShowModal({show:false,index:null})
+  }
+  // modal
+  const closeModal = () => {
+    setformM({event: "", typeofform: "", heading: "", subtitle: "", instructions: ""})
+    setShowModal({show:false,index:null})
+  }
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
@@ -526,7 +540,11 @@ function Forms(props) {
               >
                 <div className="w-1/3 border-l border-yellow-500 flex flex-col items-center">
                   <h1 className="p-2 text-3x text-center mt-5 text-amber-300">
-                    <b>{value.event}</b>
+                    <b>{eventlist.map((e)=>{
+                      if(e.id==value.event){
+                        return e.title
+                      }
+                    })}</b>
                   </h1>
                   <div className="text-white py-3">
                     <h1 className="text-xl text-center my-2">
@@ -538,6 +556,10 @@ function Forms(props) {
                     <h1 className="text-xl text-white text-center my-2">
                       {value.instructions}
                     </h1>
+                  </div>
+                  <div className="flex space-x-4">
+                    <div className="text-white" onClick={() => deleteForm(value.event)} to=""><img className='w-6' src={Delete} alt="dlt" /></div>
+                    <div className="text-white" onClick={() => updateCard(key)} to=""><img className='w-6' src={Edit} alt="edit" /></div>
                   </div>
 
                   {/* {value.fields ?
@@ -600,6 +622,86 @@ function Forms(props) {
       ) : (
         ""
       )}
+
+      
+            {/* modal */}
+            {showModal.show ? (
+              <>
+                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                  <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                    {/*content*/}
+                    <div className="bg-[#111111] border-2 border-yellow-500 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none">
+                      {/*header*/}
+                      <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                        <h3 className="text-3xl text-white font-semibold">Edit form</h3>
+                        <button className="ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={() => setShowModal(false)}>
+                          <span className="text-white h-6 w-6 text-2xl block outline-none focus:outline-none">x</span>
+                        </button>
+                      </div>
+                      {/*body*/}
+                      <div className='grid grid-cols-3'>
+                        <div className="py-2 px-4">
+                          <h2 className="text-xl p-1 my-1 text-white">Event</h2>
+                          <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="event" value={formM.event} onChange={onChange} >
+                            <option selected disabled hidden> Select </option>
+                            {eventlist.map((e) => (
+                              <option value={e.id}>{e.title}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="py-2 px-4">
+                          <h2 className="text-xl p-1 my-1 text-white">Type</h2>
+                          <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="typeofform" value={formM.typeofform} onChange={onChange} >
+                            <option selected disabled hidden> Select </option>
+                            {regexist==false && <option value="Registration">Registration</option>}
+                            <option value="Normal">Normal</option>
+                          </select>
+                        </div>
+                        <div className="py-2 px-4">
+                          <h2 className="text-xl p-1 my-1 text-white">Heading</h2>
+                          <input
+                            className="text-lg w-full py-0.5 px-1 mx-1 rounded"
+                            placeholder="Enter heading"
+                            type="text"
+                            name="heading"
+                            value={formM.heading}
+                            onChange={onChange}
+                          />
+                        </div>
+                        <div className="py-2 px-4">
+                          <h2 className="text-xl p-1 my-1 text-white">Subtitle</h2>
+                          <input
+                            className="text-lg w-full py-0.5 px-1 mx-1 rounded"
+                            placeholder="Enter subtitle"
+                            type="text"
+                            name="subtitle"
+                            value={formM.subtitle}
+                            onChange={onChange}
+                          />
+                        </div>
+                        <div className="py-2 px-4">
+                          <h2 className="text-xl p-1 my-1 text-white">Instructions</h2>
+                          <input
+                            className="text-lg w-full py-0.5 px-1 mx-1 rounded"
+                            placeholder="Enter instructions"
+                            type="text"
+                            name="instructions"
+                            value={formM.instructions}
+                            onChange={onChange}
+                          />
+                        </div>
+                      </div>
+                      {/*footer*/}
+                      <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                        <button className="text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={closeModal}>Close </button>
+                        <button className="bg-yellow-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={editForms} >Save Changes </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+              </>
+            ) : null}
     </div>
   );
 }
