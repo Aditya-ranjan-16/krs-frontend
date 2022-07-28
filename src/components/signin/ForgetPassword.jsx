@@ -11,10 +11,6 @@ export default function ForgetPassword() {
 
   const url = "http://localhost:5000/";
 
-  useEffect(() => {
-    console.log(showEmail);
-  }, [showEmail]);
-
   const PostData = async (e) => {
     const name = e.target.name;
     const value = e.target.value;
