@@ -11,6 +11,7 @@ export default function EnterOTP() {
 
   const authCtx = useContext(AuthContext);
   const url = "http://localhost:5000/";
+  const navigate = useNavigate();
 
   const PostData = async (e) => {
     const name = e.target.name;
@@ -44,6 +45,11 @@ export default function EnterOTP() {
           headers: { Authorization: `${authCtx.token}` },
         }
       );
+
+      console.log(resp.status);
+      if (resp.status === 202) {
+        navigate("/login");
+      }
     } else {
       console.log("error");
     }
