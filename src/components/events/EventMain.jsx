@@ -39,7 +39,9 @@ function EventMain() {
                   <p className='text-2x1 font-thin sm:text-xl text-justify'>{eventsData.paragrapg}</p><br />
                 </div>
                 <div className='flex mt-6'>
-                  <button className='bg-yellow-500 text-black text-xl w-32 font-semibold px-2 py-2 rounded-full'>Register</button>
+                  <a href="/form">
+                    <button className='bg-yellow-500 text-black text-xl w-32 font-semibold px-2 py-2 rounded-full'>Register</button>
+                  </a>
                 </div>
               </div>
               <div  className='w-[350px] bg-white order-1 md:order-2 h-[350px] sm:w-[400px] sm:h-[400px] py-2 px-2 event_slider_body '>

@@ -20,6 +20,8 @@ import Featured from './pages/Featured';
 import Admin from './pages/Admin';
 import AuthContext from './store/auth-context';
 import axios from 'axios';
+import Register from './pages/Register';
+import Question from './components/register/Question';
 axios.defaults.baseURL = "http://localhost:5000"
 function App() {
   const authCtx = useContext(AuthContext);
@@ -39,7 +41,9 @@ function App() {
           <Route path='/collaborations' element={<Collaborations />} />
           <Route path='/contactus' element={<ContactUs />} />
           {(authCtx.isLoggedIn) && <Route path='/admin/*' element={<Admin />} />}
-           <Route path="*"  element={<Home/>} />          
+           <Route path="*"  element={<Home/>} />   
+           <Route path='/form' element={<Register />} />    
+          <Route path='#question' element={<Question />}/>   
         </Routes>
       </Router>
     </div>
