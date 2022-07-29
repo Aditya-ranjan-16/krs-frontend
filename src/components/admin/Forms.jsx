@@ -516,7 +516,8 @@ function Forms(props) {
       {showFInalData ? (
         <div>
           {showFInalData.map((value, key) => {
-            var l = showFInalData[0].fields.length
+            var l = showFInalData[key].fields.length
+            console.log(l)
             return (
               <div
                 key={key}
@@ -563,7 +564,7 @@ function Forms(props) {
                   <div className="w-2/3" id="" key={key}>
                     <Questions
                       len={l}
-                      fields={showFInalData[0].fields}
+                      fields={showFInalData[key].fields}
                     />
                     
                   </div>
