@@ -9,6 +9,9 @@ import "./css/Sign.css";
 export default function EnterOTP() {
   const [showOTP, setOTP] = useState(0);
 
+  const authCtx = useContext(AuthContext);
+  const url = "http://localhost:5000/";
+
   const PostData = async (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -32,9 +35,18 @@ export default function EnterOTP() {
       // console.log(showOTP);
       // console.log(FEmail);
 
-      const resp = await axios.post(`${url}api/login/otpValidate`, {
-        headers: { Authorization: `${authCtx.token}` },
-      });
+      let data = {
+        email: FEmail,
+        otp: showOTP,
+      };
+
+      const resp = await axios.post(
+        `api/login/forgotPassword/otpValidate`,
+        data,
+        {
+          headers: { Authorization: `${authCtx.token}` },
+        }
+      );
     } else {
       console.log("error");
     }
