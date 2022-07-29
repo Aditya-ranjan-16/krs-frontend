@@ -39,7 +39,7 @@ export default function ForgetPassword() {
         const resp = await axios.post(
           `${url}api/login/forgotPassword/sendEmail/${email}`,
           {
-            headers: { Authorization: `${authCtx.token}` },
+            headers: { Authorization: `${authCtx.token}`},
           }
         );
 
