@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "./css/Sign.css";
 
 export default function EnterOTP() {
-  const [showOTP, setOTP] = useState();
+  const [showOTP, setOTP] = useState(0);
 
   const PostData = async (e) => {
     const name = e.target.name;
@@ -31,6 +31,10 @@ export default function EnterOTP() {
     if (showOTP.length == 6) {
       // console.log(showOTP);
       // console.log(FEmail);
+
+      const resp = await axios.post(`${url}api/login/otpValidate`, {
+        headers: { Authorization: `${authCtx.token}` },
+      });
     } else {
       console.log("error");
     }
