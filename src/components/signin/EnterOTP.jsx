@@ -4,6 +4,7 @@ import KRS from "../../public/krslogo.jpg";
 import axios from "axios";
 import AuthContext from "../../store/auth-context";
 import { useNavigate } from "react-router-dom";
+import "./css/Sign.css";
 
 export default function EnterOTP() {
   const [showOTP, setOTP] = useState();
