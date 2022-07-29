@@ -44,6 +44,7 @@ function Forms(props) {
 
   const [formData, setformData] = useState({
     eventid: "",
+    formid:"",
     typeofform: "",
     heading: "",
     subtitle: "",
@@ -61,6 +62,7 @@ function Forms(props) {
   const createForm = async() => {
     const {
       eventid,
+      formid,
       typeofform,
       heading,
       subtitle,
@@ -78,6 +80,7 @@ function Forms(props) {
     ) {
       var final = {
         eventid,
+        formid,
         typeofform,
         heading,
         subtitle,
@@ -112,6 +115,7 @@ function Forms(props) {
       setshowFInalData(showFInalData.concat(final));
       setformData({
         eventid: "",
+        formid:"",
         typeofform: "",
         heading: "",
         subtitle: "",
@@ -209,14 +213,14 @@ function Forms(props) {
   
   
   const [showModal, setShowModal] = useState({show:false,index:null});
-  const [formM, setformM] = useState({heading: "", subtitle: "", instruction: ""})
+ 
   // editing form
   const updateCard = (key) => {
-    setformData({eventid:showFInalData[key].eventid,heading: showFInalData[key].heading, subtitle: showFInalData[key].subtitle, instruction: showFInalData[key].instruction})
-    
+    setformData({eventid:showFInalData[key].eventid,heading: showFInalData[key].heading, subtitle: showFInalData[key].subtitle, instruction: showFInalData[key].instruction})   
     setShowModal({show:true,index:key})
   }
   // add changes
+
   const editForms = async () => {
     showFInalData[showModal.index].heading = formData.heading
     showFInalData[showModal.index].subtitle = formData.subtitle
@@ -226,11 +230,12 @@ function Forms(props) {
       subtitle:formData.subtitle,
       instruction:formData.instruction
     }
-    
+  
     setshowFInalData(showFInalData)
     setShowModal({show:false,index:null})
     setformData({
       eventid: "",
+      formid:"",
       typeofform: "",
       heading: "",
       subtitle: "",
