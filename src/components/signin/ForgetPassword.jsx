@@ -11,6 +11,7 @@ export default function ForgetPassword() {
 
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
+
   const url = "http://localhost:5000/";
 
   const PostData = async (e) => {
