@@ -6,6 +6,7 @@ import Events from "./pages/Events";
 import Members from "./pages/Members";
 import Recruitment from "./pages/Recruitment";
 import ForgetPassword from "./pages/ForgetPassword";
+import ChangePass from "./pages/ChangePass";
 import EnterOTP from "./pages/EnterOTP";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -40,6 +41,9 @@ function App() {
           )}
           {!authCtx.isLoggedIn && (
             <Route path="/EnterOTP" element={<EnterOTP />} />
+          )}
+          {!authCtx.isLoggedIn && (
+            <Route path="/ChangePass" element={<ChangePass />} />
           )}
           <Route path="/featured" element={<Featured />} />
           <Route path="/collaborations" element={<Collaborations />} />
