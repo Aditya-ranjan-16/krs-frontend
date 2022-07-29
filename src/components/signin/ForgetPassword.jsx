@@ -45,8 +45,7 @@ export default function ForgetPassword() {
         if (resp.status == 200) {
           setError("");
           localStorage.setItem("email", JSON.stringify(email));
-          // navigate("/EnterOTP");
-          console.log("object");
+          navigate("/EnterOTP");
         } else {
           setError("Error - Not a Member");
         }
