@@ -29,8 +29,8 @@ export default function EnterOTP() {
     let email = localStorage.getItem("email");
     const FEmail = email.substring(1, email.length - 1);
     if (showOTP.length == 6) {
-      console.log(showOTP);
-      console.log(FEmail);
+      // console.log(showOTP);
+      // console.log(FEmail);
     } else {
       console.log("error");
     }
