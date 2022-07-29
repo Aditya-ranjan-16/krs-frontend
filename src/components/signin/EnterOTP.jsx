@@ -32,7 +32,7 @@ export default function EnterOTP() {
   const sendOtp = async () => {
     let email = localStorage.getItem("email");
     const FEmail = email.substring(1, email.length - 1);
-    if (showOTP.length == 6) {
+    if (showOTP.length >= 1) {
       let data = {
         email: FEmail,
         otp: showOTP,
@@ -48,7 +48,7 @@ export default function EnterOTP() {
 
       console.log(resp.status);
       if (resp.status === 202) {
-        navigate("/login");
+        navigate("/ChangePass");
       }
     } else {
       console.log("error");
