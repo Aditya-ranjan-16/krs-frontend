@@ -5,7 +5,6 @@ import axios from "axios";
 import AuthContext from "../../store/auth-context";
 import Delete from '../../public/delete.png'
 import Edit from '../../public/edit.png'
-import { Link } from "react-router-dom";
 
 // import Questions from './Questions'
 
@@ -19,9 +18,11 @@ function Forms(props) {
     async function makereq() {
       try {
         const resp = await axios.get("/api/events/list");
+        const resp2 = await axios.get("/api/form/getForms");
         const data = resp.data;
-
+        const getformdata = resp2.data.forms;
         setEventlist(data.list);
+        setshowFInalData(showFInalData.concat(getformdata))
       } catch (e) {
         console.log(e);
       }
@@ -30,11 +31,11 @@ function Forms(props) {
   }, []);
   const formdata = [
     {
-      event: "pradarshana",
+      eventid: "pradarshana",
       typeofform: "registration",
       heading: "pra",
       subtitle: "darshana",
-      instructions: "1.0",
+      instruction: "1.0",
     },
   ];
 
@@ -42,11 +43,11 @@ function Forms(props) {
   const [showFInalData, setshowFInalData] = useState([]);
 
   const [formData, setformData] = useState({
-    event: "",
+    eventid: "",
     typeofform: "",
     heading: "",
     subtitle: "",
-    instructions: "",
+    instruction: "",
     Namevalue: "",
     Rollvalue: "",
     Emailvalue: "",
@@ -57,30 +58,30 @@ function Forms(props) {
   const [showE, setE] = useState("");
   const [showE2, setE2] = useState("");
 
-  const createForm = () => {
+  const createForm = async() => {
     const {
-      event,
+      eventid,
       typeofform,
       heading,
       subtitle,
-      instructions,
+      instruction,
       Namevalue,
       Rollvalue,
       Emailvalue,
     } = formData;
     if (
-      event !== "" &&
+      eventid !== "" &&
       typeofform !== "" &&
       heading !== "" &&
       subtitle !== "" &&
-      instructions !== ""
+      instruction !== ""
     ) {
       var final = {
-        event,
+        eventid,
         typeofform,
         heading,
         subtitle,
-        instructions,
+        instruction,
         fields: [
           {
             name: "Name",
@@ -101,13 +102,20 @@ function Forms(props) {
       };
 
       final.fields = final.fields.concat(addFeild);
+      try{
+        const resp = await axios.post("/api/form/createForms",final,{headers:{ "Authorization": `${authCtx.token}`}});
+        const data=resp.data
+        console.log(data)
+      }catch(e){
+        console.log(e)
+      }
       setshowFInalData(showFInalData.concat(final));
       setformData({
-        event: "",
+        eventid: "",
         typeofform: "",
         heading: "",
         subtitle: "",
-        instructions: "",
+        instruction: "",
         Namevalue: "",
         Rollvalue: "",
         Emailvalue: "",
@@ -129,7 +137,7 @@ function Forms(props) {
     } else {
       e.target.style.border = "2px solid  transparent";
     }
-    if(e.target.name=="event"){
+    if(e.target.name=="eventid"){
       
       async function makereq1(){
       
@@ -193,34 +201,40 @@ function Forms(props) {
 
 
   // delete form
-  const deleteForm = (event) => {
-    const newFinalData = showFInalData.filter((data) => { return data.event !== event })
+  const deleteForm = (eventid) => {
+    const newFinalData = showFInalData.filter((data) => { return data.eventid !== eventid })
     console.log("fghjk"+ newFinalData)
     setshowFInalData(newFinalData)
   }
   
   
   const [showModal, setShowModal] = useState({show:false,index:null});
-  const [formM, setformM] = useState({heading: "", subtitle: "", instructions: ""})
+  const [formM, setformM] = useState({heading: "", subtitle: "", instruction: ""})
   // editing form
   const updateCard = (key) => {
-    setformData({heading: showFInalData[key].heading, subtitle: showFInalData[key].subtitle, instructions: showFInalData[key].instructions})
+    setformData({eventid:showFInalData[key].eventid,heading: showFInalData[key].heading, subtitle: showFInalData[key].subtitle, instruction: showFInalData[key].instruction})
     
     setShowModal({show:true,index:key})
   }
   // add changes
-  const editForms = () => {
+  const editForms = async () => {
     showFInalData[showModal.index].heading = formData.heading
     showFInalData[showModal.index].subtitle = formData.subtitle
-    showFInalData[showModal.index].instructions = formData.instructions
+    showFInalData[showModal.index].instruction = formData.instruction
+    const upadtedforminfo={
+      heading:formData.heading,
+      subtitle:formData.subtitle,
+      instruction:formData.instruction
+    }
+    
     setshowFInalData(showFInalData)
     setShowModal({show:false,index:null})
     setformData({
-      event: "",
+      eventid: "",
       typeofform: "",
       heading: "",
       subtitle: "",
-      instructions: "",
+      instruction: "",
       Namevalue: "",
       Rollvalue: "",
       Emailvalue: "",
@@ -228,7 +242,7 @@ function Forms(props) {
   }
   // modal
   const closeModal = () => {
-    // setformData({event: "", typeofform: "", heading: "", subtitle: "", instructions: ""})
+    // setformData({eventid: "", typeofform: "", heading: "", subtitle: "", instruction: ""})
     setShowModal({show:false,index:null})
   }
 
@@ -241,7 +255,7 @@ function Forms(props) {
             <h2 className="text-xl p-1 my-1 text-white">Select Event</h2>
             <select
               className="text-lg w-full py-0.5 px-1 mx-1 rounded"
-              name="event"
+              name="eventid"
               onChange={onChange}
             >
               <option selected disabled hidden>
@@ -289,13 +303,13 @@ function Forms(props) {
             />
           </div>
           <div className="py-2 px-4">
-            <h2 className="text-xl p-1 my-1 text-white">Instructions</h2>
+            <h2 className="text-xl p-1 my-1 text-white">instructions</h2>
             <input
               className="text-lg w-full py-0.5 px-1 mx-1 rounded"
               placeholder="Enter instructions"
               type="text"
-              name="instructions"
-              value={formData.instructions}
+              name="instruction"
+              value={formData.instruction}
               onChange={onChange}
             />
           </div>
@@ -511,7 +525,7 @@ function Forms(props) {
                 <div className="w-1/3 border-l border-yellow-500 p-4 flex flex-col items-center">
                   <h1 className="p-2 text-3xl text-center text-amber-300">
                     <b>{eventlist.map((e)=>{
-                      if(e.id==value.event){
+                      if(e.id==value.eventid){
                         return e.title
                       }
                     })}</b>
@@ -524,11 +538,11 @@ function Forms(props) {
                       {value.subtitle}
                     </h1>
                     <h1 className="text-xl text-white text-center my-2">
-                      {value.instructions}
+                      {value.instruction}
                     </h1>
                   </div>
                   <div className="flex space-x-4">
-                    <div className="text-white" onClick={() => deleteForm(value.event)} to=""><img className='w-6' src={Delete} alt="dlt" /></div>
+                    <div className="text-white" onClick={() => deleteForm(value.eventid)} to=""><img className='w-6' src={Delete} alt="dlt" /></div>
                     <div className="text-white" onClick={() => updateCard(key)} to=""><img className='w-6' src={Edit} alt="edit" /></div>
                   </div>
 
@@ -608,8 +622,8 @@ function Forms(props) {
                             className="text-lg w-full py-0.5 px-1 mx-1 rounded"
                             placeholder="Enter instructions"
                             type="text"
-                            name="instructions"
-                            value={formData.instructions}
+                            name="instruction"
+                            value={formData.instruction}
                             onChange={onChange}
                           />
                         </div>
