@@ -17,7 +17,7 @@ function AdminSidebar({level}) {
         {level=="admin" && <Link to="/admin/adminevents" className="py-2 text-center">Events</Link>}
         {level=="admin" && <Link to="/admin/adminachievements" className="py-2 text-center">Achievements</Link>}
         {level=="user"  && <Link to="/admin/userprofile" className="py-2 text-center ">User Profile</Link>}
-      {level=="member"  &&  <Link to="/admin/memberprofile" className="py-2 text-center">Member Profile</Link>}
+        {level=="member"  &&  <Link to="/admin/memberprofile" className="py-2 text-center">Member Profile</Link>}
         {level=="admin" &&  <Link to="/admin/forms" className="py-2 text-center">Forms</Link>}
         <button onClick={logoutme} className="py-2 text-center mt-auto">Log out</button>
         </div>

@@ -247,7 +247,7 @@ function Forms(props) {
   }
 
   return (
-    <div className="flex-1 my-12 mx-20 justify-center items-center">
+    <div className="flex-1 my-12 mx-20 justify-center w-[60%] items-center">
       <div className="py-4 px-8 rounded-xl bg-[#111111] border-2 border-yellow-500">
         <h1 className="p-2 text-3xl text-white">Create a Form</h1>
         <div className="grid grid-cols-2">
@@ -521,7 +521,7 @@ function Forms(props) {
             return (
               <div
                 key={key}
-                className="flex flex-row-reverse border-2 bg-black bg-opacity-25 border-yellow-500 px- my-5 rounded-xl"
+                className="flex flex-row-reverse  border-2 bg-black bg-opacity-25 border-yellow-500 px- my-5 rounded-xl"
               >
                 <div className="w-1/3 border-l border-yellow-500 p-4 flex flex-col items-center">
                   <h1 className="p-2 text-3xl text-center text-amber-300">
@@ -531,16 +531,16 @@ function Forms(props) {
                       }
                     })}</b>
                   </h1>
-                  <div className="text-white py-3">
-                    <h1 className="text-xl text-center my-2">
+                  <div className="text-white w-[95%] py-3">
+                    <p className="text-xl text-center break-words  my-2">
                       {value.heading}
-                    </h1>
-                    <h1 className="text-xl text-center my-2">
+                    </p>
+                    <p className="text-xl text-center break-words my-2">
                       {value.subtitle}
-                    </h1>
-                    <h1 className="text-xl text-white text-center my-2">
+                    </p>
+                    <p className="text-xl text-white text-center break-words my-2">
                       {value.instruction}
-                    </h1>
+                    </p>
                   </div>
                   <div className="flex space-x-4">
                     <div className="text-white" onClick={() => deleteForm(value.eventid)} to=""><img className='w-6' src={Delete} alt="dlt" /></div>
