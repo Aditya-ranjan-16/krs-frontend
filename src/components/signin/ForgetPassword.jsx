@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ForgetPassword() {
   const [showEmail, setEmail] = useState();
+  const [showError, setError] = useState("");
 
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
@@ -33,19 +34,32 @@ export default function ForgetPassword() {
       console.log("Error");
     } else {
       var email = showEmail;
-      const resp = await axios.post(
-        `${url}api/login/forgotPassword/sendEmail/${email}`,
-        {
-          headers: { Authorization: `${authCtx.token}` },
-        }
-      );
+      try {
+        const resp = await axios.post(
+          `${url}api/login/forgotPassword/sendEmail/${email}`,
+          {
+            headers: { Authorization: `${authCtx.token}` },
+          }
+        );
 
-      if (resp.status == 200) {
-        localStorage.setItem("email", JSON.stringify(email));
-        navigate("/EnterOTP");
+        if (resp.status == 200) {
+          setError("");
+          localStorage.setItem("email", JSON.stringify(email));
+          // navigate("/EnterOTP");
+          console.log("object");
+        } else {
+          setError("Error - Not a Member");
+        }
+      } catch (error) {
+        setError("Error - Not a Member");
+        console.log(error);
       }
     }
   };
+
+  useEffect(() => {
+    console.log(showError);
+  }, [showError]);
 
   return (
     <div
@@ -75,6 +89,11 @@ export default function ForgetPassword() {
         </button>
         <div id="SignInDiv"></div>
         <br />
+        {showError !== "" ? (
+          <div className="alertTextOTP text-center">{showError}</div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
