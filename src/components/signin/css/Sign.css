@@ -3,3 +3,8 @@
   text-align: left;
   width: 100%;
 }
+
+.alertTextOTP {
+  color: red;
+  width: 100%;
+}
