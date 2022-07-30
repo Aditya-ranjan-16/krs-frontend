@@ -43,7 +43,7 @@ export default function ChangePass() {
       }
     } catch (error) {
       set("");
-      setE("Password changed Successfully");
+      setE("Error");
     }
   };
 
@@ -88,6 +88,7 @@ export default function ChangePass() {
         ) : (
           ""
         )}
+        {showE ? <p className="alertTextOTP">{showE}</p> : ""}
       </div>
     </div>
   );
