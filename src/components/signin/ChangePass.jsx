@@ -20,7 +20,7 @@ export default function ChangePass() {
   };
 
   const SendData = async (e) => {
-    console.log(showData);
+    console.table(showData);
   };
 
   return (
