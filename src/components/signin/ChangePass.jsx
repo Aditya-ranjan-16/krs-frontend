@@ -8,6 +8,7 @@ import axios from "axios";
 export default function ChangePass() {
   const [showData, setData] = useState({ password: "", cpassword: "" });
   const [show, set] = useState("");
+  const [showE, setE] = useState("");
 
   const authCtx = useContext(AuthContext);
   const url = "http://localhost:5000/";
@@ -21,21 +22,28 @@ export default function ChangePass() {
   };
 
   const SendData = async (e) => {
-    let email = localStorage.getItem("email");
-    const FEmail = email.substring(1, email.length - 1);
+    try {
+      let email = localStorage.getItem("email");
+      const FEmail = email.substring(1, email.length - 1);
 
-    let data = {
-      email: FEmail,
-      password: showData.password,
-      cpassword: showData.cpassword,
-    };
+      let data = {
+        email: FEmail,
+        password: showData.password,
+        cpassword: showData.cpassword,
+      };
 
-    const resp = await axios.post(`api/login/resetPassword/`, data, {
-      headers: { Authorization: `${authCtx.token}` },
-    });
+      const resp = await axios.post(`api/login/resetPassword/`, data, {
+        headers: { Authorization: `${authCtx.token}` },
+      });
 
-    if (resp.status === 200) {
-      set("Password changed Successfully");
+      if (resp.status === 200) {
+        set("Password changed Successfully");
+        setE("");
+        return;
+      }
+    } catch (error) {
+      set("");
+      setE("Password changed Successfully");
     }
   };
 
@@ -75,7 +83,11 @@ export default function ChangePass() {
         </button>
         <div id="SignInDiv"></div>
         <br />
-        {show ? <p className="text-white text-3xl font-bold">{show}</p> : ""}
+        {show ? (
+          <p className="text-white font-bold tracking-wide">{show}</p>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
