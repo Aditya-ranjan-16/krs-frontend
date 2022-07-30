@@ -7,6 +7,7 @@ import axios from "axios";
 
 export default function ChangePass() {
   const [showData, setData] = useState({ password: "", cpassword: "" });
+  const [show, set] = useState("");
 
   const authCtx = useContext(AuthContext);
   const url = "http://localhost:5000/";
@@ -33,7 +34,9 @@ export default function ChangePass() {
       headers: { Authorization: `${authCtx.token}` },
     });
 
-    console.log(resp.data);
+    if (resp.status === 200) {
+      set("Password changed Successfully");
+    }
   };
 
   return (
@@ -72,6 +75,7 @@ export default function ChangePass() {
         </button>
         <div id="SignInDiv"></div>
         <br />
+        {show ? <p className="text-white text-3xl font-bold">{show}</p> : ""}
       </div>
     </div>
   );
