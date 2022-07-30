@@ -95,7 +95,7 @@ function HomeMain() {
       <div ref={slideRef} className="w-full relative select-none ">
       <div className="h-[100vh] bg-cover bg-left" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${homePageData[currentIndex].img})`}}>
         <div className="lg:pl-20 pl-7 pt-28 ">
-          <h1 className="text-7xl   font-bold text-yellow-500">{homePageData[currentIndex].heading1}</h1><br />
+          <h1 className=" lg:text-7xl sm:text-6xl   font-bold text-yellow-500">{homePageData[currentIndex].heading1}</h1><br />
           <h2 className="text-5xl pl-5 font-semibold text-white">{homePageData[currentIndex].heading2}</h2><br />
           <p className="lg:w-1/3 w-4/5 pl-7  text-xl text-white">{homePageData[currentIndex].description}</p>
         </div>

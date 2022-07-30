@@ -13,6 +13,7 @@ function Forms(props) {
   const authCtx = useContext(AuthContext);
   const [eventlist, setEventlist] = useState([]);
   const [regexist,setRegexist]=useState(false)
+  const seletref=useRef()
   useEffect(() => {
     console.log("aaya");
     async function makereq() {
@@ -26,8 +27,10 @@ function Forms(props) {
       } catch (e) {
         console.log(e);
       }
+      console.table(showFInalData)
     }
     makereq();
+    
   }, []);
   const formdata = [
     {
@@ -44,7 +47,6 @@ function Forms(props) {
 
   const [formData, setformData] = useState({
     eventid: "",
-    formid:"",
     typeofform: "",
     heading: "",
     subtitle: "",
@@ -62,7 +64,6 @@ function Forms(props) {
   const createForm = async() => {
     const {
       eventid,
-      formid,
       typeofform,
       heading,
       subtitle,
@@ -80,7 +81,6 @@ function Forms(props) {
     ) {
       var final = {
         eventid,
-        formid,
         typeofform,
         heading,
         subtitle,
@@ -113,9 +113,9 @@ function Forms(props) {
         console.log(e)
       }
       setshowFInalData(showFInalData.concat(final));
+   
       setformData({
-        eventid: "",
-        formid:"",
+        eventid: " ",
         typeofform: "",
         heading: "",
         subtitle: "",
@@ -205,10 +205,16 @@ function Forms(props) {
 
 
   // delete form
-  const deleteForm = (eventid) => {
-    const newFinalData = showFInalData.filter((data) => { return data.eventid !== eventid })
-    console.log("fghjk"+ newFinalData)
+  const deleteForm = async (fid) => {
+    const newFinalData = showFInalData.filter((data) => { return data._id !== fid })
     setshowFInalData(newFinalData)
+    try{
+      crossOriginIsolated.log(fid)
+      const resp = await axios.delete(`/api/form/deleteForms/${fid}`,{headers:{ "Authorization": `${authCtx.token}`}})
+    }
+    catch(e){
+    console.log(e)
+    }
   }
   
   
@@ -230,20 +236,29 @@ function Forms(props) {
       subtitle:formData.subtitle,
       instruction:formData.instruction
     }
-  
-    setshowFInalData(showFInalData)
-    setShowModal({show:false,index:null})
-    setformData({
-      eventid: "",
-      formid:"",
-      typeofform: "",
-      heading: "",
-      subtitle: "",
-      instruction: "",
-      Namevalue: "",
-      Rollvalue: "",
-      Emailvalue: "",
-    });
+    const fid=showFInalData[showModal.index]._id
+    try{
+      closeModal()
+      setshowFInalData(showFInalData)
+    
+      setformData({
+        eventid: "",
+        typeofform: "",
+        heading: "",
+        subtitle: "",
+        instruction: "",
+        Namevalue: "",
+        Rollvalue: "",
+        Emailvalue: "",
+      });
+      const resp = await axios.patch(`/api/form/editForms/${fid}`,upadtedforminfo,{headers:{ "Authorization": `${authCtx.token}`}});
+     
+    
+    }
+    catch(e){
+      console.log(e);
+    }
+   
   }
   // modal
   const closeModal = () => {
@@ -261,9 +276,11 @@ function Forms(props) {
             <select
               className="text-lg w-full py-0.5 px-1 mx-1 rounded"
               name="eventid"
+              ref={seletref}
               onChange={onChange}
+              
             >
-              <option selected disabled hidden>
+              <option value={""} selected disabled hidden>
                 Select
               </option>
               {eventlist.map((e) => (
@@ -548,7 +565,7 @@ function Forms(props) {
                     </p>
                   </div>
                   <div className="flex space-x-4">
-                    <div className="text-white" onClick={() => deleteForm(value.eventid)} to=""><img className='w-6' src={Delete} alt="dlt" /></div>
+                    <div className="text-white" onClick={() => deleteForm(value._id)} to=""><img className='w-6' src={Delete} alt="dlt" /></div>
                     <div className="text-white" onClick={() => updateCard(key)} to=""><img className='w-6' src={Edit} alt="edit" /></div>
                   </div>
 
@@ -593,7 +610,7 @@ function Forms(props) {
                       {/*header*/}
                       <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                         <h3 className="text-3xl text-white font-semibold">Edit form</h3>
-                        <button className="ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={() => setShowModal(false)}>
+                        <button className="ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={() => setShowModal({show:false,index:null})}>
                           <span className="text-white h-6 w-6 text-2xl block outline-none focus:outline-none">x</span>
                         </button>
                       </div>
