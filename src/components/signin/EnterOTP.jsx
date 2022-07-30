@@ -8,6 +8,7 @@ import "./css/Sign.css";
 
 export default function EnterOTP() {
   const [showOTP, setOTP] = useState(0);
+  const [showE, setE] = useState("");
 
   const authCtx = useContext(AuthContext);
   const url = "http://localhost:5000/";
@@ -30,28 +31,32 @@ export default function EnterOTP() {
   };
 
   const sendOtp = async () => {
-    let email = localStorage.getItem("email");
-    const FEmail = email.substring(1, email.length - 1);
-    if (showOTP.length >= 1) {
-      let data = {
-        email: FEmail,
-        otp: showOTP,
-      };
+    try {
+      let email = localStorage.getItem("email");
+      const FEmail = email.substring(1, email.length - 1);
+      if (showOTP.length >= 1) {
+        let data = {
+          email: FEmail,
+          otp: showOTP,
+        };
 
-      const resp = await axios.post(
-        `api/login/forgotPassword/otpValidate`,
-        data,
-        {
-          headers: { Authorization: `${authCtx.token}` },
+        const resp = await axios.post(
+          `api/login/forgotPassword/otpValidate`,
+          data,
+          {
+            headers: { Authorization: `${authCtx.token}` },
+          }
+        );
+
+        console.log(resp.status);
+        if (resp.status === 202) {
+          navigate("/ChangePass");
         }
-      );
-
-      console.log(resp.status);
-      if (resp.status === 202) {
-        navigate("/ChangePass");
+      } else {
+        setE("Invalid OTP");
       }
-    } else {
-      console.log("error");
+    } catch (error) {
+      setE("Invalid OTP");
     }
   };
 
@@ -83,6 +88,7 @@ export default function EnterOTP() {
         </button>
         <div id="SignInDiv"></div>
         <br />
+        {showE ? <p className="alertTextOTP">{showE}</p> : ""}
       </div>
     </div>
   );
