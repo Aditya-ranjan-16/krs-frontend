@@ -37,6 +37,10 @@ export default function ChangePass() {
       });
 
       if (resp.status === 200) {
+        window.setTimeout(function () {
+          window.location.href = "/login";
+        }, 5000);
+
         set("Password changed Successfully");
         setE("");
         return;
@@ -84,7 +88,11 @@ export default function ChangePass() {
         <div id="SignInDiv"></div>
         <br />
         {show ? (
-          <p className="text-white font-bold tracking-wide">{show}</p>
+          <div className="text-white font-bold tracking-wide">
+            {show}
+            <br />
+            <p>{}</p>
+          </div>
         ) : (
           ""
         )}
