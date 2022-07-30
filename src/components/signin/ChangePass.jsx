@@ -9,6 +9,7 @@ export default function ChangePass() {
   const [showData, setData] = useState({ password: "", cpassword: "" });
   const [show, set] = useState("");
   const [showE, setE] = useState("");
+  const [redirect, setRedirect] = useState(5);
 
   const authCtx = useContext(AuthContext);
   const url = "http://localhost:5000/";
@@ -40,6 +41,8 @@ export default function ChangePass() {
         window.setTimeout(function () {
           window.location.href = "/login";
         }, 5000);
+
+        setRedirect("Redirecting...");
 
         set("Password changed Successfully");
         setE("");
@@ -91,7 +94,7 @@ export default function ChangePass() {
           <div className="text-white font-bold tracking-wide">
             {show}
             <br />
-            <p>{}</p>
+            <p>{redirect}</p>
           </div>
         ) : (
           ""
