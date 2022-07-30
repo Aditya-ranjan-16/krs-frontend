@@ -9,7 +9,7 @@ export default function ChangePass() {
   const [showData, setData] = useState({ password: "", cpassword: "" });
   const [show, set] = useState("");
   const [showE, setE] = useState("");
-  const [redirect, setRedirect] = useState(5);
+  const [redirect, setRedirect] = useState("");
 
   const authCtx = useContext(AuthContext);
   const url = "http://localhost:5000/";
