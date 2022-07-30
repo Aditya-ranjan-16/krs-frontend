@@ -20,11 +20,16 @@ export default function ChangePass() {
   };
 
   const SendData = async (e) => {
-    const resp = await axios.post(`api/login/resetPassword/`, showData, {
-      headers: { Authorization: `${authCtx.token}` },
-    });
+    let email = localStorage.getItem("email");
+    const FEmail = email.substring(1, email.length - 1);
 
-    console.log(resp.data);
+    console.log(FEmail);
+
+    // const resp = await axios.post(`api/login/resetPassword/`, showData, {
+    //   headers: { Authorization: `${authCtx.token}` },
+    // });
+
+    // console.log(resp.data);
   };
 
   return (
