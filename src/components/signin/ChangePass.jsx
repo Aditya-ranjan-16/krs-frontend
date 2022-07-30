@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import BG from "../../public/dronebackground.jpg";
 import KRS from "../../public/krslogo.jpg";
-import axios from "axios";
 import AuthContext from "../../store/auth-context";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function ChangePass() {
   const [showData, setData] = useState({ password: "", cpassword: "" });
@@ -20,7 +20,15 @@ export default function ChangePass() {
   };
 
   const SendData = async (e) => {
-    console.table(showData);
+    const resp = await axios.post(
+      `api/login/forgotPassword/otpValidate`,
+      data,
+      {
+        headers: { Authorization: `${authCtx.token}` },
+      }
+    );
+
+    console.log(resp);
   };
 
   return (
