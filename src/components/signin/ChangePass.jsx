@@ -6,8 +6,11 @@ import AuthContext from "../../store/auth-context";
 import { useNavigate } from "react-router-dom";
 
 export default function ChangePass() {
+  const [showData, setData] = useState({ password: "", cpassword: "" });
+
   const PostData = async (e) => {
-    console.log("first");
+    const name = e.target.name;
+    const value = e.target.value;
   };
   return (
     <div
