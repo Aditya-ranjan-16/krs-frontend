@@ -19,6 +19,10 @@ export default function ChangePass() {
     setData({ ...showData, [name]: value });
   };
 
+  const SendData = async (e) => {
+    console.log(showData);
+  };
+
   return (
     <div
       className="bg-black  bg-cover flex justify-center items-center "
@@ -49,7 +53,7 @@ export default function ChangePass() {
         />
         <button
           className="w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold mt-5"
-          //   onClick={sendOtp}
+          onClick={SendData}
         >
           Submit
         </button>
