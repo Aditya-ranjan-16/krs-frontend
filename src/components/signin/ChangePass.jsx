@@ -11,7 +11,10 @@ export default function ChangePass() {
   const PostData = async (e) => {
     const name = e.target.name;
     const value = e.target.value;
+
+    setData({ ...showData, [name]: value });
   };
+
   return (
     <div
       className="bg-black  bg-cover flex justify-center items-center "
