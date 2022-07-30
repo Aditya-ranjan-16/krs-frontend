@@ -8,6 +8,10 @@ import { useNavigate } from "react-router-dom";
 export default function ChangePass() {
   const [showData, setData] = useState({ password: "", cpassword: "" });
 
+  const authCtx = useContext(AuthContext);
+  const url = "http://localhost:5000/";
+  const navigate = useNavigate();
+
   const PostData = async (e) => {
     const name = e.target.name;
     const value = e.target.value;
