@@ -29,13 +29,11 @@ export default function ChangePass() {
       cpassword: showData.cpassword,
     };
 
-    console.log(FEmail);
+    const resp = await axios.post(`api/login/resetPassword/`, showData, {
+      headers: { Authorization: `${authCtx.token}` },
+    });
 
-    // const resp = await axios.post(`api/login/resetPassword/`, showData, {
-    //   headers: { Authorization: `${authCtx.token}` },
-    // });
-
-    // console.log(resp.data);
+    console.log(resp.data);
   };
 
   return (
