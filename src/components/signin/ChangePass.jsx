@@ -39,7 +39,7 @@ export default function ChangePass() {
 
       if (resp.status === 200) {
         window.setTimeout(function () {
-          window.location.href = "/login";
+          window.location.href = "/signin";
         }, 5000);
 
         setRedirect("Redirecting...");
@@ -94,7 +94,7 @@ export default function ChangePass() {
           <div className="text-white font-bold tracking-wide">
             {show}
             <br />
-            <p>{redirect}</p>
+            <p className="text-amber-400 tracking-widest">{redirect}</p>
           </div>
         ) : (
           ""
