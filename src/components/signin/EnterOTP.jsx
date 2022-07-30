@@ -88,7 +88,11 @@ export default function EnterOTP() {
         </button>
         <div id="SignInDiv"></div>
         <br />
-        {showE ? <p className="alertTextOTP">{showE}</p> : ""}
+        {showE ? (
+          <p className="alertTextOTP font-bold tracking-wide">{showE}</p>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
