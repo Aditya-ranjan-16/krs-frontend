@@ -29,7 +29,7 @@ export default function ChangePass() {
       cpassword: showData.cpassword,
     };
 
-    const resp = await axios.post(`api/login/resetPassword/`, showData, {
+    const resp = await axios.post(`api/login/resetPassword/`, data, {
       headers: { Authorization: `${authCtx.token}` },
     });
 
