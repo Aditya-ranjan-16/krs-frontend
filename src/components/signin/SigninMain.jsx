@@ -15,6 +15,8 @@ function SigninMain() {
   const redirect = useNavigate();
 
   const glogin = async (email) => {
+    // console.log(email);
+
     const userObject = {
       email: email,
     };
