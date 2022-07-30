@@ -23,6 +23,12 @@ export default function ChangePass() {
     let email = localStorage.getItem("email");
     const FEmail = email.substring(1, email.length - 1);
 
+    let data = {
+      email: FEmail,
+      password: showData.password,
+      cpassword: showData.cpassword,
+    };
+
     console.log(FEmail);
 
     // const resp = await axios.post(`api/login/resetPassword/`, showData, {
