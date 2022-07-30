@@ -20,15 +20,11 @@ export default function ChangePass() {
   };
 
   const SendData = async (e) => {
-    const resp = await axios.post(
-      `api/login/forgotPassword/otpValidate`,
-      data,
-      {
-        headers: { Authorization: `${authCtx.token}` },
-      }
-    );
+    const resp = await axios.post(`api/login/resetPassword/`, data, {
+      headers: { Authorization: `${authCtx.token}` },
+    });
 
-    console.log(resp);
+    console.log(showData);
   };
 
   return (
