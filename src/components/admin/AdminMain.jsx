@@ -4,14 +4,12 @@ import AdminMembers from './AdminMembers'
 import AdminSidebar from './AdminSidebar'
 import bg from '../../public/bg.png'
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   useNavigate
 } from "react-router-dom";
 import AdminAchievements from './AdminAchievements';
 import UserProfile from './UserProfile';
-import CreateTeam from './CreateTeam';
 import MemberProfile from './MemberProfile';
 import Forms from './Forms';
 import { useEffect } from 'react';

@@ -1,8 +1,42 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import Question from "./Question";
 
 function Form() {
+  let{fid} =useParams()
   const [showForm, setFormStatus] = useState(false);
+  const [eventinfo, setEventinfo] = useState();
+  const [orderid, setOrderid] = useState("");
+  const [formdata, setFormdata] = useState();
+
+useEffect(()=>{
+  async function makereq (){
+    try{
+      const resp = await axios.get(`/api/form/getForms/${fid}`);
+      const formdata=resp.data.form;
+      const eventdata=resp.data.event;
+      console.log(formdata)
+      console.log(eventdata)
+
+      if(formdata.type=="Registration" && eventdata.price>0){
+      const resp2 = await axios.get(`/api/registration/register/createOrder/`);
+      const orderid=resp2.data.orderId;
+      setOrderid(orderid)
+      }
+
+      setFormdata(formdata)
+      setEventinfo(eventdata)
+    }catch(e){
+    console.log(e)
+    }
+  
+   } 
+   makereq();
+
+
+},[fid])
 
   const viewData = () => setFormStatus(true);
   return (
@@ -27,7 +61,7 @@ function Form() {
           </div>
         </div>
       )}
-      {showForm && <Question onsubmit={onsubmit} />}
+      {showForm && <Question fields={formdata.fields} orderid={orderid} price={eventinfo.price} type={formdata.type}  onsubmit={onsubmit} />}
     </div>
   );
 }

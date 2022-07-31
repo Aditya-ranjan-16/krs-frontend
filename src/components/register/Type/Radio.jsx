@@ -1,14 +1,18 @@
 
-function Radio() {
+function Radio({name,change,values}) {
+
+  const options=values.split(',')
     return (
       <div className="text-white">
-          <input type="radio" id="Email" name="4" /> 
-        <label for="Email">Email</label>
-        <br></br>
-          <input type="radio" id="friends" name="4" /> 
-        <label for="friends">Friends</label>
-        <br></br>  <input type="radio" id="Social media" name="4" /> 
-        <label for="Social media">Social media</label>
+        {options.map((e,i)=>(
+          <>
+        <input key={i} type="radio"  onChange={change} id={e} name={name}/> 
+         <label for={e}>{e}</label>
+         <br></br>
+          </>
+         ))}
+       
+          
       </div>
     );
   }

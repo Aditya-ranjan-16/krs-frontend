@@ -1,12 +1,16 @@
 import React from 'react'
 
-function Number() {
+function Number({initial,name,change}) {
+ 
   return (
     <div>
         <input
           type="number"
           placeholder="Enter number"
           className="bg-transparent"
+          name={name}
+          defaultValue={initial}
+          onChange={change}
           style={{
             width: "100%",
             outline: "none",

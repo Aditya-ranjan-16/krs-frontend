@@ -13,7 +13,8 @@ function Forms(props) {
   const authCtx = useContext(AuthContext);
   const [eventlist, setEventlist] = useState([]);
   const [regexist,setRegexist]=useState(false)
-  const seletref=useRef()
+  const selectref=useRef()
+  const selectref2=useRef()
   useEffect(() => {
     console.log("aaya");
     async function makereq() {
@@ -23,26 +24,17 @@ function Forms(props) {
         const data = resp.data;
         const getformdata = resp2.data.forms;
         setEventlist(data.list);
-        setshowFInalData(showFInalData.concat(getformdata))
+        setshowFInalData(getformdata)
       } catch (e) {
         console.log(e);
       }
-      console.table(showFInalData)
+     
     }
     makereq();
     
   }, []);
-  const formdata = [
-    {
-      eventid: "pradarshana",
-      typeofform: "registration",
-      heading: "pra",
-      subtitle: "darshana",
-      instruction: "1.0",
-    },
-  ];
-
-  const [forms, setForms] = useState(formdata);
+ 
+  const [forms, setForms] = useState("");
   const [showFInalData, setshowFInalData] = useState([]);
 
   const [formData, setformData] = useState({
@@ -108,14 +100,16 @@ function Forms(props) {
       try{
         const resp = await axios.post("/api/form/createForms",final,{headers:{ "Authorization": `${authCtx.token}`}});
         const data=resp.data
-        console.log(data)
+        final._id=data.form._id
       }catch(e){
         console.log(e)
       }
-      setshowFInalData(showFInalData.concat(final));
-   
+      
+      setshowFInalData(e=>[...e,final]);
+      selectref.current.value="Select"
+      selectref2.current.value="Select"
       setformData({
-        eventid: " ",
+        eventid: "",
         typeofform: "",
         heading: "",
         subtitle: "",
@@ -206,10 +200,12 @@ function Forms(props) {
 
   // delete form
   const deleteForm = async (fid) => {
+
     const newFinalData = showFInalData.filter((data) => { return data._id !== fid })
     setshowFInalData(newFinalData)
+  
     try{
-      crossOriginIsolated.log(fid)
+      
       const resp = await axios.delete(`/api/form/deleteForms/${fid}`,{headers:{ "Authorization": `${authCtx.token}`}})
     }
     catch(e){
@@ -240,7 +236,7 @@ function Forms(props) {
     try{
       closeModal()
       setshowFInalData(showFInalData)
-    
+     
       setformData({
         eventid: "",
         typeofform: "",
@@ -263,6 +259,7 @@ function Forms(props) {
   // modal
   const closeModal = () => {
     // setformData({eventid: "", typeofform: "", heading: "", subtitle: "", instruction: ""})
+   console.log(showFInalData.length)
     setShowModal({show:false,index:null})
   }
 
@@ -276,11 +273,11 @@ function Forms(props) {
             <select
               className="text-lg w-full py-0.5 px-1 mx-1 rounded"
               name="eventid"
-              ref={seletref}
+              ref={selectref}
               onChange={onChange}
               
             >
-              <option value={""} selected disabled hidden>
+              <option value="Select" selected disabled hidden>
                 Select
               </option>
               {eventlist.map((e) => (
@@ -293,9 +290,10 @@ function Forms(props) {
             <select
               className="text-lg w-full py-0.5 px-1 mx-1 rounded"
               name="typeofform"
+              ref={selectref2}
               onChange={onChange}
             >
-              <option selected disabled hidden>
+              <option value={"Select"} selected disabled hidden>
                 Select
               </option>
               {regexist==false && <option value="Registration">Registration</option>}
@@ -491,6 +489,12 @@ function Forms(props) {
               <option name="type" value="email">
                 email
               </option>
+              <option name="type" value="checkbox">
+                checkbox
+              </option>
+              <option name="type" value="checkbox">
+                dropdown
+              </option>
             </select>
             <div className="flex">
               <input
@@ -539,7 +543,7 @@ function Forms(props) {
         <div>
           {showFInalData.map((value, key) => {
             var l = showFInalData[key].fields.length
-            console.log(l)
+       
             return (
               <div
                 key={key}

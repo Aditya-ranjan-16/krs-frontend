@@ -42,7 +42,7 @@ function App() {
           <Route path='/contactus' element={<ContactUs />} />
           {(authCtx.isLoggedIn) && <Route path='/admin/*' element={<Admin />} />}
            <Route path="*"  element={<Home/>} />   
-           <Route path='/form' element={<Register />} />    
+           <Route path='/form/:fid' element={<Register />} />    
           <Route path='#question' element={<Question />}/>   
         </Routes>
       </Router>

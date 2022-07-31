@@ -1,11 +1,15 @@
 
-function Text() {
+function Text({initial,name,change}) {
+console.log(initial)
     return (
       <div>
         <input
           type="text"
           placeholder="Enter your full name here"
           className="bg-transparent"
+          name={name}
+          defaultValue={initial.value}
+          onChange={change}
           style={{
             width: "100%",
             outline: "none",

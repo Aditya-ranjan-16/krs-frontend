@@ -21,6 +21,10 @@ function AdminEvents({level}) {
   const authCtx = useContext(AuthContext);
   const [qrdata, setQrData] = useState('');
  
+  const selectref=useRef()
+  const selectref1=useRef()
+  const selectref2=useRef()
+
   useEffect(()=>{
    async function makereq (){
     try{
@@ -51,6 +55,9 @@ function AdminEvents({level}) {
       }catch(err){
         console.log(err)
       }
+      selectref.current.value="Select"
+      selectref1.current.value="Select"
+      selectref2.current.value="Select"
      setEve({ title: "",price:0,subtitle:"",teamsize:null, date: "", venue: "", status: "", mode: "", teamcreation:"Select", img1: "", img2: "", img3: "", description: "", sheetId: "" });
     set("");
     } else {
@@ -59,7 +66,7 @@ function AdminEvents({level}) {
   };
 
   const onChange = (e) => {
-    const name = e.target.name;
+
     const value = e.target.value;
     if (value === "") {
       e.target.style.border = "2px solid  #FF0000";
@@ -80,9 +87,7 @@ function AdminEvents({level}) {
       });
       setEvents(newEvents);
       const resp = await axios.delete(`/api/events/deleteEvent/${id}`,{headers:{ "Authorization": `${authCtx.token}`}});
-     
-     
-  
+       
   
     }
       catch(e){
@@ -148,8 +153,8 @@ function AdminEvents({level}) {
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Status</h2>
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="status" id="" onChange={onChange}>
-              <option selected disabled hidden>Select</option>
+            <select ref={selectref} className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="status" id="" onChange={onChange}>
+              <option value="Select" selected disabled hidden>Select</option>
               <option value="Upcoming">Upcoming</option>
               <option value="Registrations Open">Registrations Open</option>
               <option value="Registrations Closed">Registrations Closed</option>
@@ -158,8 +163,8 @@ function AdminEvents({level}) {
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Mode</h2>
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="mode" id="" onChange={onChange}>
-              <option selected disabled hidden>Select</option>
+            <select ref={selectref1} className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="mode" id="" onChange={onChange}>
+              <option value="Select" selected disabled hidden>Select</option>
               <option value="Offline">Offline</option>
               <option value="Online">Online</option>
               <option value="Hybrid">Hybrid</option>
@@ -172,8 +177,8 @@ function AdminEvents({level}) {
           </div>
           <div className="py-2 px-4">
             <h2 className="text-xl p-1 my-1 text-white">Team Creation</h2>
-            <select className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="teamcreation" id="" onChange={onChange}>
-              <option selected disabled hidden>Select</option>
+            <select ref={selectref2} className="text-lg w-full py-0.5 px-1 mx-1 rounded" name="teamcreation" id="" onChange={onChange}>
+              <option value="Select" selected disabled hidden>Select</option>
               <option value="Allowed">Allowed</option>
               <option value="Not allowed">Not allowed</option>
             </select>
