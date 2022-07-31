@@ -28,9 +28,12 @@ function SigninMain() {
 
       const data = resp.data;
 
+      let email = resp.config.data.substring(10, resp.config.data.length - 2);
+
+      console.log(email);
       if (data.success == true) {
-        await authCtx.login(data.token, 3600000);
-        redirect("/admin");
+        // await authCtx.login(data.token, 3600000);
+        // redirect("/admin");
       }
     } catch (err) {
       console.error(err);
@@ -41,6 +44,7 @@ function SigninMain() {
 
   const handleCallbackResponse = (res) => {
     const userobject = jwtDecode(res.credential);
+    console.log(userobject);
     glogin(userobject.email);
   };
 
