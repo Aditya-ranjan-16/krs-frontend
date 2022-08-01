@@ -1,12 +1,13 @@
 
-function Radio({name,change,values}) {
-
+function Radio({initial,name,change,values}) {
+console.log("val-=",initial)
   const options=values.split(',')
     return (
       <div className="text-white">
         {options.map((e,i)=>(
           <>
-        <input key={i} type="radio"  onChange={change} id={e} name={name}/> 
+          {initial==e &&  <input key={i} type="radio" defaultValue={initial==""?null:initial} value={e} onChange={change} id={e} name={name} checked/> }
+          {initial!=e &&  <input key={i} type="radio" defaultValue={initial==""?null:initial} value={e} onChange={change} id={e} name={name} /> }
          <label for={e}>{e}</label>
          <br></br>
           </>

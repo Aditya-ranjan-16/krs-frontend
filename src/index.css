@@ -170,3 +170,17 @@ background-image: linear-gradient(315deg, #fbb034 0%, #ffdd00 74%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+input.tel::-webkit-outer-spin-button,
+input.tel::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number]{
+  -moz-appearance: textfield;
+}

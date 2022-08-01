@@ -492,7 +492,7 @@ function Forms(props) {
               <option name="type" value="checkbox">
                 checkbox
               </option>
-              <option name="type" value="checkbox">
+              <option name="type" value="dropdown">
                 dropdown
               </option>
             </select>

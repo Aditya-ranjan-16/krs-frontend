@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
+import { useEffect,useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import AuthContext from "../../store/auth-context";
 import Question from "./Question";
+import { eventsData } from "../events/EventMain";
 
 function Form() {
   let{fid} =useParams()
@@ -10,7 +12,7 @@ function Form() {
   const [eventinfo, setEventinfo] = useState();
   const [orderid, setOrderid] = useState("");
   const [formdata, setFormdata] = useState();
-
+  const authCtx = useContext(AuthContext);
 useEffect(()=>{
   async function makereq (){
     try{
@@ -18,10 +20,10 @@ useEffect(()=>{
       const formdata=resp.data.form;
       const eventdata=resp.data.event;
       console.log(formdata)
-      console.log(eventdata)
+      console.log(eventdata.title)
 
       if(formdata.type=="Registration" && eventdata.price>0){
-      const resp2 = await axios.get(`/api/registration/register/createOrder/`);
+      const resp2 = await axios.post(`/api/registration/register/createOrder/`,{price:eventdata.price},{headers:{ "Authorization": `${authCtx.token}`}});
       const orderid=resp2.data.orderId;
       setOrderid(orderid)
       }
@@ -61,7 +63,7 @@ useEffect(()=>{
           </div>
         </div>
       )}
-      {showForm && <Question fields={formdata.fields} orderid={orderid} price={eventinfo.price} type={formdata.type}  onsubmit={onsubmit} />}
+      {showForm && <Question fid={fid} title={eventinfo.title} fields={formdata.fields} orderid={orderid} price={eventinfo.price} type={formdata.type}  onsubmit={onsubmit} />}
     </div>
   );
 }

@@ -1,47 +1,48 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import { Link } from "react-router-dom";
 import PP from '../../public/pp.jpeg'
 import qrbg from '../../public/qrbg.jpg'
 import qr from '../../public/qr.png'
 import QRCode from 'qrcode'
+import axios from 'axios';
+import AuthContext from '../../store/auth-context';
 import { useEffect } from 'react';
 
 function UserProfile() {
     const [qrimg,setQrimg]=useState("")
-    
- useEffect(()=>{
-  const generateQR = async () => {
-    try {
-      const imgurl=await QRCode.toDataURL("399den342e-di3sd")
-      setQrimg(imgurl)
-    } catch (err) {
-      console.error(err)
-    }
-  }
-  generateQR()
- },[])
-  const usereventCard = [
-    {
-      name: "Drone workshop",
-      date: "2022-06-21",
-      venue: "KRS ROOM",
-      status: "registration open",
-      img: "https://user-images.githubusercontent.com/88647567/166467933-2b3a2dab-8477-4ed1-8f4e-54c382342305.jpeg",
-      description: "Lorem ndi eius iusto. Provident maiores numquam perferendis tempore voluptas consectetur molestiae et dolores autem repellendus officiis saepe, accusantium impedit minus animi, fugit nulla aspernatur itaque iste! Architecto odio molestias perspiciatis. Optio dolores nesciunt recusandae, delectus sed dolorem praesentium nihil quas sapiente! Voluptatum culpa et ipsam, aliquid magni totam. Mollitia voluptatum expedita obcaecati, natus ipsam alias, aliquam voluptate maiores labore eius quam maxime. Quos quis molestiae at. Reprehenderit cupiditate doloribus, a laudantium iure quis placeat!",
-      sheetId: ""
-    },
-    {
-        name: "Robocon",
-        date: "2022-06-21",
-        venue: "KRS ROOM",
-        status: "registration open",
-        img: "https://user-images.githubusercontent.com/88647567/166467933-2b3a2dab-8477-4ed1-8f4e-54c382342305.jpeg",
-        description: "Lorem ndi eius iusto. Provident maiores numquam perferendis tempore voluptas consectetur molestiae et dolores autem repellendus officiis saepe, accusantium impedit minus animi, fugit nulla aspernatur itaque iste! Architecto odio molestias perspiciatis. Optio dolores nesciunt recusandae, delectus sed dolorem praesentium nihil quas sapiente! Voluptatum culpa et ipsam, aliquid magni totam. Mollitia voluptatum expedita obcaecati, natus ipsam alias, aliquam voluptate maiores labore eius quam maxime. Quos quis molestiae at. Reprehenderit cupiditate doloribus, a laudantium iure quis placeat!",
-        sheetId: ""
-      },
-  ];
+    const [userinfo,setUserinfo]=useState({})
+    const [events,setEvents]=useState([])
 
-  
+    const authCtx = useContext(AuthContext);
+ useEffect(()=>{
+ 
+  async function makereq(){
+    const resp = await axios.post("/api/user/",{email:"2005428@kiit.ac.in"},{headers:{ "Authorization": `${authCtx.token}`}});
+    const data=resp.data;
+    setUserinfo(data.users)
+    setEvents(data.userevents)
+    console.log(data)    
+  }
+
+  makereq()
+ },[])
+ const generateQR = async (sid,fid) => {
+
+  try {
+    const resp = await axios.post(`/api/registration/register/checkreg/`,{email:userinfo.email,sheetid:sid,formid:fid},{headers:{ "Authorization": `${authCtx.token}`}});
+    const data=resp.data
+    if(data.reg==true){
+      setShowModal(true)
+    }else{
+      return
+    }
+    const imgurl=await QRCode.toDataURL(data.code)
+    setQrimg(imgurl)
+   
+  } catch (err) {
+    console.error(err)
+  }
+}
   // modal state
   const [showModal, setShowModal] = useState(false);
 
@@ -60,22 +61,22 @@ function UserProfile() {
         
 
         <div className={`w-full py-10 px-[5%] justify-items-center grid grid-cols-1`}>
-          {usereventCard.map((eventsData) => {
+          {events.map((eventsData) => {
             return (
                 <div className='px-5 py-5 border-2 rounded-xl border-yellow-500 my-5 w-1/2'>
                   <div className='text-white w-full py-5 px-5 flex flex-col justify-between items-center'>
                     <div className='flex justify-between w-full'>
-                      <h1 className='text-2xl sm:text-3xl md:text-4xl xl:text-4xl font-semibold pb-8 text-center md:text-left text-yellow-500'>{eventsData.name}</h1>
+                      <h1 className='text-2xl sm:text-3xl md:text-4xl xl:text-4xl font-semibold pb-8 text-center md:text-left text-yellow-500'>{eventsData.title}</h1>
                       <div>
                         <h2 className='text-base sm:text-xl text-yellow-500'>{eventsData.date}</h2>
                         <h2 className='text-base sm:text-xl text-yellow-500'>{eventsData.venue}</h2>
                       </div>
                     </div>
                     <div className='w-[350px] h-[350px] sm:w-[350px] sm:h-[350px] py-2 px-2'>
-                      <img className='w-full h-full rounded-xl' src={eventsData.img} alt="" />
+                      <img className='w-full h-full rounded-xl' src={eventsData.thumbnil[0]} alt="" />
                     </div>
                     <div className="flex space-x-4 pt-3">
-                      <Link className="text-white" onClick={() => setShowModal(true)} to=""><img className='w-7' src={qr} alt="qr" /></Link>      
+                      <div className="text-white" onClick={() => generateQR(eventsData.sheetid,eventsData.registrationformid)} to=""><img className='w-7' src={qr} alt="qr" /></div>      
                       <button className="text-white bg-yellow-500 rounded-lg font-bold px-2 py-1" onClick={() => setShowTeamModal(true)}>Join/Create a Team</button>
                       <span className='bg-yellow-800 p-1 -skew-x-12'>Registered</span>
                     </div>

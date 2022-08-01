@@ -1,69 +1,78 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import KRS from '../../public/krslogo.jpg'
-import BG from '../../public/dronebackground.jpg'
-import axios from 'axios';
-import AuthContext from '../../store/auth-context';
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import KRS from "../../public/krslogo.jpg";
+import BG from "../../public/dronebackground.jpg";
+import axios from "axios";
+import AuthContext from "../../store/auth-context";
 import "./css/Sign.css";
 
 function SigninUp() {
-  const [showUser, setUser] = useState({ name: "", email: "", Branch: "", Year: "", password: "", cpassword: "", });
+  const [showUser, setUser] = useState({
+    name: "",
+    email: "",
+    Branch: "",
+    Year: "",
+    password: "",
+    cpassword: "",
+  });
   const [show, set] = useState("");
 
   const authCtx = useContext(AuthContext);
 
   const redirect = useNavigate();
 
-  const signup = async() => {
+  const signup = async () => {
     const { name, email, Branch, Year, password, cpassword } = showUser;
-    if (name !== "" && email !== "" && Branch !== "" && Year !== "" && password !== "" && cpassword !== "" && email.indexOf('@') > -1 && email.indexOf('.') !== -1) {
-
+    if (
+      name !== "" &&
+      email !== "" &&
+      Branch !== "" &&
+      Year !== "" &&
+      password !== "" &&
+      cpassword !== "" &&
+      email.indexOf("@") > -1 &&
+      email.indexOf(".") !== -1
+    ) {
       if (password === cpassword) {
+        const userObject = {
+          name: name,
+          email: email,
+          branch: Branch,
+          year: Year,
+          password: password,
+          designation: "user",
+          image: "sds",
+        };
+        try {
+          const res = await axios.post("/api/login/signup", userObject, {
+            headers: { Authorization: `` },
+          });
 
-          const userObject={
-            name:name,
-            email:email,
-            branch:Branch,
-            year:Year,
-            password:password,
-            designation:"user",
-            image:"sds"
+          if (res.data.exists == false) {
+            redirect("/admin");
+            authCtx.login(res.data.token, "3000");
+          } else {
+            alert("Account already exists . please login");
+            redirect("/signin");
           }
-          try{
-            const res = await axios.post("/api/login/signup", userObject,{headers:{ "Authorization": ``}});
-           
-          
-            if(res.data.exists==false){
-              redirect('/admin')
-              authCtx.login(res.data.token,'3000')
-}else{
-  
-alert("Account already exists . please login")
-redirect('/signin')
-
-}
-           
-          }
-        catch (error) {
+        } catch (error) {
           console.error(error);
         }
-    
       } else {
         set("Passwords Does Not Match");
       }
     } else {
       set("Please fill all the fields");
-      console.log("Error")
+      console.log("Error");
     }
-
-  }
+  };
 
   const PostData = async (e) => {
     const name = e.target.name;
     const value = e.target.value;
 
     if (name === "email") {
-      if (value.indexOf('@') === -1 || value.indexOf('.') === -1) {
+      if (value.indexOf("@") === -1 || value.indexOf(".") === -1) {
         e.target.style.border = "2px solid  #FF0000";
         e.target.style.outline = "none";
       } else {
@@ -77,23 +86,46 @@ redirect('/signin')
     }
 
     setUser({ ...showUser, [name]: value });
-  }
+  };
 
   return (
-    <div className='bg-black  bg-cover flex justify-center items-center h-[100%]' style={{ backgroundImage: ` url(${BG})` }}>
-      <div className='flex mt-10 mb-10 flex-col justify-center items-center border-2 border-yellow-500 p-5 sm:p-10 rounded-xl  backdrop-blur-2xl'>
-        <img className="w-16 rounded-full" src={KRS} alt="krsLogo" /><br />
-        <h1 className='text-white text-3xl font-bold'>Sign Up</h1><br /><br />
+    <div
+      className="bg-black  bg-cover flex justify-center items-center h-[100%]"
+      style={{ backgroundImage: ` url(${BG})` }}
+    >
+      <div className="flex mt-10 mb-10 flex-col justify-center items-center border-2 border-yellow-500 p-5 sm:p-10 rounded-xl  backdrop-blur-2xl">
+        <img className="w-16 rounded-full" src={KRS} alt="krsLogo" />
+        <br />
+        <h1 className="text-white text-3xl font-bold">Sign Up</h1>
+        <br />
+        <br />
         <input
           onChange={PostData}
-          className='w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded' type="text" name="name" id="email" placeholder='Enter Name' /><br />
+          className="w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded"
+          type="text"
+          name="name"
+          id="email"
+          placeholder="Enter Name"
+        />
+        <br />
         <input
           onChange={PostData}
-          className='w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded' type="email" name="email" id="email" placeholder='Enter KIIT email addres' /><br />
+          className="w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded"
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Enter KIIT email addres"
+        />
+        <br />
         <select
           onChange={PostData}
-          className='w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 mb-5 p-1.5 text-lg rounded' name="Branch" id="email" >
-          <option selected disabled hidden>Select Branch</option>
+          className="w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 mb-5 p-1.5 text-lg rounded"
+          name="Branch"
+          id="email"
+        >
+          <option selected disabled hidden>
+            Select Branch
+          </option>
           <option value={"CSE"}>CSE</option>
           <option value={"CSSE"}>CSSE</option>
           <option value={"CSCE"}>CSCE</option>
@@ -110,34 +142,51 @@ redirect('/signin')
           <option value={"Mass Comunication"}>Mass Comunication</option>
           <option value={"Medical Sciences"}>Medical Sciences</option>
           <option value={"Dental Sciences"}>Dental Sciences</option>
-          <option value={"Nursing Sciences"}>Nursing  Sciences</option>
+          <option value={"Nursing Sciences"}>Nursing Sciences</option>
         </select>
         <select
           onChange={PostData}
-          className='w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 mb-5 p-1.5 text-lg rounded' name="Year" id="email" >
-          <option selected disabled hidden>Select Year</option>
-          <option value={"1st"} >1st</option>
-          <option value={"2nd"} >2nd</option>
-          <option value={"3rd"} >3rd</option>
-          <option value={"4th"} >4th</option>
-
+          className="w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 mb-5 p-1.5 text-lg rounded"
+          name="Year"
+          id="email"
+        >
+          <option selected disabled hidden>
+            Select Year
+          </option>
+          <option value={"1st"}>1st</option>
+          <option value={"2nd"}>2nd</option>
+          <option value={"3rd"}>3rd</option>
+          <option value={"4th"}>4th</option>
         </select>
         <input
           onChange={PostData}
-          className='w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded' type="password" name="password" id="password" placeholder='Password' />
+          className="w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded"
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+        />
         <br />
         <input
           onChange={PostData}
-          className='w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded' type="password" name="cpassword" id="password" placeholder='Confirm Password' />
+          className="w-[300px] sm:w-[400px] bg-zinc-800 text-gray-300 p-1.5 text-lg rounded"
+          type="password"
+          name="cpassword"
+          id="password"
+          placeholder="Confirm Password"
+        />
         <br />
         {show ? <p className="alertText">{show}</p> : ""}
         <br />
-        <button className='w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold' onClick={signup}>Sign Up</button>
+        <button
+          className="w-[200px] bg-yellow-500 text-lg rounded p-1.5 font-bold"
+          onClick={signup}
+        >
+          Sign Up
+        </button>
       </div>
-    </div >
-  )
+    </div>
+  );
 }
 
-
-
-export default SigninUp
+export default SigninUp;
