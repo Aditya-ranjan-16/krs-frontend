@@ -30,7 +30,13 @@ function SigninMain() {
 
       if (resp.data.success == true) {
         // console.log(userObject);
-        await authCtx.login(resp.data.token, 3600000);
+
+
+        const info=resp.data.user
+        await authCtx.login(info.name,info.email,info.pic,resp.data.token, 3600000);
+        localStorage.removeItem("newUserName")
+        localStorage.removeItem("newUserEmail")
+        localStorage.removeItem("newUserPicture")
         redirect("/admin");
       }
       if (resp.status === 200) {
@@ -93,8 +99,8 @@ function SigninMain() {
         const data = res.data;
         console.log(res);
         if (data.success == true) {
-          authCtx.login(data.token, 3600000);
-
+        const info=data.user
+        await authCtx.login(info.name,info.email,info.pic,data.token, 3600000);
           redirect("/admin");
         } else {
         }

@@ -67,6 +67,11 @@ export default function UserData() {
 
       console.log(resp);
       if (resp.status === 200) {
+        localStorage.removeItem("newUserName")
+        localStorage.removeItem("newUserEmail")
+        localStorage.removeItem("newUserPicture")
+        const info=resp.data.user
+        await authCtx.login(info.name,info.email,info.pic,resp.data.token, 3600000);
         set("");
         redirect("/admin");
       } else if (resp.status === 202) {
@@ -131,7 +136,7 @@ export default function UserData() {
         >
           Submit
         </button>
-        <div id="SignInDiv"></div>
+     
         <br />
       </div>
     </div>

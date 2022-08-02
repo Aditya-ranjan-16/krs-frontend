@@ -13,6 +13,7 @@ function Navbar() {
   const [visible, setVisible] = useState("right-[100%]");
   const authCtx=useContext(AuthContext)
   console.log(authCtx.isLoggedIn+" login status");
+  console.log(authCtx.user.pic);
   function menuClick() {
     console.log("clicked");
     if (visible) {
@@ -66,8 +67,8 @@ function Navbar() {
             </div>
             {/* secondary nav */}
             {authCtx.isLoggedIn &&   <div className="ppic lg:flex my-5 px-4 rounded-[100px] font-semibold text-white  items-center text-sm">
-              <Link to="/admin"> <div className="ppic_text">
-               A
+              <Link to="/admin"> <div className={` text-black`} > 
+                 {authCtx.user.name}
                 </div>    
                </Link>
             </div> }

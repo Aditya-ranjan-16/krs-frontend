@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate
 } from "react-router-dom";
 import { useContext } from 'react';
 import Home from './pages/Home';
@@ -56,9 +57,11 @@ function App() {
           <Route path='/collaborations' element={<Collaborations />} />
           <Route path='/contactus' element={<ContactUs />} />
           {(authCtx.isLoggedIn) && <Route path='/admin/*' element={<Admin />} />}
-           <Route path="*"  element={<Home/>} />   
+           
            <Route path='/form/:fid' element={<Register />} />    
           <Route path='#question' element={<Question />}/>   
+
+          <Route path="*"  element={<Navigate to="/" replace />} />  
         </Routes>
       </Router>
     </div>

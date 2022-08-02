@@ -7,8 +7,9 @@ function AdminSidebar({level}) {
   const authCtx = useContext(AuthContext);
   const redirect = useNavigate();
   const logoutme=()=>{
-    authCtx.logout()
     redirect('/')
+    authCtx.logout()
+ 
   }
   return (
     <div className="relative flex min-h-screen ">
