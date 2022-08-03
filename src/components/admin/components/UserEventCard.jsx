@@ -3,31 +3,32 @@ import QRCode from "qrcode";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../store/auth-context";
-
-const UserEventCard = ({ eventsData, teammodal, qrmodal, qrimg, email }) => {
+import loading from '../../../public/loading.svg'
+const UserEventCard = ({ eventsData, re,teammodal, qrmodal, qrimg, email }) => {
   const authCtx = useContext(AuthContext);
-  const [teamexist,setTeamexist]=useState(false)
-  
+  const [teamexist,setTeamexist]=useState({status:false,teaminfo:{}})
+  const [loadin,setLoadin]=useState(false)
   useEffect(() => {
     async function makereq() {
       try {
+        setLoadin(true)
         const resp = await axios.post(
             `/api/registration/register/teamstatus/`,
             { email: email, sheetid: eventsData.sheetid,formid:eventsData.registrationformid  },
             { headers: { Authorization: `${authCtx.token}` } }
           );
-          console.log(resp.data)
+          setLoadin(false)
           if(resp.data.exist==true){
-             setTeamexist(true)
+             setTeamexist({status:true,teaminfo:resp.data.teaminfo})
           }else{
-            setTeamexist(false)
+            setTeamexist({status:false,teaminfo:{},info:{sid:eventsData.sheetid,fid:eventsData.registrationformid}})
           }
       } catch (e) {
       console.log(e)
       }
     }
     makereq();
-  }, []);
+  }, [re]);
   const generateQR = async (sid, fid) => {
     try {
       qrmodal(true);
@@ -82,16 +83,17 @@ const UserEventCard = ({ eventsData, teammodal, qrmodal, qrimg, email }) => {
             <img className="w-7" src={qr} alt="qr" />
           </div>
           {
-            (eventsData.teamcreation = "Allowed" && (
+            (eventsData.teamcreation = "Allowed" && loadin==false && (
               <button
                 className="text-white bg-yellow-500 rounded-lg font-bold px-2 py-1"
-                onClick={() =>{ teammodal({status:true,teamexist:teamexist})}}
+                onClick={() =>{ teammodal({status:true,teamexist:teamexist.status,teaminfo:teamexist.teaminfo,info:{sid:eventsData.sheetid,fid:eventsData.registrationformid,teamsize:eventsData.teamsize}})}}
               >
-                {teamexist && "View Team"}
-                {!teamexist && "Join/Create Team"}
+                {teamexist.status && "View Team"}
+                {!teamexist.status && "Join/Create Team"}
               </button>
             ))
           }
+          {loadin==true && <img src={loading} className="h-10 w-10" alt='mySvgImage' />}
           <span className="bg-yellow-800 p-1 -skew-x-12">Registered</span>
         </div>
       </div>
