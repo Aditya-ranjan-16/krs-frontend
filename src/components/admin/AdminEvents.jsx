@@ -6,8 +6,10 @@ import qr from '../../public/qr.png'
 import qrbg from '../../public/qrbg.jpg'
 import EventSlider from '../events/EventSlider'
 import axios from "axios";
+import {Html5Qrcode} from "html5-qrcode"
 import AuthContext from '../../store/auth-context';
-import { QrReader } from 'react-qr-reader';
+import loading from '../../public/loading.svg'
+
 import { useEffect } from "react";
 
 
@@ -19,11 +21,16 @@ function AdminEvents({level}) {
   const [showModal, setShowModal] = useState({ show: false, index: null });
   const [show, set] = useState("");
   const authCtx = useContext(AuthContext);
-  const [qrdata, setQrData] = useState('');
- 
+  const [qrdata, setQrData] = useState({code:null,info:""});
+  const [loadin,setLoadin]=useState(false)
   const selectref=useRef()
   const selectref1=useRef()
   const selectref2=useRef()
+
+    // qr modal state
+    const [showqrModal, setShowQrModal] = useState({status:false,sid:"",fid:""});
+
+   
 
   useEffect(()=>{
    async function makereq (){
@@ -40,20 +47,66 @@ function AdminEvents({level}) {
    makereq();
   
   },[])
-  //detectqr
-  const detectqr=async(code)=>{
+   //detectqr
+   const detectqr=async(code,sid,fid)=>{
     
     try{
-      const resp = await axios.post(`/api/registration/register/verify/`,{code:code,sheetid:showqrModal.sid,formid:showqrModal.fid},{headers:{ "Authorization": `${authCtx.token}`}});
+      setLoadin(true)
+      const resp = await axios.post(`/api/registration/register/verify/`,{code:code,sheetid:sid,formid:fid,type:"detect"},{headers:{ "Authorization": `${authCtx.token}`}});
       const data=resp.data
+    
       if(data.success==true){
-        setQrData(code)
+        setQrData({code:code,info:data.info})
+        setLoadin(false)
       }
      
     }catch(e){
       console.log(e)
     }
    
+  }
+  //initscan
+ 
+  const initscan=(sid,fid)=>{
+    console.log(showqrModal)
+    const html5QrCode = new Html5Qrcode("qrreader");
+    const qrCodeSuccessCallback = async(decodedText, decodedResult) => {
+     detectqr(decodedText,sid,fid)
+     html5QrCode.stop().then((ignore) => {
+      console.log(ignore)
+    }).catch((err) => {
+      console.log(err)
+    });
+  };
+  const config = { fps: 10, qrbox: { width: 1550, height: 1550 } };
+  
+  // If you want to prefer front camera
+  html5QrCode.start({ facingMode: "user" }, config, qrCodeSuccessCallback);
+  
+  }
+
+ 
+  //verify qr
+  const verifyqr=async(code)=>{
+    try{
+      const resp = await axios.post(`/api/registration/register/verify/`,{code:code,sheetid:showqrModal.sid,formid:showqrModal.fid,type:"verify"},{headers:{ "Authorization": `${authCtx.token}`}});
+      const data=resp.data
+      if(data.success==true){
+        setQrData({code:code,info:data.info})
+      }
+     
+    }catch(e){
+      console.log(e)
+    }
+   
+  }
+  //openscan
+  const openscan=(sid,fid)=>{
+    console.log(sid+"----"+fid)
+    setTimeout(()=>{initscan(sid,fid)}, 100);
+    setShowQrModal({status:true,sid:sid,fid:fid})
+    
+    
   }
   //  add events
   const handleClick =async (e) => {
@@ -145,9 +198,6 @@ function AdminEvents({level}) {
     setEve({ title: "", date: "", venue: "", status: "",price:0,teamsize:0, mode: "", teamcreation: "", img1: "", img2: "", img3: "", description: "", sheetId: "" });
     setShowModal({ show: false, index: null })
   }
-
-  // qr modal state
-  const [showqrModal, setShowQrModal] = useState({status:false,sid:"",fid:""});
 
   return (
     <div className="flex-1 my-12 mx-20 justify-center items-center">
@@ -265,7 +315,7 @@ function AdminEvents({level}) {
               <div className="flex space-x-4 pt-4">
                 <div className="text-white" onClick={() => deleteEvent(eventsData._id)} ><img className='w-6' src={Delete} alt="dlt" /></div>
                 <div className="text-white" onClick={() => updateCard(i)} ><img className='w-6' src={Edit} alt="edit" /></div>
-                <div className="text-white" onClick={() => setShowQrModal({status:true,sid:eventsData.sheetid,fid:eventsData.registrationformid})} ><img className='w-6' src={qr} alt="qr" /></div>
+                <div className="text-white" onClick={() => {openscan(eventsData.sheetid,eventsData.registrationformid)}} ><img className='w-6' src={qr} alt="qr" /></div>
               </div>
             </div>
             <div className='w-[350px] bg-white order-1 md:order-2 h-[350px] sm:w-[400px] sm:h-[400px] py-2 px-2 event_slider_body '>
@@ -446,7 +496,7 @@ function AdminEvents({level}) {
       ) : null}
 
       {/* qr modal */}
-      {showqrModal.status ? (
+      {showqrModal.status==true ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
@@ -457,38 +507,28 @@ function AdminEvents({level}) {
                   <h3 className="text-3xl text-white font-semibold">
                     QR Scan
                   </h3>
-                  <button className="ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={() => {setShowQrModal({status:false,sid:"",fid:""});setQrData("")}}>
+                  <button className="ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={() => {setShowQrModal({status:false,sid:"",fid:""});setQrData({code:null,info:{}})}}>
                     <span className="text-white h-6 w-6 text-2xl block outline-none focus:outline-none">x</span>
                   </button>
                 </div>
                 {/*body*/}
-                <div className="flex justify-center px-16 py-2">
-                 {showqrModal.status==true ? <div><QrReader
-              
-                 className="h-64 w-64"
-        onResult={(result, error) => {
-          if (!!result) {
-            detectqr(result?.text)
-          
-          }
-
-          if (!!error) {
-            //console.info(error);
-          }
-        }}
-       
-      />
-      <center><p style={{color:"white"}}>{qrdata}</p>
-      <br/>
-      <span style={{color:"green"}}>Verified</span> <span style={{color:"red"}}>unverified</span>
+                <div className="flex-col justify-center px-16 py-2">
+                 {(showqrModal.status==true && qrdata.code==null && loadin==false)? <div id="qrreader" className="h-52 w-52">g</div>:null}
+      {qrdata.code!=null && <center><p style={{color:"white"}}><span className="text-[#EAB308]">{qrdata.code }</span> <br/> {qrdata.info.name} - {qrdata.info.roll}<br/> {qrdata.info.email} </p><br/>
+      {qrdata.info.verification=="Verified" && <span style={{color:"green"}}>Verified</span>}
+      {qrdata.info.verification=="Not Verified" && <span style={{color:"red",marginBottom:"12px"}}>Not Verified</span>}<br/>
+      {qrdata.info.verification=="Not Verified" &&  <button onClick={()=>verifyqr(qrdata.code)} className="text-white bg-green-600 rounded-lg font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" >Verify</button>}
+      
       <button></button>
-      </center>
-      </div>:null}
+      </center> }
+      
+
+     {loadin && <img src={loading} className="h-10 w-10" alt='mySvgImage' />} 
               
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button className="text-white bg-yellow-500 rounded-lg font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={() => {setShowQrModal({status:false,sid:"",fid:""});setQrData("")}}>Close</button>
+                  <button className="text-white bg-yellow-500 rounded-lg font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={() => {setShowQrModal({status:false,sid:"",fid:""});setQrData({code:null,info:{}})}}>Close</button>
                 </div>
               </div>
             </div>
